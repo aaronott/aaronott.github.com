@@ -7,4 +7,5 @@ http://aaronott.github.com/pages.html
 http://aaronott.github.com/sitemap.txt
 http://aaronott.github.com/tags.html
 
+http://aaronott.github.com/DBUG/dbug-meetup-notes
 http://aaronott.github.com/first-post

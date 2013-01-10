@@ -4,13 +4,91 @@
  <title>Aaron Ott</title>
  <link href="http://aaronott.github.com/atom.xml" rel="self"/>
  <link href="http://aaronott.github.com"/>
- <updated>2013-01-09T17:33:03-07:00</updated>
+ <updated>2013-01-09T19:49:03-07:00</updated>
  <id>http://aaronott.github.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>DBUG Meetup Notes</title>
+   <link href="http://aaronott.github.com/DBUG/dbug-meetup-notes"/>
+   <updated>2013-01-09T00:00:00-07:00</updated>
+   <id>http://aaronott.github.com/DBUG/dbug-meetup-notes</id>
+   <content type="html">&lt;h2 id='date_20130109'&gt;Date 2013-01-09&lt;/h2&gt;
+
+&lt;h3 id='favorite_modules'&gt;Favorite modules&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Commerce attributes&lt;/li&gt;
+
+&lt;li&gt;Module filter&lt;/li&gt;
+
+&lt;li&gt;Taxonomy roles&lt;/li&gt;
+
+&lt;li&gt;Services module&lt;/li&gt;
+
+&lt;li&gt;Examples module&lt;/li&gt;
+
+&lt;li&gt;Live Reload&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='topic_javascript_in_drupal'&gt;Topic: JavaScript in Drupal&lt;/h2&gt;
+
+&lt;p&gt;by Garret (Aten Design)&lt;/p&gt;
+
+&lt;p&gt;RequireJS&lt;/p&gt;
+
+&lt;p&gt;Organizing project in reusable modules is very important. Not seen as much in Drupal with JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Javascript module Things are wrapped in a function&lt;/p&gt;
+
+&lt;p&gt;JavaScript Module can return something back to the Global Namespace.&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;http://briancray.com/posts/javascript-module-pattern&lt;/li&gt;
+
+&lt;li&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id='asynchronous_module_definition'&gt;Asynchronous Module Definition&lt;/h3&gt;
+
+&lt;p&gt;Don&amp;#8217;t polute the global namespace Javascript loads synchronously which can lead to slower loads.&lt;/p&gt;
+
+&lt;p&gt;Drupal has an issue here, you would need to print out the javascript array and re-weight scripts.&lt;/p&gt;
+
+&lt;p&gt;Debugging becomes easier when modularizing code.&lt;/p&gt;
+
+&lt;p&gt;AMD Links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;https://github.com/amdjs/amdjs-api/wiki/AMD&lt;/li&gt;
+
+&lt;li&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;AMD is a method not a library.&lt;/p&gt;
+
+&lt;p&gt;Once you have an AMD module you need to be able to load it. RequireJS helps you do this.&lt;/p&gt;
+
+&lt;p&gt;RequireJS:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Encourages modulalr code&lt;/li&gt;
+
+&lt;li&gt;encourages file organization&lt;/li&gt;
+
+&lt;li&gt;leverages AMD&lt;/li&gt;
+
+&lt;li&gt;Offers optimization tools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;rjs - RequireJS optimization tool.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>First Post</title>
