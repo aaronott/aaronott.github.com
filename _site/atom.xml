@@ -4,7 +4,7 @@
  <title>Aaron Ott</title>
  <link href="http://aaronott.github.com/atom.xml" rel="self"/>
  <link href="http://aaronott.github.com"/>
- <updated>2013-01-09T19:49:03-07:00</updated>
+ <updated>2013-01-09T20:05:03-07:00</updated>
  <id>http://aaronott.github.com</id>
  <author>
    <name>Aaron Ott</name>
@@ -37,7 +37,7 @@
 
 &lt;h2 id='topic_javascript_in_drupal'&gt;Topic: JavaScript in Drupal&lt;/h2&gt;
 
-&lt;p&gt;by Garret (Aten Design)&lt;/p&gt;
+&lt;p&gt;by Garrett (killtheliterate)&lt;/p&gt;
 
 &lt;p&gt;RequireJS&lt;/p&gt;
 
@@ -50,9 +50,9 @@
 &lt;p&gt;Links:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;http://briancray.com/posts/javascript-module-pattern&lt;/li&gt;
+&lt;li&gt;&lt;a href='http://briancray.com/posts/javascript-module-pattern'&gt;http://briancray.com/posts/javascript-module-pattern&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/li&gt;
+&lt;li&gt;&lt;a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth'&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id='asynchronous_module_definition'&gt;Asynchronous Module Definition&lt;/h3&gt;
@@ -66,9 +66,9 @@
 &lt;p&gt;AMD Links:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;https://github.com/amdjs/amdjs-api/wiki/AMD&lt;/li&gt;
+&lt;li&gt;&lt;a href='https://github.com/amdjs/amdjs-api/wiki/AMD'&gt;https://github.com/amdjs/amdjs-api/wiki/AMD&lt;/a&gt;&lt;/li&gt;
 
-&lt;li&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/li&gt;
+&lt;li&gt;&lt;a href='http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth'&gt;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;AMD is a method not a library.&lt;/p&gt;
@@ -87,7 +87,15 @@
 &lt;li&gt;Offers optimization tools&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;rjs - RequireJS optimization tool.&lt;/p&gt;</content>
+&lt;p&gt;rjs - RequireJS optimization tool.&lt;/p&gt;
+
+&lt;h3 id='requirejs__drupal'&gt;RequireJS &amp;amp; Drupal&lt;/h3&gt;
+
+&lt;p&gt;RequireJS is a bit tougher to get into Drupal but it can be done.&lt;/p&gt;
+
+&lt;p&gt;There are a couple threads around adding the JavaScript to Drupal but there isn&amp;#8217;t a large backing.&lt;/p&gt;
+
+&lt;h2 id='open_discussion_happens'&gt;Open discussion happens&lt;/h2&gt;</content>
  </entry>
  
  <entry>

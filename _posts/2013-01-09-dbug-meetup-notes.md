@@ -19,7 +19,7 @@ tags: [drupal, meetup]
 
 ## Topic: JavaScript in Drupal
 
-by Garret (Aten Design)
+by Garrett (killtheliterate)
 
 RequireJS
 
@@ -33,8 +33,8 @@ Javascript module
 JavaScript Module can return something back to the Global Namespace.
 
 Links:
-* http://briancray.com/posts/javascript-module-pattern
-* http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth
+* [http://briancray.com/posts/javascript-module-pattern](http://briancray.com/posts/javascript-module-pattern)
+* [http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth)
 
 
 ### Asynchronous Module Definition
@@ -48,8 +48,8 @@ re-weight scripts.
 Debugging becomes easier when modularizing code.
 
 AMD Links:
-* https://github.com/amdjs/amdjs-api/wiki/AMD
-* http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth
+* [https://github.com/amdjs/amdjs-api/wiki/AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)
+* [http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-in-Depth)
 
 AMD is a method not a library.
 
@@ -64,4 +64,11 @@ RequireJS:
 
 rjs - RequireJS optimization tool.
 
+### RequireJS & Drupal
+RequireJS is a bit tougher to get into Drupal but it can be done.
 
+There are a couple threads around adding the JavaScript to Drupal but there
+isn't a large backing.
+
+
+## Open discussion happens
