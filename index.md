@@ -1,18 +1,43 @@
 ---
 layout: page
-title: My Github Home
-tagline: 
+title: nothing special
+tagline: just rambling on
 ---
 {% include JB/setup %}
 
-## A new home
+## A new day
 
-I've been using GitHub for a while for hosting personal projects and I really like it. I'm now getting used to the idea that I can post a blog at the same place where I do much of my development. Pretty cool actually.
+I'm moving my content and blog posts over to github. The reason for this is
+pretty simple, I want a place that can host my blog for free and I get quite a
+few perks using github to do it.
 
-## Why GitHub and not another platform such as Drupal?
+Using github allows me to play around with other technologies such as jekyll
+to build my blog. [Jekyll] allows me to create a blog post in [markdown] and
+post it on github as a static html file. Not cool? Actually is WAY cool becase
+I can also do comments and analytics along with it.
 
-I have a few places on the web, most using Drupal or some other blogging platform. Mostly I'm not using Drupal as an anything more than a blogging platform. Since this is the case, I figured I'd just use GitHub for now.
+## Why not use Drupal?
+
+I am a firm believer that each tool has it's use and Drupal is a great tool.
+Drupal is like a [swiss army knife] in that you can have quite a bit of
+functionality in a single system. For this blog I choose to have more of a
+Ginsu knife which is a tool that is only useful at one thing, cutting.
+
+Using Github I don't need to worry about upgrading or updating anything at
+all. I just create my blog post and git push it and it shows up. Since it's a
+static HTML page, I don't need to be worried about modules that are insecure.
 
 ## So what?
 
-So nothing really, I will not likely be doing much here by way of blogging, though that may change. I'm initially setting this up as a place to test an idea that I have, nothing more.
+Nothing really. I'm just going to be blogging on a few topics, starting out
+mostly with Drupal since it's something I know a bit about, and moving on to
+other things. If there are any suggestions about something that I should blog
+about, please feel free to hit up the [issue queue] on my github repo that is
+storing all this wonderful content.
+
+
+
+[Jekyll]: http://jekyllrb.com/
+[markdown]:http://daringfireball.net/projects/markdown/
+[swiss army knife]: http://www.pemaquid.com/images/swiss-army-mega-knife.jpg
+[issue queue]: https://github.com/aaronott/aaronott.github.com/issues?state=open
