@@ -1,12 +1,11 @@
 
-http://aaronott.github.com/archive.html
-http://aaronott.github.com/atom.xml
-http://aaronott.github.com/categories.html
-http://aaronott.github.com/index.html
-http://aaronott.github.com/pages.html
-http://aaronott.github.com/sitemap.txt
-http://aaronott.github.com/tags.html
+http://a.aronott.com/archive.html
+http://a.aronott.com/atom.xml
+http://a.aronott.com/categories.html
+http://a.aronott.com/index.html
+http://a.aronott.com/pages.html
+http://a.aronott.com/sitemap.txt
+http://a.aronott.com/tags.html
 
-http://aaronott.github.com/the-library
-http://aaronott.github.com/DBUG/dbug-meetup-notes
-http://aaronott.github.com/first-post
+http://a.aronott.com/the-library
+http://a.aronott.com/DBUG/dbug-meetup-notes
