@@ -403,3 +403,10 @@ div.sidebar section img.icon {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
+
+/** Custom starts here **/
+ul.post_collate {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 1em;
+}
