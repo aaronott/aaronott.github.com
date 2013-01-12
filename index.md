@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: front_page
 title: nothing special
 tagline: just rambling on
 ---

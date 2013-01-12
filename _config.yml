@@ -6,12 +6,13 @@ permalink: /:categories/:title
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
 pygments: true
+safe: true
 
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Aaron Ott
-tagline: Technologist
+title : nothing special
+tagline: Just Rambling On
 author :
   name : Aaron Ott
   email : aaron.ott@gmail.com
@@ -115,7 +116,9 @@ JB :
   # Set 'provider' to false to turn sharing off globally.
   #
   sharing :
-    provider : false
+    provider : addthis
+    addthis:
+        pubid: 'xa-50f1a84f5b0a201b'
     
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
