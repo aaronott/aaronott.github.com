@@ -12,7 +12,7 @@ branch but the Library is one of the greatest places there is. I feel saddened
 at the prospect that buildings such as this may be extinct in the future and
 feel that there is hope for these places as well. For the most part, many of
 the libraries have adapted to the times in allowing for free wifi access to
-any of it's patrons and quite a bit of good quite sitting space.
+any of its patrons and quite a bit of good quite sitting space.
 
 I love reading but don't read many tree books any longer, most books that I
 read are the digital version unless I need it for reference. I don't use the
