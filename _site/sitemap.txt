@@ -7,6 +7,6 @@ http://a.aronott.com/pages.html
 http://a.aronott.com/sitemap.txt
 http://a.aronott.com/tags.html
 
-http://a.aronott.com/securing-ownership-of-drupal-filesystem
+http://a.aronott.com/drupal/securing-ownership-of-drupal-filesystem
 http://a.aronott.com/the-library
 http://a.aronott.com/DBUG/dbug-meetup-notes

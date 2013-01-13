@@ -4,7 +4,7 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-01-13T09:11:21-07:00</updated>
+ <updated>2013-01-13T09:20:11-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Securing ownership of Drupal filesystem.</title>
-   <link href="http://a.aronott.com/securing-ownership-of-drupal-filesystem"/>
+   <link href="http://a.aronott.com/drupal/securing-ownership-of-drupal-filesystem"/>
    <updated>2013-01-13T00:00:00-07:00</updated>
-   <id>http://a.aronott.com/securing-ownership-of-drupal-filesystem</id>
+   <id>http://a.aronott.com/drupal/securing-ownership-of-drupal-filesystem</id>
    <content type="html">&lt;p&gt;There was a security vulnerability found in Drupal 7.0 - 7.15 where a Drupal site could be hijacked given the wrong permissions to the settings.php file. Read more about it here &lt;a href='http://drupal.org/node/1815912'&gt;http://drupal.org/node/1815912&lt;/a&gt; if you are still running Drupal 7.15 or less, upgrade is highly recommended.&lt;/p&gt;
 
 &lt;p&gt;This vulnerability relies on the settings.php file being writable by the web server. One way to ensure that these types of vulnerabilities don&amp;#8217;t effect your site is to set proper permissions to your install.&lt;/p&gt;

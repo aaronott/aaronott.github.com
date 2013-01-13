@@ -2,8 +2,8 @@
 layout: post
 title: "Securing ownership of Drupal filesystem."
 description: ""
-category: 
-tags: []
+category: drupal
+tags: [drupal, security]
 ---
 {% include JB/setup %}
 
