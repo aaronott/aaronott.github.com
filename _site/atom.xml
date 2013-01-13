@@ -4,13 +4,54 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-01-12T11:55:29-07:00</updated>
+ <updated>2013-01-13T09:11:21-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Securing ownership of Drupal filesystem.</title>
+   <link href="http://a.aronott.com/securing-ownership-of-drupal-filesystem"/>
+   <updated>2013-01-13T00:00:00-07:00</updated>
+   <id>http://a.aronott.com/securing-ownership-of-drupal-filesystem</id>
+   <content type="html">&lt;p&gt;There was a security vulnerability found in Drupal 7.0 - 7.15 where a Drupal site could be hijacked given the wrong permissions to the settings.php file. Read more about it here &lt;a href='http://drupal.org/node/1815912'&gt;http://drupal.org/node/1815912&lt;/a&gt; if you are still running Drupal 7.15 or less, upgrade is highly recommended.&lt;/p&gt;
+
+&lt;p&gt;This vulnerability relies on the settings.php file being writable by the web server. One way to ensure that these types of vulnerabilities don&amp;#8217;t effect your site is to set proper permissions to your install.&lt;/p&gt;
+
+&lt;p&gt;On my server, I will normally create a dev group and assign myself and other developers to that group. Then I set the permissions as follows:&lt;/p&gt;
+
+&lt;p&gt;Start with all files :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo chown -R nobody:dev /path/to/drupal&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We set the owner to all files to nobody. This is a special user in linux and will ensure that no unnecessary permissions are granted to any of the files in the Drupal install.&lt;/p&gt;
+
+&lt;p&gt;Next we set directory and file permissions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// start with the files
+sudo chmod -R 664 /path/to/drupal
+// now set the directories
+sudo find /path/to/drupal -type d -exec chmod 775 {} \;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just a few final touches to make sure Drupal is happy with how things are set.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// set the sites/default/files directory ownership
+// www-data is the owner on most debian based systems,
+// if you use a redhat based distro, you may need to set 
+// the owner to &amp;#39;apache&amp;#39;
+sudo chown -R www-data /path/to/drupal/sites/default/files&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And just for a bit more security let&amp;#8217;s make the settings.php file read-only.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo chmod 444 /path/to/drupal/sites/default/settings.php&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should do it, permissions should now be set such that anyone in the dev group will be able modify files as needed for development purposes but the webserver will not have permission to modify files leaving the install a bit more secure.&lt;/p&gt;
+
+&lt;p&gt;This whole script can be be downloaded &lt;a href='https://gist.github.com/3908003'&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>The Library</title>
