@@ -102,6 +102,13 @@
                   </a>
                 </li>
               {% endif %}
+              {% if site.author.amazon %}
+                <li>
+                  <a href="http://www.amazon.com/gp/registry/wishlist/{{ site.author.amazon }}" class="zocial amazon icon" target="_blank">
+                    <span class="hidden-desktop">FeedBurner</a>
+                  </a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>
