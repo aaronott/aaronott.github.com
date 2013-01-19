@@ -4,13 +4,92 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-01-13T18:40:37-07:00</updated>
+ <updated>2013-01-18T21:18:44-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>workingon   Time tracking</title>
+   <link href="http://a.aronott.com/workingon---time-tracking"/>
+   <updated>2013-01-18T00:00:00-07:00</updated>
+   <id>http://a.aronott.com/workingon---time-tracking</id>
+   <content type="html">&lt;p&gt;Since starting with AppliedTrust and sometime before that as well, I&amp;#8217;ve found the need to track time for different projects. I&amp;#8217;ve used a number of methods including pencil and paper, online applications, applications over xmpp that I can connect with through IM even desktop applications.&lt;/p&gt;
+
+&lt;p&gt;One thing I found was that it is super easy to start the timer, then get off onto another project totally forgetting to mark the time when you ended the previous project. This leads to very inaccurate time tracking as you are trying to rely on your memory, &amp;#8220;Hmmm, how long have I been working on this?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;I took a script that I&amp;#8217;ve written over and over to learn different languages and wrote it out in PHP real quick. I didn&amp;#8217;t really want to spend much time working on the script it self, really I wasn&amp;#8217;t sure that I&amp;#8217;d even really use it at all. I called WorkingOn and started to use it.&lt;/p&gt;
+
+&lt;p&gt;To start an activity I would simply type in&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;workingon start &amp;quot;Project X&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;this writes a temporary file with a timestamp and the project name so I can keep track of what I&amp;#8217;ve been working on and how long.&lt;/p&gt;
+
+&lt;p&gt;If at anytime I need to see what project I&amp;#8217;m tracking time against I can type in&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;workingon current&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and this would return something like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Project X since 10:52:06 [1h13m]&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a nice message telling me everything I need to know, what I&amp;#8217;m working on, when I started it and just for ease, how long I&amp;#8217;ve been working on it.&lt;/p&gt;
+
+&lt;p&gt;When I get done I can type&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;workingon end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and a message like the following will be displayed&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Ended: Project X after 1h15m27s&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I built in a limitation that will allow me to only track a single task at a time. I think this is ideal since you can&amp;#8217;t focus all your energy on more than one project at a time.&lt;/p&gt;
+
+&lt;h3 id='laziness'&gt;Laziness&lt;/h3&gt;
+
+&lt;p&gt;So I ran with this for a while and realized a few things. Number one, I got sick of typing out the full name &lt;code&gt;workingon start&lt;/code&gt; or &lt;code&gt;workingon
+current&lt;/code&gt; so I created aliases&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias wo=&amp;#39;workingon&amp;#39;
+alias woc=&amp;#39;workingon current&amp;#39;
+alias wor=&amp;#39;workingon report&amp;#39;
+alias wos=&amp;#39;workingon start&amp;#39;
+alias woe=&amp;#39;workingon end&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I can simply type &lt;code&gt;wos &amp;quot;project X&amp;quot;&lt;/code&gt; and git things started and a quick &lt;code&gt;woc&lt;/code&gt; will tell me what I&amp;#8217;m currently workingon.&lt;/p&gt;
+
+&lt;p&gt;This was progress but another thing I noticed is, like other applications, I would forget to change the clock and would find that I&amp;#8217;d type &lt;code&gt;woc&lt;/code&gt; and it would say I&amp;#8217;d been working on an application for 6hours when really I&amp;#8217;d worked on a number of projects during that time.&lt;/p&gt;
+
+&lt;h3 id='reminders'&gt;Reminders&lt;/h3&gt;
+
+&lt;p&gt;I decided that reminders are a good thing so I built them using cron on my system. I&amp;#8217;m using a linux system so I created a cron to run every 20 minutes and run a script called reminder.sh. This script used notify-send to popup a message that would say &amp;#8220;Hey, what are you workingon?&amp;#8221;&lt;/p&gt;
+
+&lt;p&gt;This worked for a bit but I figured, this could be better, so I added the output from &lt;code&gt;woc&lt;/code&gt; to the script so I could say, you are currently working on Project X for 1h15m.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+
+CURRENT=`/usr/local/bin/workingon current`
+
+/usr/bin/notify-send &amp;quot;What are you WorkingOn?&amp;quot; \
+  &amp;quot;Check your time.\n $CURRENT&amp;quot; \
+  -i /usr/share/pixmaps/gnome-set-time.png&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My cron looks like the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*/20 7-17 * * 1-5 DISPLAY=:0.0 /usr/local/bin/reminder.sh&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='anywhere'&gt;Anywhere&lt;/h3&gt;
+
+&lt;p&gt;So I found that I would be on different computers through out the day and I would like to track my time across them. Easy enough, since the database is simply a flat file, I put it in a dropbox that is connected across my computers so I can now track time on all my devices.&lt;/p&gt;
+
+&lt;p&gt;The full script can be found &lt;a href='https://github.com/aaronott/WorkingOn-CLI'&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I hope this helps someone else as much as it&amp;#8217;s helped me.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Securing ownership of Drupal filesystem.</title>

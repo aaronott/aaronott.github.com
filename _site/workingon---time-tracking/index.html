@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Securing ownership of Drupal filesystem. - 
+        workingon   Time tracking - 
       
       nothing special
     </title>
-    <meta name="description" content="">
+    <meta name="description" content="Keeping track of time for different projects.">
     <meta name="author" content="Aaron Ott">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -157,47 +157,85 @@
         
 <div class="page-header">
   <h1>
-    Securing ownership of Drupal filesystem. 
+    workingon   Time tracking 
     
   </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>There was a security vulnerability found in Drupal 7.0 - 7.15 where a Drupal site could be hijacked given the wrong permissions to the settings.php file. Read more about it here <a href='http://drupal.org/node/1815912'>http://drupal.org/node/1815912</a> if you are still running Drupal 7.15 or less, upgrade is highly recommended.</p>
+    <p>Since starting with AppliedTrust and sometime before that as well, I&#8217;ve found the need to track time for different projects. I&#8217;ve used a number of methods including pencil and paper, online applications, applications over xmpp that I can connect with through IM even desktop applications.</p>
 
-<p>This vulnerability relies on the settings.php file being writable by the web server. One way to ensure that these types of vulnerabilities don&#8217;t effect your site is to set proper permissions to your install.</p>
+<p>One thing I found was that it is super easy to start the timer, then get off onto another project totally forgetting to mark the time when you ended the previous project. This leads to very inaccurate time tracking as you are trying to rely on your memory, &#8220;Hmmm, how long have I been working on this?&#8221;</p>
 
-<p>On my server, I will normally create a dev group and assign myself and other developers to that group. Then I set the permissions as follows:</p>
+<p>I took a script that I&#8217;ve written over and over to learn different languages and wrote it out in PHP real quick. I didn&#8217;t really want to spend much time working on the script it self, really I wasn&#8217;t sure that I&#8217;d even really use it at all. I called WorkingOn and started to use it.</p>
 
-<p>Start with all files :</p>
+<p>To start an activity I would simply type in</p>
 
-<pre><code>sudo chown -R nobody:dev /path/to/drupal</code></pre>
+<pre><code>workingon start &quot;Project X&quot;</code></pre>
 
-<p>We set the owner to all files to nobody. This is a special user in linux and will ensure that no unnecessary permissions are granted to any of the files in the Drupal install.</p>
+<p>this writes a temporary file with a timestamp and the project name so I can keep track of what I&#8217;ve been working on and how long.</p>
 
-<p>Next we set directory and file permissions:</p>
+<p>If at anytime I need to see what project I&#8217;m tracking time against I can type in</p>
 
-<pre><code>// start with the files
-sudo chmod -R 664 /path/to/drupal
-// now set the directories
-sudo find /path/to/drupal -type d -exec chmod 775 {} \;</code></pre>
+<pre><code>workingon current</code></pre>
 
-<p>Just a few final touches to make sure Drupal is happy with how things are set.</p>
+<p>and this would return something like</p>
 
-<pre><code>// set the sites/default/files directory ownership
-// www-data is the owner on most debian based systems,
-// if you use a redhat based distro, you may need to set 
-// the owner to &#39;apache&#39;
-sudo chown -R www-data /path/to/drupal/sites/default/files</code></pre>
+<pre><code>Project X since 10:52:06 [1h13m]</code></pre>
 
-<p>And just for a bit more security let&#8217;s make the settings.php file read-only.</p>
+<p>This is a nice message telling me everything I need to know, what I&#8217;m working on, when I started it and just for ease, how long I&#8217;ve been working on it.</p>
 
-<pre><code>sudo chmod 444 /path/to/drupal/sites/default/settings.php</code></pre>
+<p>When I get done I can type</p>
 
-<p>That should do it, permissions should now be set such that anyone in the dev group will be able modify files as needed for development purposes but the webserver will not have permission to modify files leaving the install a bit more secure.</p>
+<pre><code>workingon end</code></pre>
 
-<p>This whole script can be be downloaded <a href='https://gist.github.com/3908003'>here</a>.</p>
+<p>and a message like the following will be displayed</p>
+
+<pre><code>Ended: Project X after 1h15m27s</code></pre>
+
+<p>I built in a limitation that will allow me to only track a single task at a time. I think this is ideal since you can&#8217;t focus all your energy on more than one project at a time.</p>
+
+<h3 id='laziness'>Laziness</h3>
+
+<p>So I ran with this for a while and realized a few things. Number one, I got sick of typing out the full name <code>workingon start</code> or <code>workingon
+current</code> so I created aliases</p>
+
+<pre><code>alias wo=&#39;workingon&#39;
+alias woc=&#39;workingon current&#39;
+alias wor=&#39;workingon report&#39;
+alias wos=&#39;workingon start&#39;
+alias woe=&#39;workingon end&#39;</code></pre>
+
+<p>Now I can simply type <code>wos &quot;project X&quot;</code> and git things started and a quick <code>woc</code> will tell me what I&#8217;m currently workingon.</p>
+
+<p>This was progress but another thing I noticed is, like other applications, I would forget to change the clock and would find that I&#8217;d type <code>woc</code> and it would say I&#8217;d been working on an application for 6hours when really I&#8217;d worked on a number of projects during that time.</p>
+
+<h3 id='reminders'>Reminders</h3>
+
+<p>I decided that reminders are a good thing so I built them using cron on my system. I&#8217;m using a linux system so I created a cron to run every 20 minutes and run a script called reminder.sh. This script used notify-send to popup a message that would say &#8220;Hey, what are you workingon?&#8221;</p>
+
+<p>This worked for a bit but I figured, this could be better, so I added the output from <code>woc</code> to the script so I could say, you are currently working on Project X for 1h15m.</p>
+
+<pre><code>#!/bin/sh
+
+CURRENT=`/usr/local/bin/workingon current`
+
+/usr/bin/notify-send &quot;What are you WorkingOn?&quot; \
+  &quot;Check your time.\n $CURRENT&quot; \
+  -i /usr/share/pixmaps/gnome-set-time.png</code></pre>
+
+<p>My cron looks like the following:</p>
+
+<pre><code>*/20 7-17 * * 1-5 DISPLAY=:0.0 /usr/local/bin/reminder.sh</code></pre>
+
+<h3 id='anywhere'>Anywhere</h3>
+
+<p>So I found that I would be on different computers through out the day and I would like to track my time across them. Easy enough, since the database is simply a flat file, I put it in a dropbox that is connected across my computers so I can now track time on all my devices.</p>
+
+<p>The full script can be found <a href='https://github.com/aaronott/WorkingOn-CLI'>here</a></p>
+
+<p>I hope this helps someone else as much as it&#8217;s helped me.</p>
     <hr>
     
 
@@ -219,11 +257,11 @@ sudo chown -R www-data /path/to/drupal/sites/default/files</code></pre>
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/the-library" title="The Library">&larr; Previous</a>
+        <a class="btn prev" href="/drupal/securing-ownership-of-drupal-filesystem" title="Securing ownership of Drupal filesystem.">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/workingon---time-tracking" title="workingon   Time tracking">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
@@ -253,15 +291,8 @@ sudo chown -R www-data /path/to/drupal/sites/default/files</code></pre>
   <div class="span4">
     <section>
       <h4>Published</h4>
-      <div class="date"><span>13 January 2013</span></div>
+      <div class="date"><span>18 January 2013</span></div>
     </section>
-    
-      <section>
-        <h4>Category</h4>
-        <span class="category">
-          drupal
-        </span>
-      </section>
          
     
       <section>
@@ -273,9 +304,7 @@ sudo chown -R www-data /path/to/drupal/sites/default/files</code></pre>
 
   
      
-    	<li><a href="/tags.html#drupal-ref">drupal <span>2</span></a></li>
-     
-    	<li><a href="/tags.html#security-ref">security <span>1</span></a></li>
+    	<li><a href="/tags.html#productivity-ref">productivity <span>1</span></a></li>
     
   
 
