@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Categories - 
+        Clean up Drupal Users - 
       
       nothing special
     </title>
-    
+    <meta name="description" content="Clean up Drupal users with Drush">
     <meta name="author" content="Aaron Ott">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -76,7 +76,7 @@
     
       
       	
-      	<li class="active"><a href="/categories.html" class="active">Categories</a></li>
+      	<li><a href="/categories.html">Categories</a></li>
       	
       
     
@@ -155,88 +155,136 @@
     <div class="container">
       <div class="content">
         
-<div class="page-header-wrapper">
-	<div class="page-header">
-  		<h1>Categories </h1>
-  	</div>
+<div class="page-header">
+  <h1>
+    Clean up Drupal Users 
+    
+  </h1>
 </div>
 
 <div class="row">
   <div class="span8">
+    <p>Many times when deploying a Drupal site from Development to Production, there is the desire to clean things up in order to boost security. One thing that should not be forgotten is the users that are allowed to login to the site. If you have a deployment where everthing happens on the development or staging server and is pushed to production, it would be a good idea to not allow any users to login directly to production.</p>
+
+<p>There are a couple ways to go about this, the first is by logging in as the admin user and manually blocking all users. This method is fine if there are only a few users, but it also becomes tedious and if there are more than a few, very time consuming.</p>
+
+<p>Another way to do it would be to login to the database and run something like:</p>
+
+<pre><code>UPDATE users SET status = 0 WHERE uid &gt; 1;</code></pre>
+
+<p>Again, this method works just fine, but since we are inside a Drupal instance, we can let Drush do the work for us. I&#8217;ve created a short script that can be used for this purpose and all it does is block every user except the Administrator and Anonymous users. The reason we block the user instead of canceling the user is we might like blog posts to remain tied to the user so they would get credit on the by-line otherwise all content is re-assigned to the Anonymous user.</p>
+
+<p>This is what the script looks like:</p>
+
+<pre><code>#!/usr/bin/env drush
+&lt;?php
+#
+# This script removes all drupal users with uid &gt; 1 (e.g., skips
+# admin user) and reassigns their content to anonymous.
+#
+
+// check if we can bootstrap
+$self = drush_sitealias_get_record(&#39;@self&#39;);
+if (empty($self)) {
+  drush_die(&quot;I can&#39;t bootstrap from the current location.&quot;, 0);
+}
+
+// we don&#39;t want to say yes each time.
+drush_set_context(&#39;DRUSH_AFFIRMATIVE&#39;, TRUE);
+
+$result = db_query(&quot;SELECT name from {users} WHERE uid &gt; 1&quot;);
+
+foreach ($result as $user) {
+  drush_invoke(&#39;user-block&#39;, array($user-&gt;name));
+}</code></pre>
+
+<p>Download the script from: <a href='https://gist.github.com/aaronott/4760022'>https://gist.github.com/aaronott/4760022</a></p>
+    <hr>
     
 
-<ul class="tag_box inline">
+
+  <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50f1a84f5b0a201b"></script>
+<!-- AddThis Button END -->
+
+
+
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/workingon---time-tracking" title="workingon   Time tracking">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next disabled">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'aaronott'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
   
-  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>11 February 2013</span></div>
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        <span class="category">
+          drupal
+        </span>
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
 
 
   
      
-    	<li><a href="/categories.html#DBUG-ref">
-    		DBUG <span>1</span>
-    	</a></li>
+    	<li><a href="/tags.html#drush-ref">drush <span>1</span></a></li>
      
-    	<li><a href="/categories.html#drupal-ref">
-    		drupal <span>2</span>
-    	</a></li>
-    
-  
-
-
-</ul>
-
-
- 
-  <h2 id="DBUG-ref">DBUG</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/DBUG/dbug-meetup-notes">DBUG Meetup Notes</a></li>
-      	
-      
+    	<li><a href="/tags.html#drupal-ref">drupal <span>3</span></a></li>
     
   
 
 
 
-  </ul>
- 
-  <h2 id="drupal-ref">drupal</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/drupal/clean-up-drupal-users">Clean up Drupal Users</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/drupal/securing-ownership-of-drupal-filesystem">Securing ownership of Drupal filesystem.</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+        </ul>
+      </section>
+             
   </div>
 </div>
 

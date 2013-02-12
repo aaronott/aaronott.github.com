@@ -4,13 +4,55 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-01-18T21:18:44-07:00</updated>
+ <updated>2013-02-11T20:49:05-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Clean up Drupal Users</title>
+   <link href="http://a.aronott.com/drupal/clean-up-drupal-users"/>
+   <updated>2013-02-11T00:00:00-07:00</updated>
+   <id>http://a.aronott.com/drupal/clean-up-drupal-users</id>
+   <content type="html">&lt;p&gt;Many times when deploying a Drupal site from Development to Production, there is the desire to clean things up in order to boost security. One thing that should not be forgotten is the users that are allowed to login to the site. If you have a deployment where everthing happens on the development or staging server and is pushed to production, it would be a good idea to not allow any users to login directly to production.&lt;/p&gt;
+
+&lt;p&gt;There are a couple ways to go about this, the first is by logging in as the admin user and manually blocking all users. This method is fine if there are only a few users, but it also becomes tedious and if there are more than a few, very time consuming.&lt;/p&gt;
+
+&lt;p&gt;Another way to do it would be to login to the database and run something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;UPDATE users SET status = 0 WHERE uid &amp;gt; 1;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Again, this method works just fine, but since we are inside a Drupal instance, we can let Drush do the work for us. I&amp;#8217;ve created a short script that can be used for this purpose and all it does is block every user except the Administrator and Anonymous users. The reason we block the user instead of canceling the user is we might like blog posts to remain tied to the user so they would get credit on the by-line otherwise all content is re-assigned to the Anonymous user.&lt;/p&gt;
+
+&lt;p&gt;This is what the script looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env drush
+&amp;lt;?php
+#
+# This script removes all drupal users with uid &amp;gt; 1 (e.g., skips
+# admin user) and reassigns their content to anonymous.
+#
+
+// check if we can bootstrap
+$self = drush_sitealias_get_record(&amp;#39;@self&amp;#39;);
+if (empty($self)) {
+  drush_die(&amp;quot;I can&amp;#39;t bootstrap from the current location.&amp;quot;, 0);
+}
+
+// we don&amp;#39;t want to say yes each time.
+drush_set_context(&amp;#39;DRUSH_AFFIRMATIVE&amp;#39;, TRUE);
+
+$result = db_query(&amp;quot;SELECT name from {users} WHERE uid &amp;gt; 1&amp;quot;);
+
+foreach ($result as $user) {
+  drush_invoke(&amp;#39;user-block&amp;#39;, array($user-&amp;gt;name));
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download the script from: &lt;a href='https://gist.github.com/aaronott/4760022'&gt;https://gist.github.com/aaronott/4760022&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>workingon   Time tracking</title>
