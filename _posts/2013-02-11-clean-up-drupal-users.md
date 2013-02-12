@@ -7,12 +7,13 @@ tags: [drush, drupal]
 ---
 {% include JB/setup %}
 
-Many times when deploying a Drupal site from your development or staging environment to the production, there
-is the desire to clean things up in order to boost security. One thing that
-should not be forgotten is the users that are allowed to login to the site. If
-you have a deployment where everything happens on the development or staging
-server and is pushed to production, it would be a good idea to not allow any
-users to login directly to production.
+Many times when deploying a Drupal site from your development or staging
+environment to the production environment, there is the desire to clean things
+up in order to boost security. One thing that should not be forgotten is the
+users that are allowed to login to the site. If you have a deployment where
+everything happens on the development or staging server and is pushed to
+production, it would be a good idea to not allow any users to login directly to
+production.
 
 There are a couple ways to go about this, the first is by logging in as the
 admin user and manually blocking all users. This method is fine if there are
