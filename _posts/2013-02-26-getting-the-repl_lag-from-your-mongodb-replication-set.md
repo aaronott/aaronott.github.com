@@ -14,7 +14,7 @@ According to mongodb.org:
 
 MongoDB has an eventually consistent model of replication. This is just fine
 most of the time. Sometimes though, it's interesting to find out just how far
-behind your secondaries are from the master. This can be done by comparing the
+behind your secondaries are from the primary. This can be done by comparing the
 optime in the replication status (`rs.status()`) output.
 
 I used to run an rs.status() then grab the optime from the primary and
