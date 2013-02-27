@@ -12,15 +12,15 @@ According to mongodb.org:
     Replication lag is a delay between an operation on the primary and the
     application of that operation from the oplog to the secondary. 
 
-MongoDB has an eventually consistent model of replication. This is just find
-most of the time. Some times though, it's interesting to find out just how far
+MongoDB has an eventually consistent model of replication. This is just fine
+most of the time. Sometimes though, it's interesting to find out just how far
 behind your secondaries are from the master. This can be done by comparing the
 optime in the replication status (`rs.status()`) output.
 
 I used to run an rs.status() then grab the optime from the primary and
-subtract the optime of the node I was interested in. This is a pain and too
+subtract the optime of the secondary node I was interested in. This is a pain and too
 time consuming. For this reason I wrote the following command that can be run
-from the mongodb commandline.
+from the mongo commandline.
 
     rs.repl_lag = function () {
       var s = db._adminCommand("replSetGetStatus");

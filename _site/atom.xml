@@ -4,7 +4,7 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-02-26T21:58:00-07:00</updated>
+ <updated>2013-02-26T22:12:26-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
@@ -22,9 +22,9 @@
 &lt;pre&gt;&lt;code&gt;Replication lag is a delay between an operation on the primary and the
 application of that operation from the oplog to the secondary. &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;MongoDB has an eventually consistent model of replication. This is just find most of the time. Some times though, it&amp;#8217;s interesting to find out just how far behind your secondaries are from the master. This can be done by comparing the optime in the replication status (&lt;code&gt;rs.status()&lt;/code&gt;) output.&lt;/p&gt;
+&lt;p&gt;MongoDB has an eventually consistent model of replication. This is just fine most of the time. Sometimes though, it&amp;#8217;s interesting to find out just how far behind your secondaries are from the master. This can be done by comparing the optime in the replication status (&lt;code&gt;rs.status()&lt;/code&gt;) output.&lt;/p&gt;
 
-&lt;p&gt;I used to run an rs.status() then grab the optime from the primary and subtract the optime of the node I was interested in. This is a pain and too time consuming. For this reason I wrote the following command that can be run from the mongodb commandline.&lt;/p&gt;
+&lt;p&gt;I used to run an rs.status() then grab the optime from the primary and subtract the optime of the secondary node I was interested in. This is a pain and too time consuming. For this reason I wrote the following command that can be run from the mongo commandline.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;rs.repl_lag = function () {
   var s = db._adminCommand(&amp;quot;replSetGetStatus&amp;quot;);
