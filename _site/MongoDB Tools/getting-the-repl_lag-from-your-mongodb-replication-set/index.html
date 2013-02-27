@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Categories - 
+        Getting the repl_lag from your MongoDB Replication set. - 
       
       nothing special
     </title>
-    
+    <meta name="description" content="">
     <meta name="author" content="Aaron Ott">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -76,7 +76,7 @@
     
       
       	
-      	<li class="active"><a href="/categories.html" class="active">Categories</a></li>
+      	<li><a href="/categories.html">Categories</a></li>
       	
       
     
@@ -155,112 +155,145 @@
     <div class="container">
       <div class="content">
         
-<div class="page-header-wrapper">
-	<div class="page-header">
-  		<h1>Categories </h1>
-  	</div>
+<div class="page-header">
+  <h1>
+    Getting the repl_lag from your MongoDB Replication set. 
+    
+  </h1>
 </div>
 
 <div class="row">
   <div class="span8">
+    <p>According to mongodb.org:</p>
+
+<pre><code>Replication lag is a delay between an operation on the primary and the
+application of that operation from the oplog to the secondary. </code></pre>
+
+<p>MongoDB has an eventually consistent model of replication. This is just find most of the time. Some times though, it&#8217;s interesting to find out just how far behind your secondaries are from the master. This can be done by comparing the optime in the replication status (<code>rs.status()</code>) output.</p>
+
+<p>I used to run an rs.status() then grab the optime from the primary and subtract the optime of the node I was interested in. This is a pain and too time consuming. For this reason I wrote the following command that can be run from the mongodb commandline.</p>
+
+<pre><code>rs.repl_lag = function () {
+  var s = db._adminCommand(&quot;replSetGetStatus&quot;);
+ 
+  // if this is primary, go no further.
+  if (s.myState == 1) {
+    return 0;
+  }
+ 
+  var mytime = 0;
+  var primarytime = 0;
+ 
+  for (var i in s.members) {
+    if (s.members[i].self == true) {
+      mytime = s.members[i].optime.t;
+    }
+ 
+    if (s.members[i].stateStr == &quot;PRIMARY&quot;) {
+      primarytime = s.members[i].optime.t;
+    }
+ 
+    if (mytime &gt; 0 &amp;&amp; primarytime &gt; 0) {
+      break;
+    }
+  }
+ 
+  return (primarytime - mytime) / 1000;
+}</code></pre>
+
+<p>To use this, call mongo using the &#8211;shell parameter:</p>
+
+<pre><code>mongo --shell repl_lag.js</code></pre>
+
+<p>Then from the prompt all you need to type is <code>rs.repl_lag()</code> and the command returns the number of seconds behind the primary that the current node is. You&#8217;ll notice that if we are on the primary, we simply return 0 since it can&#8217;t be behind itself.</p>
+
+<p>The script can be downloaded from <a href='https://gist.github.com/aaronott/5045018'>Gist</a></p>
+    <hr>
     
 
-<ul class="tag_box inline">
+
+  <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50f1a84f5b0a201b"></script>
+<!-- AddThis Button END -->
+
+
+
+
+
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/drupal/clean-up-drupal-users" title="Clean up Drupal Users">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next disabled">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_shortname = 'aaronott'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
   
-  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>26 February 2013</span></div>
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        <span class="category">
+          MongoDB Tools
+        </span>
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
 
 
   
      
-    	<li><a href="/categories.html#drupal-ref">
-    		drupal <span>2</span>
-    	</a></li>
+    	<li><a href="/tags.html#MongoDB-ref">MongoDB <span>1</span></a></li>
      
-    	<li><a href="/categories.html#DBUG-ref">
-    		DBUG <span>1</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#MongoDB Tools-ref">
-    		MongoDB Tools <span>1</span>
-    	</a></li>
-    
-  
-
-
-</ul>
-
-
- 
-  <h2 id="drupal-ref">drupal</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/drupal/clean-up-drupal-users">Clean up Drupal Users</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/drupal/securing-ownership-of-drupal-filesystem">Securing ownership of Drupal filesystem.</a></li>
-      	
-      
+    	<li><a href="/tags.html#replSet-ref">replSet <span>1</span></a></li>
     
   
 
 
 
-  </ul>
- 
-  <h2 id="DBUG-ref">DBUG</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/DBUG/dbug-meetup-notes">DBUG Meetup Notes</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
- 
-  <h2 id="MongoDB Tools-ref">MongoDB Tools</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/MongoDB%20Tools/getting-the-repl_lag-from-your-mongodb-replication-set">Getting the repl_lag from your MongoDB Replication set.</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+        </ul>
+      </section>
+             
   </div>
 </div>
 

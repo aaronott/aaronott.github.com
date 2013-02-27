@@ -4,13 +4,64 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-02-11T21:17:27-07:00</updated>
+ <updated>2013-02-26T21:58:00-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Getting the repl_lag from your MongoDB Replication set.</title>
+   <link href="http://a.aronott.com/MongoDB%20Tools/getting-the-repl_lag-from-your-mongodb-replication-set"/>
+   <updated>2013-02-26T00:00:00-07:00</updated>
+   <id>http://a.aronott.com/MongoDB%20Tools/getting-the-repl_lag-from-your-mongodb-replication-set</id>
+   <content type="html">&lt;p&gt;According to mongodb.org:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Replication lag is a delay between an operation on the primary and the
+application of that operation from the oplog to the secondary. &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MongoDB has an eventually consistent model of replication. This is just find most of the time. Some times though, it&amp;#8217;s interesting to find out just how far behind your secondaries are from the master. This can be done by comparing the optime in the replication status (&lt;code&gt;rs.status()&lt;/code&gt;) output.&lt;/p&gt;
+
+&lt;p&gt;I used to run an rs.status() then grab the optime from the primary and subtract the optime of the node I was interested in. This is a pain and too time consuming. For this reason I wrote the following command that can be run from the mongodb commandline.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rs.repl_lag = function () {
+  var s = db._adminCommand(&amp;quot;replSetGetStatus&amp;quot;);
+ 
+  // if this is primary, go no further.
+  if (s.myState == 1) {
+    return 0;
+  }
+ 
+  var mytime = 0;
+  var primarytime = 0;
+ 
+  for (var i in s.members) {
+    if (s.members[i].self == true) {
+      mytime = s.members[i].optime.t;
+    }
+ 
+    if (s.members[i].stateStr == &amp;quot;PRIMARY&amp;quot;) {
+      primarytime = s.members[i].optime.t;
+    }
+ 
+    if (mytime &amp;gt; 0 &amp;amp;&amp;amp; primarytime &amp;gt; 0) {
+      break;
+    }
+  }
+ 
+  return (primarytime - mytime) / 1000;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use this, call mongo using the &amp;#8211;shell parameter:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mongo --shell repl_lag.js&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then from the prompt all you need to type is &lt;code&gt;rs.repl_lag()&lt;/code&gt; and the command returns the number of seconds behind the primary that the current node is. You&amp;#8217;ll notice that if we are on the primary, we simply return 0 since it can&amp;#8217;t be behind itself.&lt;/p&gt;
+
+&lt;p&gt;The script can be downloaded from &lt;a href='https://gist.github.com/aaronott/5045018'&gt;Gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Clean up Drupal Users</title>
