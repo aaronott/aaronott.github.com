@@ -7,6 +7,7 @@ http://a.aronott.com/pages.html
 http://a.aronott.com/sitemap.txt
 http://a.aronott.com/tags.html
 
+http://a.aronott.com/hanging-with-dano
 http://a.aronott.com/MongoDB%20Tools/getting-the-repl_lag-from-your-mongodb-replication-set
 http://a.aronott.com/drupal/clean-up-drupal-users
 http://a.aronott.com/workingon---time-tracking

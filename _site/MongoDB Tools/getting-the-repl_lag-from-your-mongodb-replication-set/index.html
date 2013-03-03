@@ -169,7 +169,7 @@
 <pre><code>Replication lag is a delay between an operation on the primary and the
 application of that operation from the oplog to the secondary. </code></pre>
 
-<p>MongoDB has an eventually consistent model of replication. This is just fine most of the time. Sometimes though, it&#8217;s interesting to find out just how far behind your secondaries are from the master. This can be done by comparing the optime in the replication status (<code>rs.status()</code>) output.</p>
+<p>MongoDB has an eventually consistent model of replication. This is just fine most of the time. Sometimes though, it&#8217;s interesting to find out just how far behind your secondaries are from the primary. This can be done by comparing the optime in the replication status (<code>rs.status()</code>) output.</p>
 
 <p>I used to run an rs.status() then grab the optime from the primary and subtract the optime of the secondary node I was interested in. This is a pain and too time consuming. For this reason I wrote the following command that can be run from the mongo commandline.</p>
 
@@ -233,7 +233,7 @@ application of that operation from the oplog to the secondary. </code></pre>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next disabled">Next &rarr;</a>
+        <a class="btn next" href="/hanging-with-dano" title="Hanging with Dano">Next &rarr;</a>
       
     </div>
     <hr>
