@@ -4,7 +4,7 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-03-03T12:05:38-07:00</updated>
+ <updated>2013-03-03T16:57:00-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
@@ -17,7 +17,11 @@
    <link href="http://a.aronott.com/hanging-with-dano"/>
    <updated>2013-03-03T00:00:00-07:00</updated>
    <id>http://a.aronott.com/hanging-with-dano</id>
-   <content type="html">&lt;p&gt;Today I was sitting at a coffee shop chatting with a &lt;a href='http://danomanion.com/'&gt;good friend&lt;/a&gt; about different technologies. We had a great time chatting about Drupal, Markdown and other great techs.&lt;/p&gt;</content>
+   <content type="html">&lt;p&gt;Today I was sitting at a coffee shop chatting with a &lt;a href='http://danomanion.com/'&gt;good friend&lt;/a&gt; about different technologies. We had a great time chatting about Drupal, Markdown and other great techs.&lt;/p&gt;
+
+&lt;p&gt;One of the things we talked about was JavaScript and the different frameworks that are available for it. It seems to me that there may actually be too many choices. With all these choices, which one do I choose?&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;ve chosen to just learn one and use it a bit and not stress out about which is the &amp;#8220;best&amp;#8221; one to use. So backbone is the one for now. If anyone has any nice tutorials for backbone it would be appreciated. I&amp;#8217;ve gone through a couple and am still lost so I think I&amp;#8217;m missing something.&lt;/p&gt;</content>
  </entry>
  
  <entry>
