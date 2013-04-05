@@ -4,13 +4,42 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-03-14T12:41:16-06:00</updated>
+ <updated>2013-04-05T15:31:46-06:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Super shortcuts to useful pages</title>
+   <link href="http://a.aronott.com/shortcuts"/>
+   <updated>2013-04-05T00:00:00-06:00</updated>
+   <id>http://a.aronott.com/shortcuts</id>
+   <content type="html">&lt;p&gt;Bookmarks are great for taking you back to a page that you&amp;#8217;ve been to before, but what about those pages that you frequent daily. I find myself heading on over to &lt;a href='http://php.net'&gt;php.net&lt;/a&gt; or to &lt;a href='http://api.drupal.org'&gt;api.drupal.org&lt;/a&gt; quite a bit to look up different functions.&lt;/p&gt;
+
+&lt;p&gt;The issue that I have going directly to these pages is that I have to type in the url into the browser, then search for the function I want. I suppose I could type in the function into Google (or the browser search) and click on the first entry that comes back, but I like making thinks a bit easier for me. Imagine you are using the &lt;a href='http://us.php.net/manual/en/function.date.php'&gt;date&lt;/a&gt; function and can&amp;#8217;t remember if you need to use &amp;#8216;r&amp;#8217; or &amp;#8216;c&amp;#8217; in your function. Using the regular search way, you could type in php date in the search field, or you could head on over to &lt;a href='http://php.net'&gt;php.net&lt;/a&gt; and search there. Wouldn&amp;#8217;t it be easier to simply type php date in your browser bar and have it take you directly to that page?&lt;/p&gt;
+
+&lt;p&gt;Google Chrome allows you to do just that by setting up your own custom search (even though you&amp;#8217;re not really searching). If you are in the Chrome browser now, you can try it out.&lt;/p&gt;
+
+&lt;p&gt;Click the wrench &amp;#8216;Customize&amp;#8217; button and click on Preferences. A little more than half way down, you will find the &amp;#8216;Search&amp;#8217; section with a button labeled &amp;#8216;Manage Search Engines&amp;#8230;&amp;#8217;. Clicking on this brings up an overlay with two sections, &amp;#8216;Default search options&amp;#8217; and &amp;#8216;Other search engines&amp;#8217; for our case we are interested in the second one. Scroll to the very bottom where you will find a row of three text entry boxes.&lt;/p&gt;
+
+&lt;p&gt;In the first box enter php.net - this is the label of your search so you can call it whatever you want.&lt;/p&gt;
+
+&lt;p&gt;Second box php - this is the shortcut text that will invoke the search engine&lt;/p&gt;
+
+&lt;p&gt;Third box http://us.php.net/manual/en/function.%s.php - when we search for date on the php.net page, we notice it takes us to http://us.php.net/manual/en/function.date.php so if we use the %s as our string placeholder, we only need to type in the name of the function to get that url.&lt;/p&gt;
+
+&lt;p&gt;Now you should be able to use php date on your own browser, and yes you can search for any of the other php functions as well.&lt;/p&gt;
+
+&lt;p&gt;Here are a couple more of my shortcuts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Drupal Projects | pr | http://drupal.org/project/%s
+D7 API Lookup | d7 | http://api.drupal.org/api/search/7/%s
+D6 API Lookup | d6 | http://api.drupal.org/api/search/6/%s
+Drupal Code | dc | http://drupalcode.org/project/%s.git&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
  
  <entry>
    <title>Hanging with Dano</title>
