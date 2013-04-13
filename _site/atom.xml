@@ -4,13 +4,33 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-04-13T13:42:15-06:00</updated>
+ <updated>2013-04-13T14:04:23-06:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Apps in Drupal</title>
+   <link href="http://a.aronott.com/drupal/apps-in-drupal"/>
+   <updated>2013-04-13T00:00:00-06:00</updated>
+   <id>http://a.aronott.com/drupal/apps-in-drupal</id>
+   <content type="html">&lt;p&gt;Following up on last months presentation on &lt;a href='http://a.aronott.com/drupal/distributions-in-drupal'&gt;Drupal distributions&lt;/a&gt; at DBUG I presented this month on &lt;a href='http://prezi.com/ru-qvlaseye5/drupal-apps/?kw=view-ru-qvlaseye5&amp;amp;rc=ref-37411643'&gt;Drupal Apps&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Drupal apps are a great way to build and capture pieces of functionality that fit a single use-case. Good apps are things like Events, Blog and Photos because they solve a single problem.&lt;/p&gt;
+
+&lt;p&gt;During the presentation I pointed out that things solving more than a single problem would not make a good app. Things like views, panels and tokens fall into this category. While these are great modules and can be used to build apps, they themselves would not make good apps since their functionality is too broad.&lt;/p&gt;
+
+&lt;p&gt;At the end of the presentation I pointed to the following links to learn more about what an app is and how to build one.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://groups.drupal.org/open-app-standard/oas'&gt;Open App Standards&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://drupal.org/project/apps'&gt;Apps Module&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://denver2012.drupal.org/program/sessions/building-drupal-apps-distributions'&gt;Drupalcon Presentation&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Super shortcuts to useful pages</title>

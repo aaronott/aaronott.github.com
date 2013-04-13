@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Distributions in Drupal - 
+        Apps in Drupal - 
       
       nothing special
     </title>
-    <meta name="description" content="Using distributions can be great for those learning to build with Drupal.">
+    <meta name="description" content="Apps in Drupal is great for knocking out those features that are single use-case.">
     <meta name="author" content="Aaron Ott">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -157,66 +157,26 @@
         
 <div class="page-header">
   <h1>
-    Distributions in Drupal 
+    Apps in Drupal 
     
   </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p>I recently gave a presentation on Distributions (or Installation Profiles) at the local Drupal Meetup and touched at a higher level about what these can do for you.</p>
+    <p>Following up on last months presentation on <a href='http://a.aronott.com/drupal/distributions-in-drupal'>Drupal distributions</a> at DBUG I presented this month on <a href='http://prezi.com/ru-qvlaseye5/drupal-apps/?kw=view-ru-qvlaseye5&amp;rc=ref-37411643'>Drupal Apps</a>.</p>
 
-<p>Starting out in Drupal some time ago I was pretty excited. I downloaded Drupal, installed it and then&#8230; well I had that feeling &#8220;Ok now what?&#8221; I wasn&#8217;t really sure what all could be done with Drupal or what I wanted to do with Drupal so kind of left it at that for a bit. Luckily I was using it at work for a different project where we built custom module after custom module and added them to our platform.</p>
+<p>Drupal apps are a great way to build and capture pieces of functionality that fit a single use-case. Good apps are things like Events, Blog and Photos because they solve a single problem.</p>
 
-<p>I think quite a few people feel this way. They hear about Drupal from someone who may be excited about it &#8220;Hey you&#8217;re building a such-and-such site? You&#8217;ve gotta checkout Drupal, it would be perfect for that.&#8221; So they go home, download and install Drupal and say to themselves&#8230; &#8220;Ok now what?&#8221;.</p>
+<p>During the presentation I pointed out that things solving more than a single problem would not make a good app. Things like views, panels and tokens fall into this category. While these are great modules and can be used to build apps, they themselves would not make good apps since their functionality is too broad.</p>
 
-<p>I think Distributions are a great place to start. First off, you get much more functionality than the out-of-the-box installation and you can choose a distribution that is close to what you are trying to build. One of the biggest benefits I find of distributions is that you can install it then take a look at all the modules used to create the great functionality you are looking for. This is a great learning tool in that you can see what modules work well with other modules and find the answer to just how did they build that super cool slideshow?</p>
+<p>At the end of the presentation I pointed to the following links to learn more about what an app is and how to build one.</p>
 
-<p>During the presentation we walked through four different distributions with varying levels of complexity. We started off with a pretty simple distribution and worked up to a very well polished distribution that can be used with very little customization needed.</p>
+<p><a href='http://groups.drupal.org/open-app-standard/oas'>Open App Standards</a></p>
 
-<h2 id='jumpstart'>Jumpstart</h2>
+<p><a href='http://drupal.org/project/apps'>Apps Module</a></p>
 
-<p>The first distribution we looked at was the Jumpstart distribution which is pretty simple by design. The purpose of this distribution is to have a starting point to build sites. Instead of requiring that you download and install Drupal, then download Views and some development modules separately, this Distribution takes care of that for you.</p>
-<img src='/assets/images/jumpstart_ss.png' />
-<p>This is a good example of a personal distribution that can be created to have a good jumping off point to create your projects. There aren&#8217;t any added features with this distro so it really is just something to use while at the beginning of a new project.</p>
-
-<p><a href='http://drupal.org/project/jumpstart'>Jumpstart project page</a></p>
-
-<h2 id='openpublish'>OpenPublish</h2>
-
-<p>OpenPublish aims to bring all the required tools for building a publishing centric site such as a news site. While there is no sample content, this distribution adds a couple different content types for Blog post, photo galleries, and videos.</p>
-<img src='/assets/images/publish_ss.png' />
-<p>This distribution includes features exported using the features module allowing for the distribution to create views and other pieces out of the box. Features in this distribution are used to build the different content types and modify the users profiles as well as creating a default view for content.</p>
-
-<p>A piece we didn&#8217;t touch on but that is interesting is the fact that this distribution also includes the apps module. This allows the site builder to download prepackaged fully functional applications to add even more functionality to the site.</p>
-
-<p><a href='http://drupal.org/project/openpublish'>OpenPublish project page</a></p>
-
-<h2 id='drupal_commons'>Drupal Commons</h2>
-
-<p>We then moved on to the great Drupal Commons distribution. This distribution is created to include a community site. Out of the box this distribution allows for the creation and display of events, subscription to different groups and even a wiki for each group. There are many other features that are included in this distribution that make customization easier on the site builder. For instance this distribution uses panels for layout which allows you to drag and drop your displays to different sections on the screen. The appearance section includes quite a few customizations that can be made to the layout and css of your site.</p>
-<img src='/assets/images/commons_ss.png' />
-<p>This is the first distribution we looked at that also installed sample content which gives the site builder a much better idea of the layout and flow of the site. This is a great distribution to download an look at if you are looking at adding &#8220;Hot Topics&#8221; to your site. It uses the radioactivity module to keep track of those stories and articles that people want to to read on your site.</p>
-
-<p><a href='https://network.acquia.com/downloads/drupal-commons'>OpenPublish project page</a></p>
-
-<h2 id='commerce_kickstart'>Commerce Kickstart</h2>
-
-<p>Finally we installed and looked at the Commerce Kickstart distribution. This distribution was built as an example of what can be done with the Commerce module and is a great place to start if you are looking at building an online commerce store. Included in this distribution is everything you will need setup your store, take payments and ship your product. While this distribution doesn&#8217;t include any apps, it does make good use of the Features module and builds many different content types and views to display your products.</p>
-<img src='/assets/images/commerce_ss.png' />
-<p>Along with sample content, this distribution also has a great help section that include videos and step-by-step how-to&#8217;s.</p>
-
-<p>Outside of commerce, it is a great example of what can be done to customize the installation process to fit the needs of your distribution.</p>
-
-<p><a href='http://drupal.org/project/commerce_kickstart'>Commerce Kickstart project page</a></p>
-
-<h2 id='conclusion'>Conclusion</h2>
-
-<p>Installing distributions is a great place for those that are new to Drupal and would like to get into building different sites with it. They allow new (and seasoned) users the opportunity to dig into the pre-packaged site and figure out how the features and functionalities are built.</p>
-
-<p>For those who have been building Drupal sites for a while, it will give them ideas on creating a distribution allowing for a good starting point to cut down the level of work they will need to complete on each of their projects.</p>
-
-<p>Let me know of other distributions that you&#8217;ve run into that are good for learning or that do something really cool.</p>
+<p><a href='http://denver2012.drupal.org/program/sessions/building-drupal-apps-distributions'>Drupalcon Presentation</a></p>
     <hr>
     
 
@@ -238,11 +198,11 @@
     <hr>
     <div class="pagination btn-group">
       
-        <a class="btn prev" href="/hanging-with-dano" title="Hanging with Dano">&larr; Previous</a>
+        <a class="btn prev" href="/shortcuts" title="Super shortcuts to useful pages">&larr; Previous</a>
       
         <a class="btn" href="/archive.html">Archive</a>
       
-        <a class="btn next" href="/shortcuts" title="Super shortcuts to useful pages">Next &rarr;</a>
+        <a class="btn next disabled">Next &rarr;</a>
       
     </div>
     <hr>
@@ -272,7 +232,7 @@
   <div class="span4">
     <section>
       <h4>Published</h4>
-      <div class="date"><span>13 March 2013</span></div>
+      <div class="date"><span>13 April 2013</span></div>
     </section>
     
       <section>
@@ -294,7 +254,7 @@
      
     	<li><a href="/tags.html#Drupal-ref">Drupal <span>2</span></a></li>
      
-    	<li><a href="/tags.html#BLUG-ref">BLUG <span>1</span></a></li>
+    	<li><a href="/tags.html#DBUG-ref">DBUG <span>1</span></a></li>
     
   
 
