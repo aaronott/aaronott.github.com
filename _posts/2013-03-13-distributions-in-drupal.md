@@ -23,6 +23,8 @@ who may be excited about it "Hey you're building a such-and-such site? You've
 gotta checkout Drupal, it would be perfect for that." So they go home,
 download and install Drupal and say to themselves... "Ok now what?".
 
+<!--more-->
+
 I think Distributions are a great place to start. First off, you get much more
 functionality than the out-of-the-box installation and you can choose a
 distribution that is close to what you are trying to build. One of the biggest

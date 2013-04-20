@@ -15,6 +15,8 @@ Drupal apps are a great way to build and capture pieces of functionality that
 fit a single use-case. Good apps are things like Events, Blog and Photos
 because they solve a single problem.
 
+<!--more-->
+
 During the presentation I pointed out that things solving more than a single
 problem would not make a good app. Things like views, panels and tokens fall
 into this category. While these are great modules and can be used to build

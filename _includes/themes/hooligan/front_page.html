@@ -1,12 +1,18 @@
 <div class="page-header-wrapper">
 	<div class="page-header">
   		<h1>{{ page.title }} {% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+      <h1>The Latest...</h1>
   	</div>
 </div>
 
 <div class="row">
   <div class="span8">
-    {{ content }}
+    {% for post in site.posts limit:4 %}
+      <h2><a href="{{ post.url }}" rel="bookmark" title="Permanent link to ">{{ post.title }}</a></h2>
+      <span>{{ post.date | date: '%B'}} {{ post.date | date: '%e' }}, {{ post.date | date: '%Y' }}</span>
+      {{ post.content | postmorefilter: post.url, "Readmore &raquo;" }}
+      <hr>
+    {% endfor %}
   </div>
 
   <div class="span4">

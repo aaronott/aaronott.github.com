@@ -26,6 +26,8 @@ on over to [php.net](http://php.net) and search there. Wouldn't it be easier
 to simply type php date in your browser bar and have it take you directly to
 that page?
 
+<!--more-->
+
 Google Chrome allows you to do just that by setting up your own custom search
 (even though you're not really searching). If you are in the Chrome browser
 now, you can try it out.
