@@ -4,13 +4,33 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-04-20T14:46:51-06:00</updated>
+ <updated>2013-04-21T15:20:16-06:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Easy Jekyll push to Github with plugins</title>
+   <link href="http://a.aronott.com/jekyll/easy-jekyll-push-to-github-with-plugins"/>
+   <updated>2013-04-21T00:00:00-06:00</updated>
+   <id>http://a.aronott.com/jekyll/easy-jekyll-push-to-github-with-plugins</id>
+   <content type="html">&lt;p&gt;Today I was looking at a way to create a &amp;#8220;Readmore&amp;#8221; link on the front page of this blog. This allows for me to have a nice dynamic listing on the front page without having to display the entire contents of each blog.&lt;/p&gt;
+
+&lt;p&gt;Since I&amp;#8217;m new to Jekyll and don&amp;#8217;t have much experience with Ruby either, I looked to the webs assuming that I&amp;#8217;m not the first one to think of such crazy ideas.&lt;/p&gt;
+&lt;!--more--&gt;
+&lt;p&gt;I ran across a few different posts including &lt;a href='http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/'&gt;this one&lt;/a&gt; which I ended up using. So I created the postmore.rb file in my _plugins directory and BAM! it worked just like I wanted. I made the modifications to some of my more recent posts and tested everything locally. Everything was looking great so I pushed up to Github only to find that things were now looking different. Some investigation revealed that Github doesn&amp;#8217;t run 3rd party plugins so I wasn&amp;#8217;t going to be able to use the solution that I was very recently so excited about.&lt;/p&gt;
+
+&lt;p&gt;&amp;#8220;Ok Internets, let&amp;#8217;s try this again.&amp;#8221; Again assuming that I&amp;#8217;m not the first one to run into this issue I set out to find a solution. I actually ran across many different really good solutions but decided on &lt;a href='http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/'&gt;this one&lt;/a&gt; by &lt;a href='https://twitter.com/Dwedard'&gt;Eddie Hedges&lt;/a&gt;. I&amp;#8217;d highly recommed you read Eddies description as well as the original answer he got from &lt;a href='http://stackoverflow.com/a/11679993/1813873'&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I liked this solution because it takes the _site directory in the dev branch and points the master branch to it. This reduces the amount of files remaining in master and always ensures that it is simple to setup your site anywhere with the static html files.&lt;/p&gt;
+
+&lt;p&gt;I even created a quick publish.sh script that contains the one-liner because I&amp;#8217;m horrible with remember all the commands there.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this helps others out as much as it has me. Please feel free to let me know of any other great solutions you&amp;#8217;ve found to this problem.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Apps in Drupal</title>

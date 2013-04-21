@@ -7,6 +7,7 @@ http://a.aronott.com/pages.html
 http://a.aronott.com/sitemap.txt
 http://a.aronott.com/tags.html
 
+http://a.aronott.com/jekyll/easy-jekyll-push-to-github-with-plugins
 http://a.aronott.com/drupal/apps-in-drupal
 http://a.aronott.com/shortcuts
 http://a.aronott.com/drupal/distributions-in-drupal

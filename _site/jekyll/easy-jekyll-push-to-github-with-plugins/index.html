@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>
       
-        Categories - 
+        Easy Jekyll push to Github with plugins - 
       
       nothing special
     </title>
-    
+    <meta name="description" content="jekyll">
     <meta name="author" content="Aaron Ott">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- HTML5 shim, for IE6-8 support of HTML elements -->
@@ -76,7 +76,7 @@
     
       
       	
-      	<li class="active"><a href="/categories.html" class="active">Categories</a></li>
+      	<li><a href="/categories.html">Categories</a></li>
       	
       
     
@@ -155,152 +155,97 @@
     <div class="container">
       <div class="content">
         
-<div class="page-header-wrapper">
-	<div class="page-header">
-  		<h1>Categories </h1>
-  	</div>
+<div class="page-header">
+  <h1>
+    Easy Jekyll push to Github with plugins 
+    
+  </h1>
 </div>
 
 <div class="row">
   <div class="span8">
+    <p>Today I was looking at a way to create a &#8220;Readmore&#8221; link on the front page of this blog. This allows for me to have a nice dynamic listing on the front page without having to display the entire contents of each blog.</p>
+
+<p>Since I&#8217;m new to Jekyll and don&#8217;t have much experience with Ruby either, I looked to the webs assuming that I&#8217;m not the first one to think of such crazy ideas.</p>
+<!--more-->
+<p>I ran across a few different posts including <a href='http://www.jacquesf.com/2011/03/creating-excerpts-in-jekyll-with-wordpress-style-more-html-comments/'>this one</a> which I ended up using. So I created the postmore.rb file in my _plugins directory and BAM! it worked just like I wanted. I made the modifications to some of my more recent posts and tested everything locally. Everything was looking great so I pushed up to Github only to find that things were now looking different. Some investigation revealed that Github doesn&#8217;t run 3rd party plugins so I wasn&#8217;t going to be able to use the solution that I was very recently so excited about.</p>
+
+<p>&#8220;Ok Internets, let&#8217;s try this again.&#8221; Again assuming that I&#8217;m not the first one to run into this issue I set out to find a solution. I actually ran across many different really good solutions but decided on <a href='http://edhedges.com/blog/2012/07/30/jekyll-with-plugins-hosted-on-github-pages/'>this one</a> by <a href='https://twitter.com/Dwedard'>Eddie Hedges</a>. I&#8217;d highly recommed you read Eddies description as well as the original answer he got from <a href='http://stackoverflow.com/a/11679993/1813873'>Stack Overflow</a></p>
+
+<p>I liked this solution because it takes the _site directory in the dev branch and points the master branch to it. This reduces the amount of files remaining in master and always ensures that it is simple to setup your site anywhere with the static html files.</p>
+
+<p>I even created a quick publish.sh script that contains the one-liner because I&#8217;m horrible with remember all the commands there.</p>
+
+<p>Hopefully this helps others out as much as it has me. Please feel free to let me know of any other great solutions you&#8217;ve found to this problem.</p>
+    <hr>
     
 
-<ul class="tag_box inline">
+    <hr>
+    <div class="pagination btn-group">
+      
+        <a class="btn prev" href="/drupal/apps-in-drupal" title="Apps in Drupal">&larr; Previous</a>
+      
+        <a class="btn" href="/archive.html">Archive</a>
+      
+        <a class="btn next disabled">Next &rarr;</a>
+      
+    </div>
+    <hr>
+    
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'aaronott'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+  </div>
   
-  
+  <div class="span4">
+    <section>
+      <h4>Published</h4>
+      <div class="date"><span>21 April 2013</span></div>
+    </section>
+    
+      <section>
+        <h4>Category</h4>
+        <span class="category">
+          jekyll
+        </span>
+      </section>
+         
+    
+      <section>
+        <h4>Tags</h4>
+        <ul class="tag_box">
+          
+          
 
 
   
      
-    	<li><a href="/categories.html#drupal-ref">
-    		drupal <span>4</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#DBUG-ref">
-    		DBUG <span>1</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#MongoDB Tools-ref">
-    		MongoDB Tools <span>1</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#jekyll-ref">
-    		jekyll <span>1</span>
-    	</a></li>
-    
-  
-
-
-</ul>
-
-
- 
-  <h2 id="drupal-ref">drupal</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/drupal/apps-in-drupal">Apps in Drupal</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/drupal/distributions-in-drupal">Distributions in Drupal</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/drupal/clean-up-drupal-users">Clean up Drupal Users</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/drupal/securing-ownership-of-drupal-filesystem">Securing ownership of Drupal filesystem.</a></li>
-      	
-      
+    	<li><a href="/tags.html#jekyll-ref">jekyll <span>1</span></a></li>
     
   
 
 
 
-  </ul>
- 
-  <h2 id="DBUG-ref">DBUG</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/DBUG/dbug-meetup-notes">DBUG Meetup Notes</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
- 
-  <h2 id="MongoDB Tools-ref">MongoDB Tools</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/MongoDB%20Tools/getting-the-repl_lag-from-your-mongodb-replication-set">Getting the repl_lag from your MongoDB Replication set.</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
- 
-  <h2 id="jekyll-ref">jekyll</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/easy-jekyll-push-to-github-with-plugins">Easy Jekyll push to Github with plugins</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+        </ul>
+      </section>
+             
   </div>
 </div>
 
