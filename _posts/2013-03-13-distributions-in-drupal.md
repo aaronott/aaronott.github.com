@@ -3,7 +3,7 @@ layout: post
 title: "Distributions in Drupal"
 description: "Using distributions can be great for those learning to build with Drupal."
 category: drupal
-tags: [drupal, BLUG]
+tags: [drupal, meetup, DBUG]
 ---
 {% include JB/setup %}
 

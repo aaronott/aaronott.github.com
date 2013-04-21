@@ -4,7 +4,7 @@ title: "Apps in Drupal"
 description: "Apps in Drupal is great for knocking out those features that are
 single use-case."
 category: drupal
-tags: [drupal, DBUG]
+tags: [drupal, meetup, DBUG]
 ---
 {% include JB/setup %}
 
