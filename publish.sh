@@ -8,11 +8,7 @@ NOW=$(date +"%m-%d-%Y")
 
 echo "Generating pages."
 
-PID=$JEKYLL --server &
-
-sleep 2
-
-kill $PID
+$JEKYLL --no-server --no-auto
 
 git add .
 
