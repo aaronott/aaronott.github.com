@@ -4,13 +4,25 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2013-11-05T19:58:13-07:00</updated>
+ <updated>2014-06-19T13:33:18-06:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Back again</title>
+   <link href="http://a.aronott.com/back-again"/>
+   <updated>2014-06-19T00:00:00-06:00</updated>
+   <id>http://a.aronott.com/back-again</id>
+   <content type="html">&lt;p&gt;Well back at this again. I&amp;#8217;m looking for a side project to work on, something that I&amp;#8217;ll have fun with, something that I&amp;#8217;ll use. I&amp;#8217;ve been looking through my list of documents that contain the word &amp;#8216;Idea&amp;#8217; in the title and while I think a couple of them would be cool, I don&amp;#8217;t think I&amp;#8217;d use them much.&lt;/p&gt;
+
+&lt;p&gt;The one thing that I keep finding is that I like to track things. I&amp;#8217;ve seen quite a few other posts about people tracking every aspect of their life and have even seen companies built around this. While this is fun to do, it&amp;#8217;s something that is pretty time consuming and I don&amp;#8217;t really want to have to take out my phone each time I fill my cup of coffee.&lt;/p&gt;
+
+&lt;p&gt;For now I&amp;#8217;m going to start writing a bit more. (let&amp;#8217;s see how that really goes)&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Getting back to it</title>
