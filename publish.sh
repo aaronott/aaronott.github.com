@@ -8,11 +8,9 @@ NOW=$(date +"%m-%d-%Y")
 
 echo "Generating pages."
 
-$JEKYLL --no-server --no-auto
-
-git add .
-
-git commit -m "committing $now"
+$JEKYLL --no-server --no-auto > /dev/null
+ 
+git commit -a -m "committing $now"
 
 # Edit references
 git update-ref refs/heads/master $(echo 'publishing changes to the blog.' | git commit-tree dev^{tree}:_site -p $(cat .git/refs/heads/master))
