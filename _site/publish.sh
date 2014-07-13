@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -x
+set -x
 
 JEKYLL=`which jekyll` || exit 0;
 
