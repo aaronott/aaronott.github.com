@@ -12,9 +12,9 @@ $JEKYLL --no-server --auto > /dev/null &
  
 sleep 5;
 
-pgrep jekyll;
+pgrep -f jekyll;
 
-pkill jekyll;
+pkill -f jekyll;
 
 git add .
 git commit -a -m "committing $now"
