@@ -4,13 +4,21 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2015-03-03T17:17:59-07:00</updated>
+ <updated>2015-03-03T17:25:16-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
    <email>aaron.ott@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Testing Another Post</title>
+   <link href="http://a.aronott.com/testing-another-post"/>
+   <updated>2015-03-03T00:00:00-07:00</updated>
+   <id>http://a.aronott.com/testing-another-post</id>
+   <content type="html">&lt;p&gt;I&amp;#8217;m just testing this post. I&amp;#8217;ll be taking it down at some point.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Static site generators</title>
