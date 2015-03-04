@@ -26,6 +26,7 @@ git checkout master
 
 git push
 
+rm -rf _site
 echo "All done. Putting you back in dev."
 
 git checkout dev
