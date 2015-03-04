@@ -4,7 +4,7 @@
  <title>nothing special</title>
  <link href="http://a.aronott.com/atom.xml" rel="self"/>
  <link href="http://a.aronott.com"/>
- <updated>2015-03-03T17:08:41-07:00</updated>
+ <updated>2015-03-03T17:10:57-07:00</updated>
  <id>http://a.aronott.com</id>
  <author>
    <name>Aaron Ott</name>
@@ -19,7 +19,7 @@
    <id>http://a.aronott.com/static-site-generators</id>
    <content type="html">&lt;p&gt;Obviously that didn&amp;#8217;t go well. The continuance of blogging that is. The half went really well, we aren&amp;#8217;t the fastest in the bunch, but we finished and that&amp;#8217;s what really matters right?&lt;/p&gt;
 
-&lt;p&gt;I&amp;#8217;m looking at some other static site generators, a task that stemmed from a conversation with a friend of mine, and I&amp;#8217;ve not been able to find one that just works well. &lt;span&gt;http://jekyllrb.com&lt;/span&gt; which is what this site is built in, works pretty well I suppose but if you look at my github repo (where i&amp;#8217;m keeping this), you will notice that I have a master and a dev branch. Sure that&amp;#8217;s not exactly required, but I do it because I want a clean set of HTML files for static content.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m looking at some other static site generators, a task that stemmed from a conversation with a friend of mine, and I&amp;#8217;ve not been able to find one that just works well. Jekyll which is what this site is built in, works pretty well I suppose but if you look at my github repo (where i&amp;#8217;m keeping this), you will notice that I have a master and a dev branch. Sure that&amp;#8217;s not exactly required, but I do it because I want a clean set of HTML files for static content.&lt;/p&gt;
 
 &lt;p&gt;What I&amp;#8217;d like is a tool, much like jekyll, but has a bit smaller learning curve. Something that I can update super easily and that doesn&amp;#8217;t take some reverse engineering to get all working properly.&lt;/p&gt;
 
