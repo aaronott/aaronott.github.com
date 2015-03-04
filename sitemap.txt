@@ -7,6 +7,7 @@ http://a.aronott.com/pages.html
 http://a.aronott.com/sitemap.txt
 http://a.aronott.com/tags.html
 
+http://a.aronott.com/testing-another-post
 http://a.aronott.com/static-site-generators
 http://a.aronott.com/training-for-the-half
 http://a.aronott.com/back-again
