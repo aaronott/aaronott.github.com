@@ -16,6 +16,7 @@ pgrep jekyll;
 
 pkill jekyll;
 
+git add .
 git commit -a -m "committing $now"
 
 # Edit references
