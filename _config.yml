@@ -6,23 +6,16 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title : nothing special
-tagline: Just Rambling On
+title: nothing special
+email: aaron.ott@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-author :
-  name : Aaron Ott
-  email : aaron.ott@gmail.com
-  github : aaronott
-  twitter : aaronott
-  googleplus : 100230085096361853232
-  linkedin : aaronott
-  amazon : '23LCTLUHBS638'
+url: "http://a.aronott.com" # the base hostname & protocol for your site
+twitter_username: aaronott
+github_username:  aaronott
 
-permalink: /:categories/:title 
 # Build settings
 markdown: kramdown
