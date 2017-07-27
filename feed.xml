@@ -6,8 +6,8 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jul 2017 21:20:48 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Jul 2017 21:20:48 -0600</lastBuildDate>
+    <pubDate>Wed, 26 Jul 2017 21:28:59 -0600</pubDate>
+    <lastBuildDate>Wed, 26 Jul 2017 21:28:59 -0600</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -20,10 +20,11 @@
 
 &lt;p&gt;First, start with nmap:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nmap -p- 192.168.1.116&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nmap -p- 192.168.1.116
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
-ports open: PORT STATE SERVICE
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -31,22 +32,24 @@ ports open: PORT STATE SERVICE
 139/tcp open netbios-ssn
 666/tcp open doom
 3306/tcp open mysql
-12380/tcp open unknown
-&lt;/code&gt;
-This returns a list of open ports that can be used to further enumerate each service.&lt;/p&gt;
+12380/tcp open unknown&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This returns a list of open ports that can be used to further enumerate each service.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 21:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Connecting to FTP we are presented a message:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;Connecting to FTP we are presented a message:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
 220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
 220
-&lt;/code&gt;
-&lt;img src=&quot;/img/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We are able to login anonymously and find that there is a file available for download.&lt;/p&gt;
 

@@ -70,10 +70,11 @@
 
 <p>First, start with nmap:</p>
 
-<p><code class="highlighter-rouge">nmap -p- 192.168.1.116</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>nmap -p- 192.168.1.116
+</code></pre>
+</div>
 
-<p><code class="highlighter-rouge">
-ports open: PORT STATE SERVICE
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -81,22 +82,24 @@ ports open: PORT STATE SERVICE
 139/tcp open netbios-ssn
 666/tcp open doom
 3306/tcp open mysql
-12380/tcp open unknown
-</code>
-This returns a list of open ports that can be used to further enumerate each service.</p>
+12380/tcp open unknown</code></pre></figure>
+
+<p>This returns a list of open ports that can be used to further enumerate each service.</p>
 
 <p><strong>Port 21:</strong></p>
 
-<p>Connecting to FTP we are presented a message:
-<code class="highlighter-rouge">
+<p>Connecting to FTP we are presented a message:</p>
+
+<p><code class="highlighter-rouge">
 220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
 220
-</code>
-<img src="/img/stapler/image.png" alt="img of ftp output" /></p>
+</code></p>
+
+<p><img src="/img/stapler/image.png" alt="img of ftp output" /></p>
 
 <p>We are able to login anonymously and find that there is a file available for download.</p>
 
