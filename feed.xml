@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nothing special</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    <description>While working on ctfs and boot-to-roots, I need to practice documentation,  this just happens to be the place where those are kept.
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jul 2017 21:32:28 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Jul 2017 21:32:28 -0600</lastBuildDate>
+    <pubDate>Wed, 26 Jul 2017 21:40:47 -0600</pubDate>
+    <lastBuildDate>Wed, 26 Jul 2017 21:40:47 -0600</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -24,7 +24,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ports open: PORT STATE SERVICE
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -40,7 +40,7 @@
 
 &lt;p&gt;Connecting to FTP we are presented a message:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;220-
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
@@ -66,9 +66,9 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 &lt;p&gt;When using ssh to connect to the box, we see another message:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;-----------------------------------------------------------------
-~ Barry, don&lt;span class=&quot;s1&quot;&gt;&#39;t forget to put a message here ~
------------------------------------------------------------------&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;-----------------------------------------------------------------
+~ Barry, don&#39;t forget to put a message here ~
+-----------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4&lt;/p&gt;
 
@@ -76,78 +76,78 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 &lt;p&gt;enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# enum4linux 192.168.1.116&lt;/span&gt;
-Starting enum4linux v0.8.9 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; http://labs.portcullis.co.uk/application/enum4linux/ &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; on Sun Jul 16 11:36:25 2017
-&lt;span class=&quot;o&quot;&gt;==========================&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# enum4linux 192.168.1.116
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
+==========================
 | Target Information     |
-&lt;span class=&quot;o&quot;&gt;==========================&lt;/span&gt;
+==========================
 Target ........... 192.168.1.116
 RID Range ........ 500-550,1000-1050
-Username ......... &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;
-Password ......... &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;
+Username ......... &#39;&#39;
+Password ......... &#39;&#39;
 Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
 
-&lt;span class=&quot;o&quot;&gt;==========================================&lt;/span&gt;
+==========================================
 | Share Enumeration on 192.168.1.116     |
-&lt;span class=&quot;o&quot;&gt;==========================================&lt;/span&gt;
-WARNING: The &lt;span class=&quot;s2&quot;&gt;&quot;syslog&quot;&lt;/span&gt; option is deprecated
-&lt;span class=&quot;nv&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;WORKGROUP] &lt;span class=&quot;nv&quot;&gt;OS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;Windows 6.1] &lt;span class=&quot;nv&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;Samba 4.3.9-Ubuntu]
+==========================================
+WARNING: The &quot;syslog&quot; option is deprecated
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 
-&lt;span class=&quot;nv&quot;&gt;Domain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;WORKGROUP] &lt;span class=&quot;nv&quot;&gt;OS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;Windows 6.1] &lt;span class=&quot;nv&quot;&gt;Server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;Samba 4.3.9-Ubuntu]
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 Sharename Type Comment
 --------- ---- -------
-&lt;span class=&quot;gp&quot;&gt;print$    &lt;/span&gt;Disk  Printer Drivers
+print$    Disk  Printer Drivers
 kathy     Disk  Fred, What are we doing here?
 tmp       Disk  All temporary files should be stored here
-&lt;span class=&quot;gp&quot;&gt;IPC$      &lt;/span&gt;IPC   IPC Service &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;red server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Samba, Ubuntu&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+IPC$      IPC   IPC Service (red server (Samba, Ubuntu))
 
 
 Server    Comment
 --------- -------
 LINKSYS01751 Samba 3.0.28a
-RED        red server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Samba, Ubuntu&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+RED        red server (Samba, Ubuntu)
 
 Workgroup  Master
 ---------  --------
 WORKGROUP LINKSYS01751
 
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;+] Attempting to map shares on 192.168.1.116
-&lt;span class=&quot;gp&quot;&gt;//192.168.1.116/print$ &lt;/span&gt;Mapping: DENIED, Listing: N/A
+[+] Attempting to map shares on 192.168.1.116
+//192.168.1.116/print$ Mapping: DENIED, Listing: N/A
 //192.168.1.116/kathy Mapping: OK, Listing: OK
 //192.168.1.116/tmp Mapping: OK, Listing: OK
-&lt;span class=&quot;gp&quot;&gt;//192.168.1.116/IPC$ &lt;/span&gt;Mapping: OK Listing: DENIED
+//192.168.1.116/IPC$ Mapping: OK Listing: DENIED
 
 ...
 
-S-1-22-1-1000 Unix User&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;eter &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1001 Unix User&lt;span class=&quot;se&quot;&gt;\R&lt;/span&gt;Nunemaker &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1002 Unix User&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;Tollefson &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1003 Unix User&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;Swanger &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1004 Unix User&lt;span class=&quot;se&quot;&gt;\A&lt;/span&gt;Parnell &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1005 Unix User&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;Hayslett &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1006 Unix User&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;Bassin &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1007 Unix User&lt;span class=&quot;se&quot;&gt;\J&lt;/span&gt;Bare &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1008 Unix User&lt;span class=&quot;se&quot;&gt;\L&lt;/span&gt;Solum &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1009 Unix User&lt;span class=&quot;se&quot;&gt;\I&lt;/span&gt;Chadwick &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1010 Unix User&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;Frei &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1011 Unix User&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;Stroud &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1012 Unix User&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;Ceaser &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1013 Unix User&lt;span class=&quot;se&quot;&gt;\J&lt;/span&gt;Kanode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1014 Unix User&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;Joo &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1015 Unix User&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;eth &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1016 Unix User&lt;span class=&quot;se&quot;&gt;\L&lt;/span&gt;Solum2 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1017 Unix User&lt;span class=&quot;se&quot;&gt;\J&lt;/span&gt;Lipps &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1018 Unix User&lt;span class=&quot;se&quot;&gt;\j&lt;/span&gt;amie &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1019 Unix User&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;am &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1020 Unix User&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;rew &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1022 Unix User&lt;span class=&quot;se&quot;&gt;\S&lt;/span&gt;HAY &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1023 Unix User&lt;span class=&quot;se&quot;&gt;\T&lt;/span&gt;aylor &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1024 Unix User&lt;span class=&quot;se&quot;&gt;\m&lt;/span&gt;el &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1025 Unix User&lt;span class=&quot;se&quot;&gt;\k&lt;/span&gt;ai &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1026 Unix User&lt;span class=&quot;se&quot;&gt;\z&lt;/span&gt;oe &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1027 Unix User&lt;span class=&quot;se&quot;&gt;\N&lt;/span&gt;ATHAN &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1028 Unix User&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;ww &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-S-1-22-1-1029 Unix User&lt;span class=&quot;se&quot;&gt;\e&lt;/span&gt;lly &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Local User&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+S-1-22-1-1000 Unix User\peter (Local User)
+S-1-22-1-1001 Unix User\RNunemaker (Local User)
+S-1-22-1-1002 Unix User\ETollefson (Local User)
+S-1-22-1-1003 Unix User\DSwanger (Local User)
+S-1-22-1-1004 Unix User\AParnell (Local User)
+S-1-22-1-1005 Unix User\SHayslett (Local User)
+S-1-22-1-1006 Unix User\MBassin (Local User)
+S-1-22-1-1007 Unix User\JBare (Local User)
+S-1-22-1-1008 Unix User\LSolum (Local User)
+S-1-22-1-1009 Unix User\IChadwick (Local User)
+S-1-22-1-1010 Unix User\MFrei (Local User)
+S-1-22-1-1011 Unix User\SStroud (Local User)
+S-1-22-1-1012 Unix User\CCeaser (Local User)
+S-1-22-1-1013 Unix User\JKanode (Local User)
+S-1-22-1-1014 Unix User\CJoo (Local User)
+S-1-22-1-1015 Unix User\Eeth (Local User)
+S-1-22-1-1016 Unix User\LSolum2 (Local User)
+S-1-22-1-1017 Unix User\JLipps (Local User)
+S-1-22-1-1018 Unix User\jamie (Local User)
+S-1-22-1-1019 Unix User\Sam (Local User)
+S-1-22-1-1020 Unix User\Drew (Local User)
+S-1-22-1-1022 Unix User\SHAY (Local User)
+S-1-22-1-1023 Unix User\Taylor (Local User)
+S-1-22-1-1024 Unix User\mel (Local User)
+S-1-22-1-1025 Unix User\kai (Local User)
+S-1-22-1-1026 Unix User\zoe (Local User)
+S-1-22-1-1027 Unix User\NATHAN (Local User)
+S-1-22-1-1028 Unix User\www (Local User)
+S-1-22-1-1029 Unix User\elly (Local User)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 666:&lt;/strong&gt;&lt;/p&gt;
 
