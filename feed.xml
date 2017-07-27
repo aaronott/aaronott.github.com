@@ -6,8 +6,8 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jul 2017 21:16:05 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Jul 2017 21:16:05 -0600</lastBuildDate>
+    <pubDate>Wed, 26 Jul 2017 21:20:48 -0600</pubDate>
+    <lastBuildDate>Wed, 26 Jul 2017 21:20:48 -0600</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -255,8 +255,8 @@ Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&g
 &lt;p&gt;In the end there are quite a few more messages left around the system including some in the ssl certificate and the message2.jpg file (using strings to display this). Thank you g0tmi1k for the great boot2root VM.&lt;/p&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 19:34:00 -0600</pubDate>
-        <link>http://a.aronott.com/ctf/2017/07/26/stapler.html</link>
-        <guid isPermaLink="true">http://a.aronott.com/ctf/2017/07/26/stapler.html</guid>
+        <link>http://a.aronott.com/stapler.html</link>
+        <guid isPermaLink="true">http://a.aronott.com/stapler.html</guid>
         
         
         <category>ctf</category>
