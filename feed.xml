@@ -6,8 +6,8 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 Jul 2017 16:28:09 -0600</pubDate>
-    <lastBuildDate>Thu, 27 Jul 2017 16:28:09 -0600</lastBuildDate>
+    <pubDate>Thu, 27 Jul 2017 16:33:11 -0600</pubDate>
+    <lastBuildDate>Thu, 27 Jul 2017 16:33:11 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
     
       <item>
@@ -259,8 +259,8 @@ Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 &lt;p&gt;In the end there are quite a few more messages left around the system including some in the ssl certificate and the message2.jpg file (using strings to display this). Thank you g0tmi1k for the great boot2root VM.&lt;/p&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 19:34:00 -0600</pubDate>
-        <link>http://a.aronott.com/ctf/2017/07/26/stapler.html</link>
-        <guid isPermaLink="true">http://a.aronott.com/ctf/2017/07/26/stapler.html</guid>
+        <link>http://a.aronott.com/ctf/stapler.html</link>
+        <guid isPermaLink="true">http://a.aronott.com/ctf/stapler.html</guid>
         
         
         <category>ctf</category>
