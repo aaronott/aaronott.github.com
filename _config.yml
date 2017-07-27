@@ -17,6 +17,8 @@ url: "http://a.aronott.com" # the base hostname & protocol for your site
 twitter_username: aaronott
 github_username:  aaronott
 
+permalink: /:categories/:title.html
+
 # Build settings
 markdown: kramdown
 
