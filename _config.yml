@@ -24,3 +24,6 @@ markdown: kramdown
 
 # Handling Reading
 exclude:  ["publish.sh"]
+
+# Load these plugins
+plugins: ["jekyll-email-protect", "uglifier", "jekyll-deploy"]
