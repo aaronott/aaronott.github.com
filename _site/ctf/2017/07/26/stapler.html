@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Stapler</title>
-  <meta name="description" content="Stapler">
+  <meta name="description" content="Stapler is a boot-to-root vulnerable machine that was found on Vulnhub. The machine was not super difficult, however it does certainly reward enumeration. Th...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://a.aronott.com/ctf/2017/07/26/stapler.html">
@@ -62,9 +62,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h1 id="stapler">Stapler</h1>
-
-<p>Stapler is a boot-to-root vulnerable machine that was found on <a href="https://www.vulnhub.com/entry/stapler-1,150/">Vulnhub</a>. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.</p>
+    <p>Stapler is a boot-to-root vulnerable machine that was found on <a href="https://www.vulnhub.com/entry/stapler-1,150/">Vulnhub</a>. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.</p>
 
 <p>This is by no means the only correct way to pass this machine and gain root access, it is just the way I found to do it.</p>
 
@@ -72,8 +70,7 @@
 
 <p><code class="highlighter-rouge">nmap -p- 192.168.1.116</code></p>
 
-<p><code class="highlighter-rouge">
-ports open: PORT STATE SERVICE
+<div class="highlighter-rouge"><pre class="highlight"><code>ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -82,21 +79,22 @@ ports open: PORT STATE SERVICE
 666/tcp open doom
 3306/tcp open mysql
 12380/tcp open unknown
-</code>
-This returns a list of open ports that can be used to further enumerate each service.</p>
+</code></pre>
+</div>
+<p>This returns a list of open ports that can be used to further enumerate each service.</p>
 
 <p><strong>Port 21:</strong></p>
 
-<p>Connecting to FTP we are presented a message:
-<code class="highlighter-rouge">
-220-
+<p>Connecting to FTP we are presented a message:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
 220
-</code>
-<img src="/assets/images/stapler/image.png" alt="img of ftp output" /></p>
+</code></pre>
+</div>
+<p><img src="/assets/images/stapler/image.png" alt="img of ftp output" /></p>
 
 <p>We are able to login anonymously and find that there is a file available for download.</p>
 
@@ -115,60 +113,61 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 <p>When using ssh to connect to the box, we see another message:</p>
 
-<h2 id="section">```</h2>
-<p>~ Barry, don’t forget to put a message here ~
-—————————————————————–
-```
-using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>-----------------------------------------------------------------
+~ Barry, don't forget to put a message here ~
+-----------------------------------------------------------------
+</code></pre>
+</div>
+<p>using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4</p>
 
 <p><strong>Port 139:</strong></p>
 
 <p>enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.</p>
 
-<p>```
-# enum4linux 192.168.1.116
+<div class="highlighter-rouge"><pre class="highlight"><code># enum4linux 192.168.1.116
 Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
 ==========================
 | Target Information     |
 ==========================
-Target ……….. 192.168.1.116
-RID Range …….. 500-550,1000-1050
-Username ……… ‘’
-Password ……… ‘’
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none</p>
+Target ........... 192.168.1.116
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
 
-<p>==========================================
+==========================================
 | Share Enumeration on 192.168.1.116     |
 ==========================================
-WARNING: The “syslog” option is deprecated
-Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]</p>
+WARNING: The "syslog" option is deprecated
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 
-<p>Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 Sharename Type Comment
-——— —- ——-
+--------- ---- -------
 print$    Disk  Printer Drivers
 kathy     Disk  Fred, What are we doing here?
 tmp       Disk  All temporary files should be stored here
-IPC$      IPC   IPC Service (red server (Samba, Ubuntu))</p>
+IPC$      IPC   IPC Service (red server (Samba, Ubuntu))
 
-<p>Server    Comment
-——— ——-
+
+Server    Comment
+--------- -------
 LINKSYS01751 Samba 3.0.28a
-RED        red server (Samba, Ubuntu)</p>
+RED        red server (Samba, Ubuntu)
 
-<p>Workgroup  Master
-———  ——–
-WORKGROUP LINKSYS01751</p>
+Workgroup  Master
+---------  --------
+WORKGROUP LINKSYS01751
 
-<p>[+] Attempting to map shares on 192.168.1.116
+[+] Attempting to map shares on 192.168.1.116
 //192.168.1.116/print$ Mapping: DENIED, Listing: N/A
 //192.168.1.116/kathy Mapping: OK, Listing: OK
 //192.168.1.116/tmp Mapping: OK, Listing: OK
-//192.168.1.116/IPC$ Mapping: OK Listing: DENIED</p>
+//192.168.1.116/IPC$ Mapping: OK Listing: DENIED
 
-<p>…</p>
+...
 
-<p>S-1-22-1-1000 Unix User\peter (Local User)
+S-1-22-1-1000 Unix User\peter (Local User)
 S-1-22-1-1001 Unix User\RNunemaker (Local User)
 S-1-22-1-1002 Unix User\ETollefson (Local User)
 S-1-22-1-1003 Unix User\DSwanger (Local User)
@@ -197,25 +196,30 @@ S-1-22-1-1026 Unix User\zoe (Local User)
 S-1-22-1-1027 Unix User\NATHAN (Local User)
 S-1-22-1-1028 Unix User\www (Local User)
 S-1-22-1-1029 Unix User\elly (Local User)
-```
-<strong>Port 666:</strong>
+</code></pre>
+</div>
+<p><strong>Port 666:</strong>
 Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 
 <p><img src="/assets/images/stapler/image4.png" alt="image of gibberish" /></p>
 
-<p>If we capture this gibberish out to a file,
-<img src="/assets/images/stapler/image5.png" alt="image of gibberish" />
-We see that it’s a zip file.</p>
+<p>If we capture this gibberish out to a file.</p>
 
-<p><img src="/assets/images/stapler/image6.png" alt="img message2.jpg" />
-This contains an interesting file message2.jpg.</p>
+<p><img src="/assets/images/stapler/image5.png" alt="image of gibberish" /></p>
+
+<p>We see that it’s a zip file.</p>
+
+<p><img src="/assets/images/stapler/image6.png" alt="img message2.jpg" /></p>
+
+<p>This contains an interesting file message2.jpg.</p>
 
 <p><strong>Port 3306:</strong></p>
 
 <p>I don’t have a valid username or password for mysql, but I was able to find the mysql version using netcat.</p>
 
-<p>5.7.12-0ubuntu1
-<img src="/assets/images/stapler/image7.png" alt="img mysql version" /></p>
+<p>5.7.12-0ubuntu1</p>
+
+<p><img src="/assets/images/stapler/image7.png" alt="img mysql version" /></p>
 
 <p><strong>Port 12380:</strong></p>
 
@@ -262,13 +266,16 @@ This contains an interesting file message2.jpg.</p>
 
 <p><img src="/assets/images/stapler/image14.png" alt="Bruteforce" /></p>
 
-<p>Now I have 3 accounts that I can use to ssh to the box.
-- JBare: cookie
-- MFrei: letmein
-- Drew: qwerty</p>
+<p>Now I have 3 accounts that I can use to ssh to the box.</p>
+<ul>
+  <li>JBare: cookie</li>
+  <li>MFrei: letmein</li>
+  <li>Drew: qwerty</li>
+</ul>
 
-<p><img src="/assets/images/stapler/image15.png" alt="access through ssh" />
-Using the password (cookie) from above I was able to ssh to the machine.</p>
+<p><img src="/assets/images/stapler/image15.png" alt="access through ssh" /></p>
+
+<p>Using the password (cookie) from above I was able to ssh to the machine.</p>
 
 <p>I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</p>
 

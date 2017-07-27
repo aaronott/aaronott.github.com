@@ -2,10 +2,8 @@
 layout: post
 title:  "Stapler"
 date:   2017-07-26 19:34
-categories: ctf 
+categories: ctf
 ---
-
-#Stapler
 
 Stapler is a boot-to-root vulnerable machine that was found on [Vulnhub](https://www.vulnhub.com/entry/stapler-1,150/). The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.
 
@@ -148,11 +146,14 @@ Using netcat to connect to port 666 we see a bunch of gibberish.
 
 ![image of gibberish](/assets/images/stapler/image4.png)
 
-If we capture this gibberish out to a file,
+If we capture this gibberish out to a file.
+
 ![image of gibberish](/assets/images/stapler/image5.png)
+
 We see that it's a zip file.
 
 ![img message2.jpg](/assets/images/stapler/image6.png)
+
 This contains an interesting file message2.jpg.
 
 **Port 3306:**
@@ -160,6 +161,7 @@ This contains an interesting file message2.jpg.
 I don't have a valid username or password for mysql, but I was able to find the mysql version using netcat.
 
 5.7.12-0ubuntu1
+
 ![img mysql version](/assets/images/stapler/image7.png)
 
 **Port 12380:**
@@ -211,8 +213,8 @@ Now I have 3 accounts that I can use to ssh to the box.
 - Drew: qwerty
 
 ![access through ssh](/assets/images/stapler/image15.png)
-Using the password (cookie) from above I was able to ssh to the machine.
 
+Using the password (cookie) from above I was able to ssh to the machine.
 
 I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
 
