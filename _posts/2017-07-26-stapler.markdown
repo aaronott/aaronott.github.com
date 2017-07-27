@@ -2,7 +2,7 @@
 layout: post
 title:  "Stapler"
 date:   2017-07-26 19:34
-categories: ctf boot2root
+categories: ctf 
 ---
 
 #Stapler

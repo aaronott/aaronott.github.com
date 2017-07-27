@@ -19,3 +19,6 @@ github_username:  aaronott
 
 # Build settings
 markdown: kramdown
+
+# Handling Reading
+exclude:  ["publish.sh"]
