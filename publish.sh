@@ -8,14 +8,8 @@ NOW=$(date +"%m-%d-%Y")
 
 echo "Generating pages."
 
-$JEKYLL --no-server --auto > /dev/null &
+$JEKYLL build --watch > /dev/null &
  
-sleep 5;
-
-pgrep -f jekyll;
-
-pkill -f jekyll;
-
 git add --all
 git commit -a -m "committing $now"
 
