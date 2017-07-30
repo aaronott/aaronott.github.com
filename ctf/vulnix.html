@@ -224,7 +224,7 @@ Target domain ............
 
 <p>After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.</p>
 
-<p><img src="/assets/images/vulnix/mounted_as_vulnix.png" alt="Mounted as vulnix" /></p>
+<p><img src="/assets/images/vulnix/mounted-as-vulnix.png" alt="Mounted as vulnix" /></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -t rsa
 </code></pre>
@@ -272,7 +272,8 @@ chmod 4755 bash
 
 <p><img src="/assets/images/vulnix/escalation_to_root.png" alt="Escalate" /></p>
 
-<p>BOOM! Done.</p>
+<p>Technically we are not root, but we have all the permissions of the root user with that EUID
+BOOM! Done.</p>
 
   </div>
 
