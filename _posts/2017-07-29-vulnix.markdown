@@ -159,7 +159,7 @@ Well, we can't get in there even with root. That's what that root_squash setting
 
 After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.
 
-![Mounted as vulnix](/assets/images/vulnix/mounted_as_vulnix.png)
+![Mounted as vulnix](/assets/images/vulnix/mounted-as-vulnix.png)
 
     ssh-keygen -t rsa
 
@@ -201,4 +201,5 @@ On the victim machine as the vulnix user, we run `bash -p` to keep permissions o
 
 ![Escalate](/assets/images/vulnix/escalation_to_root.png)
 
+Technically we are not root, but we have all the permissions of the root user with that EUID
 BOOM! Done.

