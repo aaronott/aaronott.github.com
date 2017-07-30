@@ -201,5 +201,4 @@ On the victim machine as the vulnix user, we run `bash -p` to keep permissions o
 
 ![Escalate](/assets/images/vulnix/escalation_to_root.png)
 
-Technically we are not root, but we have all the permissions of the root user with that EUID
 BOOM! Done.
