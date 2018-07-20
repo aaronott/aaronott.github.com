@@ -6,14 +6,14 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: nothing special
-email: aaron.ott@gmail.com
+title: Hacking on things...
+#email: aaron.ott@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Always be learning. Push push push...
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://a.aronott.com" # the base hostname & protocol for your site
-twitter_username: aaronott
-github_username:  aaronott
+baseurl: "blog" # the subpath of your site, e.g. /blog
+url: "http://ado.im" # the base hostname & protocol for your site
+#twitter_username: aaronott
+#github_username:  aaronott
 
 permalink: /:categories/:title.html
 
@@ -22,6 +22,8 @@ markdown: kramdown
 
 # Handling Reading
 exclude:  ["publish.sh"]
+
+include:  ['.htaccess']
 
 # Load these plugins
 plugins: ["jekyll-email-protect", "uglifier", "jekyll-deploy"]
