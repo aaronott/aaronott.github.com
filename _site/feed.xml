@@ -4,10 +4,10 @@
     <title>Hacking on things...</title>
     <description>Always be learning. Push push push...
 </description>
-    <link>http://ado.imblog/</link>
-    <atom:link href="http://ado.imblog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Jul 2018 12:32:02 -0600</pubDate>
-    <lastBuildDate>Fri, 20 Jul 2018 12:32:02 -0600</lastBuildDate>
+    <link>http://ado.im/blog/</link>
+    <atom:link href="http://ado.im/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 20 Jul 2018 12:36:02 -0600</pubDate>
+    <lastBuildDate>Fri, 20 Jul 2018 12:36:02 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
     
       <item>
@@ -143,8 +143,8 @@ get the uploaded image to execute.&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 15 Aug 2017 12:34:00 -0600</pubDate>
-        <link>http://ado.imblog/ctf/billu_box.html</link>
-        <guid isPermaLink="true">http://ado.imblog/ctf/billu_box.html</guid>
+        <link>http://ado.im/blog/ctf/billu_box.html</link>
+        <guid isPermaLink="true">http://ado.im/blog/ctf/billu_box.html</guid>
         
         
         <category>ctf</category>
@@ -362,8 +362,8 @@ chmod 4755 bash
 &lt;p&gt;BOOM! Done.&lt;/p&gt;
 </description>
         <pubDate>Fri, 28 Jul 2017 12:34:00 -0600</pubDate>
-        <link>http://ado.imblog/ctf/vulnix.html</link>
-        <guid isPermaLink="true">http://ado.imblog/ctf/vulnix.html</guid>
+        <link>http://ado.im/blog/ctf/vulnix.html</link>
+        <guid isPermaLink="true">http://ado.im/blog/ctf/vulnix.html</guid>
         
         
         <category>ctf</category>
@@ -623,8 +623,8 @@ Using netcat to connect to port 666 we see a bunch of gibberish.&lt;/p&gt;
 &lt;p&gt;In the end there are quite a few more messages left around the system including some in the ssl certificate and the message2.jpg file (using strings to display this). Thank you g0tmi1k for the great boot2root VM.&lt;/p&gt;
 </description>
         <pubDate>Wed, 26 Jul 2017 19:34:00 -0600</pubDate>
-        <link>http://ado.imblog/ctf/stapler.html</link>
-        <guid isPermaLink="true">http://ado.imblog/ctf/stapler.html</guid>
+        <link>http://ado.im/blog/ctf/stapler.html</link>
+        <guid isPermaLink="true">http://ado.im/blog/ctf/stapler.html</guid>
         
         
         <category>ctf</category>
