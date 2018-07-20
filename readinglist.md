@@ -11,7 +11,7 @@ read
 {% for item in site.data.readinglist %}
   <li>
     <time datetime="{{item.date}}T12:34:00-06:00" itemprop="datePublished">{{item.date}}</time>
-    <span class="reading-list-item"><a href="{{item.list}}">{{item.title}}</a>
+    <span class="reading-list-item"><a href="{{item.link}}">{{item.title}}</a></span>
   </li>
 {% endfor %}
 
