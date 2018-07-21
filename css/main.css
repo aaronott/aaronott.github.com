@@ -11,9 +11,9 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #111;
-  background-color: #fdfdfd;
+  font: 400 23px/1.5 "ff-yoga-web-pro", Georgia, serif;
+  color: #A6A4A4;
+  background-color: #313131;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
@@ -44,7 +44,7 @@ figure > img {
   display: block; }
 
 figcaption {
-  font-size: 14px; }
+  font-size: 20.125px; }
 
 /**
  * Lists
@@ -66,12 +66,12 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #2a7ae2;
+  color: #ffcc00;
   text-decoration: none; }
   a:visited {
-    color: #1756a9; }
+    color: #b38f00; }
   a:hover {
-    color: #111;
+    color: #A6A4A4;
     text-decoration: underline; }
 
 /**
@@ -169,7 +169,7 @@ pre {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #111;
+    color: #A6A4A4;
     line-height: 1.5; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }
@@ -178,7 +178,7 @@ pre {
       position: absolute;
       top: 9px;
       right: 15px;
-      background-color: #fdfdfd;
+      background-color: #313131;
       border: 1px solid #e8e8e8;
       border-radius: 5px;
       text-align: right; }
@@ -276,7 +276,7 @@ pre {
     margin-bottom: 30px; }
 
 .post-meta {
-  font-size: 14px;
+  font-size: 20.125px;
   color: #828282; }
 
 .post-link {
