@@ -5,7 +5,7 @@ permalink: /readinglist/
 ---
 
 This is a list of security related whitepapers, blog posts, and books that I've
-read
+been reading.
 
 <ul>
 {% for item in site.data.readinglist %}
