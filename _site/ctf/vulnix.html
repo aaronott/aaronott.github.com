@@ -102,7 +102,7 @@ Service Info: Host: vulnix; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 78.42 seconds</code></pre></figure>
 
-<p><img src="/assets/images/vulnix/initial_nmap.png" alt="Initial nmap" /></p>
+<p><img src="/blog/assets/images/vulnix/initial_nmap.png" alt="Initial nmap" /></p>
 
 <p>We can use the postfix server to check for existing users on the machine using the VRFY command.</p>
 
@@ -190,7 +190,7 @@ Target domain ............
 </code></pre>
 </div>
 
-<p><img src="/assets/images/vulnix/fingering.png" alt="finger" /></p>
+<p><img src="/blog/assets/images/vulnix/fingering.png" alt="finger" /></p>
 
 <p>Knowing the users that have a login shell, we stuff those into a file called users.txt and use hydra to bruteforce a login.</p>
 
@@ -198,15 +198,15 @@ Target domain ............
 </code></pre>
 </div>
 
-<p><img src="/assets/images/vulnix/hydra.png" alt="hydra" /></p>
+<p><img src="/blog/assets/images/vulnix/hydra.png" alt="hydra" /></p>
 
 <p>Now that we have a valid username and password (user:letmein) we can use ssh to get in and start enumeration on the box.</p>
 
-<p><img src="/assets/images/vulnix/ssh-in.png" alt="ssh with low priv" /></p>
+<p><img src="/blog/assets/images/vulnix/ssh-in.png" alt="ssh with low priv" /></p>
 
 <p>On the box I start enumeration using steps here https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</p>
 
-<p><img src="/assets/images/vulnix/exports.png" alt="/etc/exports" /></p>
+<p><img src="/blog/assets/images/vulnix/exports.png" alt="/etc/exports" /></p>
 
 <p>Hmmm</p>
 
@@ -216,33 +216,33 @@ Target domain ............
 
 <p>Looking this up I found that the * here is a wildcard meaning that /home/vulnix can be mounted from anywhere. So, let’s mount it to my machine.</p>
 
-<p><img src="/assets/images/vulnix/mount_with_permission_denied.png" alt="mount permission denied" /></p>
+<p><img src="/blog/assets/images/vulnix/mount_with_permission_denied.png" alt="mount permission denied" /></p>
 
 <p>Well, we can’t get in there even with root. That’s what that root_squash setting does. We are only going to be able to get in there using the vulnix user, so we create a local vulnix user with the same uid(2008) and gid(2008) as the remote box.</p>
 
-<p><img src="/assets/images/vulnix/passwd_file.png" alt="/etc/passwd" /></p>
+<p><img src="/blog/assets/images/vulnix/passwd_file.png" alt="/etc/passwd" /></p>
 
 <p>After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.</p>
 
-<p><img src="/assets/images/vulnix/mounted-as-vulnix.png" alt="Mounted as vulnix" /></p>
+<p><img src="/blog/assets/images/vulnix/mounted-as-vulnix.png" alt="Mounted as vulnix" /></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>ssh-keygen -t rsa
 </code></pre>
 </div>
 
-<p><img src="/assets/images/vulnix/create_ssh_key.png" alt="create ssh key" /></p>
+<p><img src="/blog/assets/images/vulnix/create_ssh_key.png" alt="create ssh key" /></p>
 
-<p><img src="/assets/images/vulnix/mv_ssh_pub_key.png" alt="Move pub key" /></p>
+<p><img src="/blog/assets/images/vulnix/mv_ssh_pub_key.png" alt="Move pub key" /></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>ssh vulnix@192.168.1.130 -i /home/vulnix/.ssh/id_rsa
 </code></pre>
 </div>
 
-<p><img src="/assets/images/vulnix/ssh_with_vulnix.png" alt="SSH as vulnix" /></p>
+<p><img src="/blog/assets/images/vulnix/ssh_with_vulnix.png" alt="SSH as vulnix" /></p>
 
 <p>Let’s see what the vulnix user can do with <code class="highlighter-rouge">sudo -l</code></p>
 
-<p><img src="/assets/images/vulnix/sudo_l.png" alt="sudo -l" /></p>
+<p><img src="/blog/assets/images/vulnix/sudo_l.png" alt="sudo -l" /></p>
 
 <p>So we are able to edit the /etc/exports file and change that root_squash to no_root_squash.</p>
 
@@ -254,11 +254,11 @@ Target domain ............
 
 <p>Prior to rebooting, let’s copy /bin/bash to the /home/vulnix directory for some setuid fun.</p>
 
-<p><img src="/assets/images/vulnix/copy_bash.png" alt="copy bash" /></p>
+<p><img src="/blog/assets/images/vulnix/copy_bash.png" alt="copy bash" /></p>
 
 <p>After the reboot, we remount /home/vulnix and are now able access that directory with the root user.</p>
 
-<p><img src="/assets/images/vulnix/setuid_bash.png" alt="set uid" /></p>
+<p><img src="/blog/assets/images/vulnix/setuid_bash.png" alt="set uid" /></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cd /mnt/vulnix
 chown root bash
@@ -270,7 +270,7 @@ chmod 4755 bash
 
 <p>On the victim machine as the vulnix user, we run <code class="highlighter-rouge">bash -p</code> to keep permissions of the user.</p>
 
-<p><img src="/assets/images/vulnix/escalation_to_root.png" alt="Escalate" /></p>
+<p><img src="/blog/assets/images/vulnix/escalation_to_root.png" alt="Escalate" /></p>
 
 <p>BOOM! Done.</p>
 

