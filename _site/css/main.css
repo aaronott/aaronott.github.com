@@ -95,7 +95,8 @@ code {
   font-size: 15px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
-  background-color: #eef; }
+  background-color: #646464;
+  color: #eef; }
 
 code {
   padding: 1px 5px; }
@@ -321,7 +322,7 @@ pre {
 .highlight {
   background: #fff; }
   .highlighter-rouge .highlight {
-    background: #eef; }
+    background: #646464; }
   .highlight .c {
     color: #998;
     font-style: italic; }
