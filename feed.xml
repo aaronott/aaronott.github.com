@@ -6,15 +6,15 @@
 </description>
     <link>http://ado.im/blog/</link>
     <atom:link href="http://ado.im/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Jul 2018 15:34:28 -0600</pubDate>
-    <lastBuildDate>Sun, 22 Jul 2018 15:34:28 -0600</lastBuildDate>
+    <pubDate>Sun, 22 Jul 2018 15:47:44 -0600</pubDate>
+    <lastBuildDate>Sun, 22 Jul 2018 15:47:44 -0600</lastBuildDate>
     <generator>Jekyll v3.5.1</generator>
     
       <item>
-        <title>How to get caught on a web application penetration test</title>
+        <title>How to get caught during a web application penetration test</title>
         <description>&lt;p&gt;&lt;strong&gt;Why would you want to get caught?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;There are a number of reasons why you would like to get caught on a penetration test. For instance, you might be testing the ability of the SOC to detect and respond to attacks. Testing the current toolset that is in place to monitor the environment.&lt;/p&gt;
+&lt;p&gt;There are a number of reasons why you would like to get caught during a penetration test. For instance, you might be testing the ability of the SOC to detect and respond to attacks. Testing the current toolset that is in place to monitor the environment.&lt;/p&gt;
 
 &lt;p&gt;The other thing to think about here, if you know ways to get caught, you can reverse these and find ways not to get caught.&lt;/p&gt;
 
@@ -53,8 +53,8 @@
 &lt;p&gt;Obviously, there are many other ways to get caught and some ways to cover your tracks even on the above tactics to make it more difficult to defend, I simply wanted to give a few examples to get started.&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Jul 2018 12:34:00 -0600</pubDate>
-        <link>http://ado.im/blog/how_to_get_caught_on_a_penetration_test.html</link>
-        <guid isPermaLink="true">http://ado.im/blog/how_to_get_caught_on_a_penetration_test.html</guid>
+        <link>http://ado.im/blog/how_to_get_caught_during_a_penetration_test.html</link>
+        <guid isPermaLink="true">http://ado.im/blog/how_to_get_caught_during_a_penetration_test.html</guid>
         
         
       </item>
