@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to get caught on a web application penetration test</title>
+  <meta name="description" content="Why would you want to get caught?">
+
+  <link rel="stylesheet" href="/blog/css/main.css">
+  <link rel="canonical" href="http://ado.im/blog/how_to_get_caught_on_a_penetration_test.html">
+  <link rel="alternate" type="application/rss+xml" title="Hacking on things..." href="http://ado.im/blog/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/blog/">Hacking on things...</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/blog/readinglist/">Reading List</a>
+          
+        
+          
+          <a class="page-link" href="/blog/ctf/index.html">Category archive for ctf</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">How to get caught on a web application penetration test</h1>
+    <p class="post-meta"><time datetime="2018-07-22T12:34:00-06:00" itemprop="datePublished">Jul 22, 2018</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><strong>Why would you want to get caught?</strong></p>
+
+<p>There are a number of reasons why you would like to get caught on a penetration test. For instance, you might be testing the ability of the SOC to detect and respond to attacks. Testing the current toolset that is in place to monitor the environment.</p>
+
+<p>The other thing to think about here, if you know ways to get caught, you can reverse these and find ways not to get caught.</p>
+
+<p><strong>nmap -T5 -A</strong></p>
+
+<p>One of the early steps in penetration testing is to fingerprint the servers and services used to run the application. As an attacker, we want to know if there are any other vectors that can be used to attack the environment. nmap is a good standard tool used for mapping ports on a server. The -T flag allows the runner to choose the speed at which probes are sent to the server and specifying level 5 means that nmap is going to send multiple probes in parallel and allow only a 5ms TCP delay before sending again. This, as you can imagine, can be very noisy on the network. The -A is an aggressive scan, this will run all the associated nmap scripts on each of the ports/services found on the system.</p>
+
+<p>This type of scan should be noticed by an IDS and alert the SOC or perform some action such as throttling the replies back to the sender.</p>
+
+<p><strong>dirbuster or dirb with large lists running at top speed</strong></p>
+
+<p>dirbuster and dirb are essentially the same tools with the major exception being GUI vs CLI. dirbuster is a java application which opens a Graphical User Interface allowing a user to simply fill out the form and start scanning while dirb is a command run just from the command line to accomplish the same task.</p>
+
+<p>These tools are used for directory enumeration and take a wordlist as input. They then send a request to the server appending the word from the wordlist to the URL and checking to see the return code. If the return comes back as a 200 or 302 it might be interesting to the attacker.</p>
+
+<p>The issue is that for each request being sent to the application, the server has to build and return a response. Many times this means calling the filesystem and possibly making one or more calls to the database backend. A large number of requests can start to bog down a system due to memory and CPU usage. This can arguably be a finding in itself since it is creating a DoS situation, but it certainly starts setting off alarm bells for monitors of CPU and Memory usage.</p>
+
+<p>The other issue is that for each request made, a log entry is created, generally capturing the request URI and IP address of the requestor. While this style of testing can be launched from a tor network, ensuring requests coming from multiple IP addresses, it still has raised alerts allowing someone to take action.</p>
+
+<p><strong>hydra or medusa for brute force passwords</strong></p>
+
+<p>Brute-forcing a list of passwords is a technique used to try and gain access to the backend of a system. Like the above enumeration technique, brute-force password guessing has its flaws. It too sends multiple requests to the web server at a high rate guessing passwords from a wordlist. This will also raise alerts due to CPU and memory usage.</p>
+
+<p><strong>Nessus or openVAS scan</strong></p>
+
+<p>Running a vulnerability scan on a site sets off quite a few bells and alerts as well. This has much the same effect as the brute force passwords, enumeration, and the nmap previously mentioned since these tools will try and scan the site looking for known vulnerabilities. While a vulnerability scan isn’t the same as a penetration test, it is sometimes used at the beginning to get a baseline of what can be easily found then digging continues from there.</p>
+
+<p><strong>Honeyfiles and Honeyfields</strong></p>
+
+<p>While honeyfiles and honeyfields aren’t tools used by a penetration tester, they could be used as a defense mechanism in the application. The idea behind these techniques is that if an attacker or tester were to come across the honeyfile and find information they think useful to further attacks could be based on this information leading the attacker away from the real information. Likewise, honeyfields are added to forms and are used to throw out posts coming from an automated script. The honeyfield is generally a form field hidden from normal users and should not be filled out, but given a semi-standard field name so when a script comes across the form, it will automatically fill in the field and when submitted the form information will be flagged as coming from an abnormal user.</p>
+
+<p><strong>Summary</strong></p>
+
+<p>Notice all the ways mentioned above cause quite a bit of noise. If during a penetration test, the SOC was not notified of your activities and they didn’t notice you doing the above, that is something that needs to be looked into and reported on.</p>
+
+<p>Obviously, there are many other ways to get caught and some ways to cover your tracks even on the above tactics to make it more difficult to defend, I simply wanted to give a few examples to get started.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Always be learning. Push push push...
+</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+  </body>
+
+</html>
