@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "How to get caught on a web application penetration test"
+title:  "How to get caught during a web application penetration test"
 date:   2018-07-22 12:34
 ---
 
 **Why would you want to get caught?**
 
-There are a number of reasons why you would like to get caught on a penetration test. For instance, you might be testing the ability of the SOC to detect and respond to attacks. Testing the current toolset that is in place to monitor the environment.
+There are a number of reasons why you would like to get caught during a penetration test. For instance, you might be testing the ability of the SOC to detect and respond to attacks. Testing the current toolset that is in place to monitor the environment.
 
 The other thing to think about here, if you know ways to get caught, you can reverse these and find ways not to get caught.
 
