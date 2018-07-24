@@ -41,6 +41,6 @@ While honeyfiles and honeyfields aren't tools used by a penetration tester, they
 
 **Summary**
 
-Notice all the ways mentioned above cause quite a bit of noise. If during a penetration test, the SOC was not notified of your activities and they didn't notice you doing the above, that is something that needs to be looked into and reported on.
+There are a number of ways to get caught, most of which involve being very loud with attempts, whether it be through enumeration or brute-forcing of passwords. If during a penetration test, the SOC was not notified of your activities and they didn't notice you doing the above, that is something that needs to be looked into and reported on.
 
 Obviously, there are many other ways to get caught and some ways to cover your tracks even on the above tactics to make it more difficult to defend, I simply wanted to give a few examples to get started.
